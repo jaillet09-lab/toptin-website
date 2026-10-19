@@ -25,7 +25,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-md" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
-        <Link href="/" aria-label={`${siteConfig.name} home`} className="shrink-0">
+        <Link href="/" aria-label={`${siteConfig.name} home`} className="flex min-h-11 shrink-0 items-center">
           <Logo height={38} priority />
         </Link>
 
