@@ -12,7 +12,7 @@ import Link from "next/link";
 export const metadata: Metadata = buildMetadata({
   title: "Contact Top Tin Roofing, Brisbane Roofers",
   description:
-    "Contact Top Tin Roofing on 0480 095 902 or toptinroofing@gmail.com, Mon to Fri 9am to 5pm. QBCC licence 15465551. Brisbane, Moreton Bay and Logan.",
+    "Contact Top Tin Roofing on 0480 095 902 or toptinroofing@gmail.com, Mon to Fri 7am to 6pm and Sat 9am to 5pm. QBCC licence 15465551.",
   path: "/contact",
   ogTitle: "Contact Top Tin Roofing",
 });

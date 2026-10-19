@@ -12,7 +12,7 @@ consistent business.
 | Phone | 0480 095 902 |
 | Email | toptinroofing@gmail.com |
 | Website | https://toptinroofing.com |
-| Hours | Mon to Fri, 9am to 5pm |
+| Hours | Mon to Fri 7am to 6pm, Sat 9am to 5pm |
 | QBCC licence | 15465551 |
 | ABN | 25 656 843 944 |
 | Categories | Roofing contractor (primary); Roofing service; Metal roofing contractor |

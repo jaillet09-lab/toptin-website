@@ -8,7 +8,7 @@ import { ConversionPing } from "./ConversionPing";
 
 export const metadata: Metadata = buildMetadata({
   title: "Thank You, Your Quote Request Is In",
-  description: "Thanks for your quote request. Top Tin Roofing will be in touch Mon to Fri, 9am to 5pm, to arrange a time to inspect your roof and prepare a written quote.",
+  description: "Thanks for your quote request. Top Tin Roofing will be in touch to arrange a time to inspect your roof and prepare a written quote for you.",
   path: "/thank-you",
   noindex: true,
 });

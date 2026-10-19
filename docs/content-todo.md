@@ -18,7 +18,7 @@ Change the values in `site.config.ts` unless another file is named.
 
 ## Other open items
 
-- **Opening hours do not match.** Google Business Profile shows opening at 7 am; the old and new website say Mon to Fri, 9am to 5pm. Pick one and make both the same (`site.config.ts` → `hours`, and the Google profile).
+- **Opening hours** now match the Google profile: Mon to Fri 7am to 6pm, Sat 9am to 5pm (owner confirmed 19 Oct 2026).
 
 - **Second phone number.** The old site also shows 0410 656 969 (Ethan's mobile, used on TopTin proposals). The new site uses only 0480 095 902, and the build fails if any other number appears. Confirm that is right.
 - **Owner story** for the About page: `[OWNER STORY]` placeholder in `app/about/page.tsx`. Who runs Top Tin, how it started, the crew.

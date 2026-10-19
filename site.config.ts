@@ -39,11 +39,17 @@ export const siteConfig = {
     timezone: "Australia/Brisbane",
   },
 
+  /** Matches the Google Business Profile (confirmed by the owner 2026-10-19). */
   hours: {
-    label: "Mon to Fri, 9am to 5pm",
+    label: "Mon to Fri 7am to 6pm, Sat 9am to 5pm",
     schema: [
       {
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "18:00",
+      },
+      {
+        dayOfWeek: ["Saturday"],
         opens: "09:00",
         closes: "17:00",
       },
@@ -51,7 +57,7 @@ export const siteConfig = {
   },
 
   /** The line under every form. No faster reply promise until the owner confirms one. */
-  replyLine: "Free quote. We reply Mon to Fri, 9am to 5pm.",
+  replyLine: "Free quote. We reply Mon to Fri 7am to 6pm, Sat 9am to 5pm.",
 
   serviceArea: {
     summary: "Brisbane, Moreton Bay and Logan",
