@@ -3,9 +3,9 @@ Errors: 0
 Warnings: 0
 
 Page summary (route | H1s | words | internal links | index):
-  / | 1 | 1538 | 46 | index
+  / | 1 | 1543 | 46 | index
   /about | 1 | 320 | 7 | index
-  /areas | 1 | 334 | 49 | index
+  /areas | 1 | 339 | 49 | index
   /areas/acacia-ridge | 1 | 545 | 12 | index
   /areas/albany-creek | 1 | 499 | 10 | index
   /areas/ashgrove | 1 | 431 | 10 | index

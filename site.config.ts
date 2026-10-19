@@ -61,7 +61,7 @@ export const siteConfig = {
 
   serviceArea: {
     summary: "Brisbane, Ipswich, Logan and the Gold Coast",
-    long: "All of Brisbane, west to Ipswich, south through Logan to the Gold Coast, and the suburbs in between.",
+    long: "All of Brisbane and north into Moreton Bay, west to Ipswich, south through Logan to the Gold Coast, and the suburbs in between.",
     /** Used in schema.org areaServed. */
     regions: ["Brisbane", "Ipswich", "Logan", "Gold Coast", "Moreton Bay"],
   },
