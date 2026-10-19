@@ -1,0 +1,52 @@
+SEO audit: 47 prerendered pages checked
+Errors: 0
+Warnings: 0
+
+Page summary (route | H1s | words | internal links | index):
+  / | 1 | 1501 | 28 | index
+  /about | 1 | 314 | 7 | index
+  /areas | 1 | 300 | 31 | index
+  /areas/acacia-ridge | 1 | 536 | 11 | index
+  /areas/albany-creek | 1 | 495 | 10 | index
+  /areas/ashgrove | 1 | 427 | 10 | index
+  /areas/aspley | 1 | 521 | 10 | index
+  /areas/belmont | 1 | 503 | 11 | index
+  /areas/bethania | 1 | 494 | 10 | index
+  /areas/birkdale | 1 | 418 | 9 | index
+  /areas/boondall | 1 | 496 | 11 | index
+  /areas/capalaba | 1 | 439 | 10 | index
+  /areas/carindale | 1 | 503 | 11 | index
+  /areas/chermside | 1 | 499 | 11 | index
+  /areas/everton-park | 1 | 459 | 10 | index
+  /areas/indooroopilly | 1 | 440 | 9 | index
+  /areas/kenmore | 1 | 538 | 11 | index
+  /areas/mitchelton | 1 | 460 | 10 | index
+  /areas/mount-gravatt | 1 | 449 | 9 | index
+  /areas/north-lakes | 1 | 491 | 9 | index
+  /areas/stafford | 1 | 501 | 11 | index
+  /areas/strathpine | 1 | 468 | 9 | index
+  /areas/sunnybank | 1 | 515 | 11 | index
+  /areas/the-gap | 1 | 536 | 12 | index
+  /areas/wynnum | 1 | 489 | 10 | index
+  /blog | 1 | 497 | 17 | index
+  /blog/asbestos-roofs-what-homeowners-should-know | 1 | 859 | 12 | index
+  /blog/choosing-a-colorbond-colour-for-queensland-heat | 1 | 867 | 12 | index
+  /blog/colorbond-vs-tile-roofing-in-queensland | 1 | 825 | 13 | index
+  /blog/how-a-roof-replacement-works-step-by-step | 1 | 989 | 12 | index
+  /blog/how-much-does-a-roof-replacement-cost-in-brisbane | 1 | 1063 | 13 | index
+  /blog/roof-insulation-and-thermal-performance-basics | 1 | 888 | 13 | index
+  /blog/roof-replacement-and-insurance-claims | 1 | 865 | 12 | index
+  /blog/roof-replacement-and-storm-season-in-brisbane | 1 | 877 | 13 | index
+  /blog/signs-your-roof-needs-replacing | 1 | 904 | 12 | index
+  /blog/what-to-check-before-you-hire-a-roofer | 1 | 956 | 13 | index
+  /contact | 1 | 262 | 8 | index
+  /how-it-works | 1 | 457 | 7 | index
+  /privacy | 1 | 321 | 4 | index
+  /projects | 1 | 254 | 7 | index
+  /quote | 1 | 202 | 5 | index
+  /reviews | 1 | 654 | 7 | index
+  /services | 1 | 291 | 7 | index
+  /services/colorbond-roof-installation | 1 | 1097 | 33 | index
+  /services/roof-replacement | 1 | 1290 | 33 | index
+  /terms | 1 | 181 | 3 | index
+  /thank-you | 1 | 64 | 4 | noindex

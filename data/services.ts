@@ -34,7 +34,7 @@ export const services: Service[] = [
     slug: "roof-replacement",
     name: "Roof replacement",
     short: "Roof replacement",
-    seoTitle: "Roof Replacement Brisbane, Tile and Metal to Colorbond",
+    seoTitle: "Roof Replacement Brisbane, Tile to Metal",
     description:
       "Roof replacement in Brisbane by a QBCC licensed local crew. Old tile or metal roofs replaced with new Colorbond, a written quote first and a clean site after.",
     h1: "Roof replacement in Brisbane",
@@ -135,7 +135,7 @@ export const services: Service[] = [
     slug: "colorbond-roof-installation",
     name: "Colorbond roof installation",
     short: "Colorbond roofing",
-    seoTitle: "Colorbond Roof Installation Brisbane, Colours and Profiles",
+    seoTitle: "Colorbond Roof Installation Brisbane",
     description:
       "Colorbond roof installation in Brisbane. Help choosing the colour and profile for Queensland heat, a written quote and a local QBCC licensed crew. Free quote.",
     h1: "Colorbond roof installation in Brisbane",
@@ -197,7 +197,7 @@ export const services: Service[] = [
     ],
     faqs: [
       {
-        q: "Which Colorbond colour is best for Queensland heat?",
+        q: "Which Colorbond colour suits Queensland heat?",
         a: "Lighter colours reflect more of the sun's heat than darker ones, which can help keep the roof space cooler. Insulation under the sheets also makes a big difference. We bring samples and explain the trade-offs at the quote.",
       },
       {

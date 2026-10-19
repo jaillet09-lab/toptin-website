@@ -44,7 +44,7 @@ export const areas: Area[] = [
     region: "north",
     summary: "Roof replacement and Colorbond roofing for Aspley's brick homes and family houses.",
     homes:
-      "Aspley grew quickly from the 1960s onwards, so many streets are lined with lowset brick homes and larger family houses built in the following decades. A lot of these homes are now on their original roof.",
+      "Aspley grew quickly from the 1960s onwards, so many streets are lined with lowset brick homes and larger family houses built through the 1970s and 1980s. A lot of these homes are now on their original roof.",
     roofs:
       "Concrete tile is common here. After forty or more years the tiles get porous, ridge capping mortar cracks, and the sarking underneath (if there is any) breaks down. Many owners in Aspley choose to go from tile to Colorbond when the roof is due, which takes a lot of weight off the frame.",
     exposure:
@@ -114,7 +114,7 @@ export const areas: Area[] = [
     homes:
       "Stafford has a mix of older timber homes, post-war houses and plenty of renovations and raise-and-builds as families have moved into the area.",
     roofs:
-      "Many older homes still have corrugated iron that has done its job for decades. Replacing it with new Colorbond keeps the traditional look while fixing rust, leaks and loose sheets.",
+      "Many older homes still have corrugated iron that has done its job for a very long time. Replacing it with new Colorbond keeps the traditional look while fixing rust, leaks and loose sheets.",
     exposure:
       "Stafford sits on undulating ground, so some homes catch more wind than others. Proper fixing and new flashings are what keep a roof quiet and dry in a storm.",
     faq: {
@@ -235,7 +235,7 @@ export const areas: Area[] = [
     region: "east",
     summary: "Roof replacement and Colorbond installation in Belmont, Brisbane's east.",
     homes:
-      "Belmont is a leafy eastern suburb with acreage-style blocks, family homes from several decades and newer builds.",
+      "Belmont is a leafy eastern suburb with acreage-style blocks, family homes of many ages and newer builds.",
     roofs:
       "Tile and metal roofs from the 1970s onwards are common. Larger homes on bigger blocks often have big, complex roofs with several sections.",
     exposure:
@@ -254,7 +254,7 @@ export const areas: Area[] = [
     homes:
       "Much of Carindale was developed in the 1970s, 1980s and 1990s, so there are many brick homes with concrete tile roofs, plus larger two-storey houses.",
     roofs:
-      "Concrete tile roofs from those decades are now ageing. Owners often choose tile to Colorbond to lighten the roof and refresh the look of the house.",
+      "Concrete tile roofs from that era are now ageing. Owners often choose tile to Colorbond to lighten the roof and refresh the look of the house.",
     exposure:
       "Two-storey homes mean steeper, higher work. Scaffolding and edge protection are planned and priced in the quote.",
     faq: {
@@ -377,7 +377,7 @@ export const areas: Area[] = [
     homes:
       "Bethania is a Logan suburb of family homes, many from the 1980s and 1990s, along with newer estates.",
     roofs:
-      "Concrete tile roofs from those decades are common and starting to need serious maintenance. Re-roofing in Colorbond is a popular option.",
+      "Concrete tile roofs from that era are common and starting to need serious maintenance. Re-roofing in Colorbond is a popular option.",
     exposure:
       "Close to the Logan and Albert rivers, Bethania gets heavy rain in storm season, which shows up any weak points in an old roof.",
     faq: {

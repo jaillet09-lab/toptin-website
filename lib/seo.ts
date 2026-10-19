@@ -10,6 +10,8 @@ export type PageMeta = {
   ogTitle?: string;
   ogSubtitle?: string;
   noindex?: boolean;
+  /** Root page only: Next does not apply the layout title template there, so add the suffix here. */
+  absoluteTitle?: boolean;
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
@@ -31,7 +33,7 @@ export function buildMetadata(meta: PageMeta): Metadata {
   const image = ogImageUrl(meta.ogTitle ?? meta.title, meta.ogSubtitle);
   const fullTitle = `${meta.title}${TITLE_SUFFIX}`;
   return {
-    title: meta.title,
+    title: meta.absoluteTitle ? { absolute: fullTitle } : meta.title,
     description: meta.description,
     alternates: { canonical: url },
     robots: meta.noindex ? { index: false, follow: false } : { index: true, follow: true },
