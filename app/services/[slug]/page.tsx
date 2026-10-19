@@ -94,7 +94,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {s.steps.map((st, i) => (
               <li key={st.title} className="card p-6">
-                <span className="font-display text-[40px] font-extrabold leading-none text-tin">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="font-display text-[40px] font-extrabold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 font-display text-[19px] font-bold text-navy">{st.title}</h3>
                 <p className="mt-2 text-[15px] text-mute">{st.text}</p>
               </li>

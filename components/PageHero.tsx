@@ -29,8 +29,8 @@ export function PageHero({
     <section className="on-dark relative overflow-hidden bg-navy text-white">
       {photo ? (
         <>
-          <Image src={photo.src} alt={photo.alt} fill priority sizes="100vw" className="object-cover opacity-35" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/40" aria-hidden="true" />
+          <Image src={photo.src} alt={photo.alt} fill priority sizes="(max-width: 767px) 1px, 100vw" quality={70} className="hidden object-cover opacity-35 md:block" />
+          <div className="absolute inset-0 hidden bg-gradient-to-r from-navy via-navy/90 to-navy/40 md:block" aria-hidden="true" />
         </>
       ) : null}
       <div className="wrap relative py-12 md:py-20">

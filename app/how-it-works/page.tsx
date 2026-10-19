@@ -54,7 +54,7 @@ export default function HowItWorksPage() {
           <ol className="grid gap-6">
             {steps.map((s, i) => (
               <li key={s.title} className="card grid gap-6 p-6 md:grid-cols-[120px_1fr_1fr] md:p-8">
-                <span className="font-display text-[56px] font-extrabold leading-none text-tin">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="font-display text-[56px] font-extrabold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <h2 className="font-display text-[26px] font-extrabold text-navy">{s.title}</h2>
                   <p className="mt-3 text-[16px] text-mute">{s.text}</p>

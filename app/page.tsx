@@ -49,8 +49,8 @@ export default function HomePage() {
     <>
       {/* 1. Hero */}
       <section className="on-dark relative overflow-hidden bg-navy text-white">
-        <Image src={heroPhoto.src} alt={heroPhoto.alt} fill priority sizes="100vw" className="object-cover opacity-45" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/30" aria-hidden="true" />
+        <Image src={heroPhoto.src} alt={heroPhoto.alt} fill priority sizes="(max-width: 767px) 1px, 100vw" quality={70} className="hidden object-cover opacity-45 md:block" />
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-navy via-navy/85 to-navy/30 md:block" aria-hidden="true" />
         <div className="wrap relative grid gap-10 py-14 md:py-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
           <div>
             <span className="eyebrow">Brisbane roofing contractor · QBCC {siteConfig.qbcc}</span>
@@ -96,7 +96,7 @@ export default function HomePage() {
             { icon: "file" as IconName, text: `ABN ${siteConfig.abn}` },
             { icon: "check" as IconName, text: "Free, no-obligation quote" },
             { icon: "pin" as IconName, text: "Brisbane based" },
-            ...(rating ? [{ icon: "star" as IconName, text: `${rating.toFixed(1)} on Google (${reviews.reviews.length} reviews)` }] : []),
+            ...(rating ? [{ icon: "star" as IconName, text: siteConfig.reviews.googleCount ? `${(siteConfig.reviews.googleRating ?? rating).toFixed(1)} on Google (${siteConfig.reviews.googleCount} reviews)` : "5-star Google reviews" }] : []),
             ...(siteConfig.claims.projectsCount.enabled ? [{ icon: "home" as IconName, text: siteConfig.claims.projectsCount.label }] : []),
             ...(siteConfig.claims.experience.enabled ? [{ icon: "users" as IconName, text: siteConfig.claims.experience.label }] : []),
           ].map((t) => (
@@ -167,7 +167,7 @@ export default function HomePage() {
           <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <li key={s.title} className="card p-6">
-                <span className="font-display text-[40px] font-extrabold leading-none text-tin">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="font-display text-[40px] font-extrabold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 font-display text-[19px] font-bold text-navy">{s.title}</h3>
                 <p className="mt-2 text-[15px] text-mute">{s.text}</p>
               </li>
@@ -198,7 +198,7 @@ export default function HomePage() {
         <div className="wrap">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading eyebrow="Reviews" title="What homeowners say." lead={<RatingSummary />} />
-            <Link href="/reviews" className="btn btn-outline shrink-0">Read all reviews <Icon name="arrow" size={18} /></Link>
+            <Link href="/reviews" className="btn btn-outline shrink-0">Read more reviews <Icon name="arrow" size={18} /></Link>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {reviews.reviews.slice(0, 6).map((r) => <ReviewCard key={r.author} review={r} />)}

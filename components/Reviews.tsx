@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { averageRating, displayName, reviews, type Review } from "@/lib/schema";
+import { averageRating, displayName, type Review } from "@/lib/schema";
 import { siteConfig } from "@/site.config";
 import { Icon } from "@/components/ui/Icon";
 
@@ -29,12 +29,14 @@ export function ReviewCard({ review, dark = false }: { review: Review; dark?: bo
 
 /** Rating summary computed from content/reviews.json. */
 export function RatingSummary({ dark = false }: { dark?: boolean }) {
-  const rating = averageRating();
+  const { googleRating, googleCount } = siteConfig.reviews;
+  const rating = googleRating ?? averageRating();
   if (!rating) return null;
+  const label = googleRating && googleCount ? `${googleRating.toFixed(1)} from ${googleCount} Google reviews` : `${rating.toFixed(1)} star reviews on Google`;
   const inner = (
     <span className="inline-flex items-center gap-2.5">
       <Stars rating={rating} size={18} />
-      <span className={`text-[15px] font-semibold ${dark ? "text-white" : "text-navy"}`}>{rating.toFixed(1)} from {reviews.reviews.length} Google reviews</span>
+      <span className={`text-[15px] font-semibold ${dark ? "text-white" : "text-navy"}`}>{label}</span>
     </span>
   );
   return siteConfig.reviews.googleProfileUrl ? (

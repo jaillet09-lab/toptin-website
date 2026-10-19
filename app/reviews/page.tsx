@@ -22,7 +22,7 @@ export default function ReviewsPage() {
         crumbs={[{ name: "Reviews", path: "/reviews" }]}
         eyebrow="Reviews"
         title="What homeowners say."
-        intro={<p>These are real Google reviews, shown word for word. <RatingSummary dark /></p>}
+        intro={<p>A selection of our Google reviews, shown word for word. <RatingSummary dark /></p>}
       />
       <Section tone="page" label="Google reviews">
         <div className="wrap">

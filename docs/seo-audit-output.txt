@@ -3,7 +3,7 @@ Errors: 0
 Warnings: 0
 
 Page summary (route | H1s | words | internal links | index):
-  / | 1 | 1501 | 28 | index
+  / | 1 | 1499 | 28 | index
   /about | 1 | 314 | 7 | index
   /areas | 1 | 300 | 31 | index
   /areas/acacia-ridge | 1 | 536 | 11 | index
@@ -44,7 +44,7 @@ Page summary (route | H1s | words | internal links | index):
   /privacy | 1 | 321 | 4 | index
   /projects | 1 | 254 | 7 | index
   /quote | 1 | 202 | 5 | index
-  /reviews | 1 | 654 | 7 | index
+  /reviews | 1 | 655 | 7 | index
   /services | 1 | 291 | 7 | index
   /services/colorbond-roof-installation | 1 | 1097 | 33 | index
   /services/roof-replacement | 1 | 1290 | 33 | index

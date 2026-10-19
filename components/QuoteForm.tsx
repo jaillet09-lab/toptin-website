@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/site.config";
 import { quoteServiceOptions } from "@/data/services";
 import { roofAgeOptions, roofTypeOptions } from "@/lib/lead/types";
@@ -18,6 +18,8 @@ type Props = {
   /** Where the form sits, for reporting. */
   source: string;
   dark?: boolean;
+  /** Pre-fill service and suburb from ?service= and ?suburb= in the page URL (the /quote page). */
+  fromUrl?: boolean;
 };
 
 const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service: "not-sure", roofType: "", roofAge: "", message: "" };
@@ -26,7 +28,7 @@ const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service:
  * The one quote form, used everywhere. Two short steps: contact first (so a lead is
  * never lost to a long form), then roof details and optional photos.
  */
-export function QuoteForm({ service, suburb, source, dark = false }: Props) {
+export function QuoteForm({ service, suburb, source, dark = false, fromUrl = false }: Props) {
   const router = useRouter();
   const [v, setV] = useState<LeadInput>({
     ...EMPTY,
@@ -41,6 +43,19 @@ export function QuoteForm({ service, suburb, source, dark = false }: Props) {
   const [formError, setFormError] = useState("");
   const startedAt = useRef<number>(0);
   const honeypot = useRef<HTMLInputElement>(null);
+
+  // Read ?service= and ?suburb= after mount, so the page itself can stay static.
+  useEffect(() => {
+    if (!fromUrl) return;
+    const sp = new URLSearchParams(window.location.search);
+    const s = sp.get("service");
+    const sub = sp.get("suburb");
+    setV((p) => ({
+      ...p,
+      ...(s && quoteServiceOptions.some((o) => o.value === s) ? { service: s } : {}),
+      ...(sub && !p.address ? { address: sub.slice(0, 120) } : {}),
+    }));
+  }, [fromUrl]);
 
   function touch() {
     if (!startedAt.current) {

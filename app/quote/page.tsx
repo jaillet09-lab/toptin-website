@@ -1,11 +1,9 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/site.config";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { QuoteForm } from "@/components/QuoteForm";
-import { QuoteFormFromParams } from "@/components/QuoteFormFromParams";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 import { RatingSummary } from "@/components/Reviews";
@@ -41,9 +39,7 @@ export default function QuotePage() {
           </div>
         </div>
         <div className="rounded-[14px] bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
-          <Suspense fallback={<QuoteForm source="quote-page" dark />}>
-            <QuoteFormFromParams source="quote-page" dark />
-          </Suspense>
+          <QuoteForm source="quote-page" dark fromUrl />
         </div>
       </div>
       <div className="bg-page text-text">

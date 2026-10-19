@@ -60,15 +60,18 @@ export function localBusinessSchema() {
     knowsAbout: ["Roof replacement", "Colorbond roof installation", "Metal roofing", "Tile to Colorbond roof replacement"],
   };
   if (sameAs.length) schema.sameAs = sameAs;
-  const rating = averageRating();
-  if (hasRealReviews() && rating) {
+  // Aggregate rating only from the real Google totals (site.config.ts), never from the selection.
+  const { googleRating, googleCount } = siteConfig.reviews;
+  if (googleRating && googleCount) {
     schema.aggregateRating = {
       "@type": "AggregateRating",
-      ratingValue: rating,
-      reviewCount: reviews.reviews.length,
+      ratingValue: googleRating,
+      reviewCount: googleCount,
       bestRating: 5,
       worstRating: 1,
     };
+  }
+  if (hasRealReviews()) {
     schema.review = reviews.reviews.map((r) => ({
       "@type": "Review",
       author: { "@type": "Person", name: displayName(r.author) },

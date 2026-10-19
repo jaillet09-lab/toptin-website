@@ -82,10 +82,19 @@ export const siteConfig = {
     metalRoofingPage: false,
   },
 
-  /** Review links. The owner supplies the Google Business Profile link. */
+  /**
+   * Google reviews. content/reviews.json holds a SELECTION shown word for word (10 from the
+   * old site). The profile has more: when the owner supplies the real overall rating and total
+   * count from the Google Business Profile, set them here and they are shown and used in schema.
+   * Until then no total is shown, so the site never understates (or invents) the number.
+   */
   reviews: {
     googleProfileUrl: "",
     googleReviewUrl: "",
+    /** Overall Google rating, for example 4.9. null until confirmed. */
+    googleRating: null as number | null,
+    /** Total number of Google reviews. null until confirmed. */
+    googleCount: null as number | null,
   },
 
   social: {
