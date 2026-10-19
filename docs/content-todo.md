@@ -13,10 +13,12 @@ Change the values in `site.config.ts` unless another file is named.
 | 4 | Services: only roof replacement and Colorbond, or also metal roofing, repairs, restoration, gutters, fascia? | Two services, metal roofing as a material option | `data/services.ts`, `services.metalRoofingPage` |
 | 5 | Suburb list (22 default suburbs across Brisbane, Moreton Bay and Logan) | See `data/areas.ts` | `data/areas.ts` (pages, sitemap, footer and redirects follow) |
 | 6 | Warranty and insurance wording (workmanship warranty, manufacturer warranty, Home Warranty, public liability amount) | Not mentioned anywhere | Add only with written confirmation |
-| 7 | Google Business Profile link, real overall rating and total review count; reviewers happy to appear on the site | No link; "5.0 star reviews on Google" without a count; 10 reviews from the old site shown as "a selection" | `reviews.googleProfileUrl`, `reviews.googleRating`, `reviews.googleCount`; reviews in `content/reviews.json` |
+| 7 | Reviewers happy to appear on the site; keep the rating and count current | Profile linked; 5.0 from 33 Google reviews (read 19 Oct 2026); 10 reviews from the old site shown as "a selection". Add a "write a review" link when available | `reviews.*` in `site.config.ts`; reviews in `content/reviews.json` |
 | 8 | Commercial work offered? | Homeowners first | Copy in `data/services.ts` and the homepage |
 
 ## Other open items
+
+- **Opening hours do not match.** Google Business Profile shows opening at 7 am; the old and new website say Mon to Fri, 9am to 5pm. Pick one and make both the same (`site.config.ts` → `hours`, and the Google profile).
 
 - **Second phone number.** The old site also shows 0410 656 969 (Ethan's mobile, used on TopTin proposals). The new site uses only 0480 095 902, and the build fails if any other number appears. Confirm that is right.
 - **Owner story** for the About page: `[OWNER STORY]` placeholder in `app/about/page.tsx`. Who runs Top Tin, how it started, the crew.

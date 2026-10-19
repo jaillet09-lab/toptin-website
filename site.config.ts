@@ -89,12 +89,12 @@ export const siteConfig = {
    * Until then no total is shown, so the site never understates (or invents) the number.
    */
   reviews: {
-    googleProfileUrl: "",
+    /** Google Business Profile (owner supplied 2026-10-19; Google id /g/11wqmn70hn). */
+    googleProfileUrl: "https://share.google/xvkUlSB603EpsoDZD",
     googleReviewUrl: "",
-    /** Overall Google rating, for example 4.9. null until confirmed. */
-    googleRating: null as number | null,
-    /** Total number of Google reviews. null until confirmed. */
-    googleCount: null as number | null,
+    /** Overall Google rating and total count, read from the profile on 2026-10-19. Update as reviews grow. */
+    googleRating: 5.0 as number | null,
+    googleCount: 33 as number | null,
   },
 
   social: {
