@@ -6,7 +6,7 @@ import { TelLink } from "@/components/ui/TelLink";
 export function MobileBar() {
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-navy/95 backdrop-blur-md nav:hidden print:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-navy nav:hidden print:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
       <div className="flex gap-2.5 px-3 py-2.5">

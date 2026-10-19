@@ -22,8 +22,11 @@ export function Header() {
 
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
+  // The mobile menu sits outside <header> on purpose: a fixed element inside a sticky
+  // or filtered parent can be clipped to the parent's box (it opened 0px tall on iOS).
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-md" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+    <>
+    <header className="sticky top-0 z-50 border-b border-line bg-white" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-6">
         <Link href="/" aria-label={`${siteConfig.name} home`} className="flex min-h-11 shrink-0 items-center">
           <Logo height={38} priority />
@@ -69,9 +72,10 @@ export function Header() {
           </button>
         </div>
       </div>
+    </header>
 
       {open && (
-        <div id="mobile-menu" className="nav:hidden fixed inset-x-0 bottom-0 top-[calc(var(--header-h)+env(safe-area-inset-top))] z-40 overflow-y-auto bg-white">
+        <div id="mobile-menu" className="nav:hidden fixed inset-x-0 bottom-0 top-[calc(var(--header-h)+env(safe-area-inset-top))] z-[45] overflow-y-auto overscroll-contain bg-white">
           <nav aria-label="Mobile" className="wrap py-6">
             <ul className="divide-y divide-line">
               {navLinks.map((l) => (
@@ -101,6 +105,6 @@ export function Header() {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }
