@@ -227,7 +227,7 @@ export default function HomePage() {
       {/* 9. Areas */}
       <Section tone="paper" label="Areas we cover">
         <div className="wrap">
-          <SectionHeading eyebrow="Areas" title="Across Brisbane, Moreton Bay and Logan." lead={siteConfig.serviceArea.long} />
+          <SectionHeading eyebrow="Areas" title="Across Brisbane, Ipswich, Logan and the Gold Coast." lead={siteConfig.serviceArea.long} />
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <li key={a.slug}>

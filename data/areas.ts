@@ -1,6 +1,6 @@
 /**
  * Area pages. One entry per suburb, each with its own copy (no find-and-replace).
- * The list is the default from the brief (Brisbane, Moreton Bay and Logan) and is
+ * The list is the default from the brief (Brisbane to Ipswich and the Gold Coast, owner confirmed 19 Oct 2026) and is
  * waiting on the owner to confirm (docs/content-todo.md). Add or remove entries here;
  * pages, the sitemap, footer links and redirects all follow.
  *
@@ -8,7 +8,7 @@
  * No invented job counts, prices or named customers.
  */
 
-export type Region = "north" | "west" | "east" | "south" | "logan" | "moreton-bay";
+export type Region = "north" | "west" | "east" | "south" | "logan" | "ipswich" | "gold-coast" | "moreton-bay";
 
 export type Area = {
   slug: string;
@@ -33,6 +33,8 @@ export const regionLabels: Record<Region, string> = {
   east: "Brisbane east and bayside",
   south: "Brisbane southside",
   logan: "Logan",
+  ipswich: "Ipswich",
+  "gold-coast": "Gold Coast",
   "moreton-bay": "Moreton Bay",
 };
 
@@ -365,7 +367,24 @@ export const areas: Area[] = [
       q: "What does a roof replacement include on an older Acacia Ridge home?",
       a: "Usually removal of the old roof, any batten work needed, new sarking or insulation if chosen, the new Colorbond sheets, new flashings and ridge capping, and a full clean up. Everything included is listed in the written quote.",
     },
-    neighbours: ["sunnybank", "mount-gravatt", "bethania"],
+    neighbours: ["sunnybank", "mount-gravatt", "bethania", "forest-lake"],
+  },
+  {
+    slug: "forest-lake",
+    name: "Forest Lake",
+    region: "south",
+    summary: "Roof replacement and Colorbond roofing in Forest Lake, between Brisbane and Ipswich.",
+    homes:
+      "Forest Lake is a planned suburb in Brisbane's south-west, built mostly through the 1990s, with family homes set around the lake and parklands.",
+    roofs:
+      "Concrete tile roofs from the 1990s are common and many are now showing cracked ridge pointing, faded tiles and tired valleys.",
+    exposure:
+      "Storms tracking in from the west hit the south-west suburbs first, bringing strong wind and the occasional hailstorm.",
+    faq: {
+      q: "Our Forest Lake tile roof is about 30 years old. Is it time to replace it?",
+      a: "Not always. Some tile roofs that age just need repairs, others are past it. We inspect it, show you what we find and tell you plainly whether repair or replacement makes more sense.",
+    },
+    neighbours: ["acacia-ridge", "browns-plains", "goodna", "springfield-lakes"],
   },
 
   // ── Logan ─────────────────────────────────────────────────────────────────
@@ -384,7 +403,300 @@ export const areas: Area[] = [
       q: "Do you cover Logan suburbs like Bethania?",
       a: "Yes. Bethania and nearby Logan suburbs are in our service area. The quote is free and we come to the property.",
     },
-    neighbours: ["acacia-ridge", "sunnybank"],
+    neighbours: ["acacia-ridge", "sunnybank", "browns-plains", "loganholme"],
+  },
+  {
+    slug: "springwood",
+    name: "Springwood",
+    region: "logan",
+    summary: "Roof replacement and Colorbond roofing for Springwood's hillside family homes.",
+    homes:
+      "Springwood is an established Logan suburb on rolling hills, with many brick and timber family homes built through the 1970s and 1980s and some larger homes on the higher streets.",
+    roofs:
+      "Concrete tile from that era is the most common roof. Ridge pointing cracks, tiles go porous and old valleys rust through. Swapping to Colorbond also cuts the load on the frame, which matters on split-level homes.",
+    exposure:
+      "Homes on the ridgelines catch the full wind of summer storms, while homes lower down deal with water running off the hills. Both show up tired flashings quickly.",
+    faq: {
+      q: "Our Springwood home is split-level. Is that harder to re-roof?",
+      a: "It takes more planning. Split-level homes have more junctions where one roof meets a wall or another roof, and each needs new flashing. We look at every junction during the quote and set the work out in writing.",
+    },
+    neighbours: ["loganholme", "carindale", "mount-gravatt", "shailer-park"],
+  },
+  {
+    slug: "shailer-park",
+    name: "Shailer Park",
+    region: "logan",
+    summary: "Colorbond roof installation and roof replacement in Shailer Park, Logan.",
+    homes:
+      "Shailer Park is a leafy suburb of larger family homes on generous blocks, most built from the late 1970s through the 1990s, many on sloping land.",
+    roofs:
+      "Hip and valley concrete tile roofs are common, often with long valleys and a lot of ridge line. As they age the valleys and ridge capping are where leaks start.",
+    exposure:
+      "Tall gums drop leaves and bark into valleys and gutters, which holds water against the roof. Storm season brings heavy downpours that find any weak spot.",
+    faq: {
+      q: "Can we get leaf guard or new gutters at the same time as a new roof in Shailer Park?",
+      a: "Ask us during the quote. It is easiest to plan gutters and anything at the roof edge while the roof is being replaced, and we will list exactly what is included in the written quote.",
+    },
+    neighbours: ["loganholme", "springwood", "capalaba"],
+  },
+  {
+    slug: "loganholme",
+    name: "Loganholme",
+    region: "logan",
+    summary: "Roof replacement and Colorbond roofing in Loganholme, between Brisbane and the Gold Coast.",
+    homes:
+      "Loganholme sits where the Logan River meets the M1, with family homes from the 1980s and 1990s alongside newer builds and acreage on the edges.",
+    roofs:
+      "Tile roofs from the 1980s and 1990s are now at the age where repairs become frequent. Some acreage homes have large or complex roofs with sheds and patios attached.",
+    exposure:
+      "The river valley gets heavy rain and humid summers. Damp, still air under an old roof can lead to rusted fixings and sagging sarking.",
+    faq: {
+      q: "Can you re-roof the patio and shed at the same time as the house in Loganholme?",
+      a: "Often, yes. Doing everything together means the colours match and the crew is only on site once. Tell us what you want covered and we will price each part separately in the quote.",
+    },
+    neighbours: ["shailer-park", "springwood", "beenleigh", "bethania"],
+  },
+  {
+    slug: "browns-plains",
+    name: "Browns Plains",
+    region: "logan",
+    summary: "Roof replacement in Browns Plains for 1980s and 1990s family homes.",
+    homes:
+      "Browns Plains grew fast in the 1980s and 1990s, so many streets are lowset brick homes from that period, with newer estates on the outskirts.",
+    roofs:
+      "Concrete tile roofs from that boom are common and many are now on their original tiles, ridge capping and valleys.",
+    exposure:
+      "Flat, open streets mean homes take the full force of afternoon storms rolling in from the west.",
+    faq: {
+      q: "Is it worth replacing a tile roof in Browns Plains or just repairing it?",
+      a: "If the tiles are porous, the ridges keep cracking and leaks keep coming back, a replacement is often better value than repeated repairs. We will inspect it and tell you plainly which makes sense.",
+    },
+    neighbours: ["bethania", "acacia-ridge", "forest-lake"],
+  },
+  {
+    slug: "beenleigh",
+    name: "Beenleigh",
+    region: "logan",
+    summary: "Roof replacement and Colorbond roofing in Beenleigh, on the way to the Gold Coast.",
+    homes:
+      "Beenleigh is one of the older towns in Logan, with timber workers cottages and Queenslanders near the centre and brick family homes from the 1970s and 1980s around it.",
+    roofs:
+      "Older homes often still have corrugated iron that has rusted at the laps and fixings. The brick homes mostly have concrete tile that is near the end of its life.",
+    exposure:
+      "Beenleigh sits low near the Albert River, so humid air and heavy summer rain are hard on old iron and flashings.",
+    faq: {
+      q: "Can you keep the look of an older Beenleigh Queenslander with a new roof?",
+      a: "Yes. A corrugated Colorbond profile in a heritage-style colour keeps the classic look while giving you a new, sealed roof. We help you choose during the quote.",
+    },
+    neighbours: ["loganholme", "ormeau", "bethania"],
+  },
+
+  // ── Ipswich ───────────────────────────────────────────────────────────────
+  {
+    slug: "ipswich",
+    name: "Ipswich",
+    region: "ipswich",
+    summary: "Roof replacement and Colorbond roofing for Ipswich Queenslanders and family homes.",
+    homes:
+      "Ipswich has some of the oldest housing in Queensland, with Queenslanders and worker cottages around the centre and brick family homes in the surrounding suburbs.",
+    roofs:
+      "Many older homes still have original or early corrugated iron that has rusted at the laps, nail holes and gutters. Brick homes from the 1970s and 1980s mostly have concrete tile.",
+    exposure:
+      "Ipswich sits inland, so summers run hotter than coastal Brisbane. Roof colour and insulation make a real difference to how hot the house gets.",
+    faq: {
+      q: "What roof colour keeps an Ipswich home cooler?",
+      a: "Lighter Colorbond colours reflect more heat, and adding insulation or a foil blanket under the new sheets helps too. We talk through colours and options during the quote.",
+    },
+    neighbours: ["brassall", "redbank-plains", "springfield-lakes"],
+  },
+  {
+    slug: "brassall",
+    name: "Brassall",
+    region: "ipswich",
+    summary: "Roof replacement and Colorbond installation in Brassall, Ipswich.",
+    homes:
+      "Brassall, on the northern side of Ipswich, has older timber homes near the river and plenty of brick family homes from the 1980s onwards.",
+    roofs:
+      "A mix of old corrugated iron and concrete tile. On the older iron roofs, rusted fixings and worn flashings are usually the first problem.",
+    exposure:
+      "Hot inland summers and storms that build over the ranges to the west bring strong wind and hail risk.",
+    faq: {
+      q: "Our Brassall roof was damaged in a hailstorm. Can you help?",
+      a: "Yes. We can inspect the roof, explain what needs replacing and give you a written quote you can pass to your insurer.",
+    },
+    neighbours: ["ipswich", "redbank-plains"],
+  },
+  {
+    slug: "redbank-plains",
+    name: "Redbank Plains",
+    region: "ipswich",
+    summary: "Roof replacement in Redbank Plains for established and newer family homes.",
+    homes:
+      "Redbank Plains has older lowset homes from the 1970s and 1980s and a lot of newer estate housing built from the 2000s onwards.",
+    roofs:
+      "The older homes mostly have concrete tile or early metal roofs that are due for replacement. Newer homes are more likely to need work after storm damage.",
+    exposure:
+      "Open, exposed streets catch strong westerly storms in summer, which lift old tiles and test fixings.",
+    faq: {
+      q: "Do you work on both older and newer homes in Redbank Plains?",
+      a: "Yes. Whether it is an old tile roof that is past repair or a newer roof that has been storm damaged, we inspect it and give you a written quote.",
+    },
+    neighbours: ["goodna", "springfield-lakes", "ipswich"],
+  },
+  {
+    slug: "goodna",
+    name: "Goodna",
+    region: "ipswich",
+    summary: "Roof replacement and Colorbond roofing in Goodna, between Ipswich and Brisbane.",
+    homes:
+      "Goodna is an older suburb near the Brisbane River, with timber homes, highset Queenslanders and brick homes from the 1960s to the 1980s.",
+    roofs:
+      "Old corrugated iron and early tile roofs are common. Rust at the laps, loose fixings and worn flashings are typical on homes of this age.",
+    exposure:
+      "Low-lying, humid conditions near the river are hard on old iron and timber battens, so we check the battens closely during the quote.",
+    faq: {
+      q: "Do you check the battens on older Goodna homes?",
+      a: "Yes. On older timber homes the battens can be worn or rotted. We check them during the inspection and allow for any replacement in the written quote.",
+    },
+    neighbours: ["redbank-plains", "springfield-lakes", "forest-lake"],
+  },
+  {
+    slug: "springfield-lakes",
+    name: "Springfield Lakes",
+    region: "ipswich",
+    summary: "Colorbond roofing and roof replacement in Springfield Lakes.",
+    homes:
+      "Springfield Lakes is a planned community built from the early 2000s, with modern family homes, many two-storey, and estate covenants on some streets.",
+    roofs:
+      "Roofs here are newer, so replacements are usually after storm damage, ongoing leaks, or a change from tile to Colorbond for looks and weight.",
+    exposure:
+      "Newer estates have fewer mature trees, so homes catch strong storm winds. Two-storey homes need proper edge protection, which we plan in the quote.",
+    faq: {
+      q: "Does our Springfield Lakes estate allow a change of roof colour?",
+      a: "Some estates have design rules, so it is worth checking your covenant. We can suggest Colorbond colours that suit the street and work with what your estate allows.",
+    },
+    neighbours: ["redbank-plains", "goodna", "forest-lake"],
+  },
+
+  // ── Gold Coast ────────────────────────────────────────────────────────────
+  {
+    slug: "ormeau",
+    name: "Ormeau",
+    region: "gold-coast",
+    summary: "Roof replacement and Colorbond roofing in Ormeau, on the northern Gold Coast.",
+    homes:
+      "Ormeau and nearby Pimpama sit on the M1 between Logan and the Gold Coast, with acreage homes, 1990s family homes and large newer estates.",
+    roofs:
+      "Older acreage homes often have big tile or metal roofs with attached sheds and patios. Newer homes mostly need work after storm damage.",
+    exposure:
+      "The open corridor between the hills and the coast catches strong storm winds, so secure fixings matter.",
+    faq: {
+      q: "Do you cover acreage properties around Ormeau?",
+      a: "Yes. Larger roofs and outbuildings are fine. We measure everything on site and price each part clearly in the quote.",
+    },
+    neighbours: ["beenleigh", "coomera"],
+  },
+  {
+    slug: "coomera",
+    name: "Coomera",
+    region: "gold-coast",
+    summary: "Colorbond roofing and roof replacement in Coomera, Gold Coast.",
+    homes:
+      "Coomera has grown quickly, with modern estates built mostly from the 2000s onwards and some older acreage and canal homes nearby.",
+    roofs:
+      "Many homes are newer, so replacement is often after storm damage or ongoing problems with the original roof. Older homes in the area have tile that is due.",
+    exposure:
+      "Close to the Coomera River and the Broadwater, homes get humid, salty air that is harder on metal fixings than inland suburbs.",
+    faq: {
+      q: "Does being close to the water change the roof we should choose in Coomera?",
+      a: "It can. Salt air is harder on steel. We look at how close the home is to the water and recommend the right Colorbond product and fixings for the site.",
+    },
+    neighbours: ["ormeau", "helensvale"],
+  },
+  {
+    slug: "helensvale",
+    name: "Helensvale",
+    region: "gold-coast",
+    summary: "Roof replacement and Colorbond installation in Helensvale, Gold Coast.",
+    homes:
+      "Helensvale has lots of family homes from the late 1980s and 1990s, including canal-front homes and leafy streets near the hills.",
+    roofs:
+      "Concrete tile from that era is common and many roofs are on their original tiles, valleys and ridge capping.",
+    exposure:
+      "Canal homes are exposed to salt air and wind off the water, while homes near the hills deal with leaf litter in gutters and valleys.",
+    faq: {
+      q: "Our Helensvale canal home has a tile roof. Is Colorbond suitable near the water?",
+      a: "Yes, with the right product and fixings for the site. We look at how exposed the home is during the quote and recommend accordingly.",
+    },
+    neighbours: ["coomera", "southport", "nerang"],
+  },
+  {
+    slug: "southport",
+    name: "Southport",
+    region: "gold-coast",
+    summary: "Roof replacement and Colorbond roofing in Southport, Gold Coast.",
+    homes:
+      "Southport is one of the Gold Coast's older suburbs, with post-war houses, Queenslanders and brick homes mixed in with newer units and townhouses.",
+    roofs:
+      "Older homes often have rusted iron or tired tile roofs. Salt air speeds up corrosion on fixings, flashings and old sheets.",
+    exposure:
+      "Close to the Broadwater, homes get salt-laden wind year round and strong storms in summer.",
+    faq: {
+      q: "Why does our Southport roof rust faster than inland roofs?",
+      a: "Salt in the air near the coast attacks steel and fixings. On coastal homes we recommend the right Colorbond product and fixings for how close you are to the water.",
+    },
+    neighbours: ["helensvale", "nerang", "robina"],
+  },
+  {
+    slug: "nerang",
+    name: "Nerang",
+    region: "gold-coast",
+    summary: "Roof replacement in Nerang for family homes and hinterland properties.",
+    homes:
+      "Nerang sits at the foot of the hinterland, with older timber homes near the town centre, 1980s family homes and acreage in the hills.",
+    roofs:
+      "Tile and older metal roofs are common. Homes on hillsides can have tricky access, which we plan for in the quote.",
+    exposure:
+      "Storms often build over the hinterland and hit Nerang hard, with heavy rain and the risk of hail.",
+    faq: {
+      q: "Our Nerang home is on a steep block. Can you still re-roof it?",
+      a: "Usually, yes. Steep blocks need careful planning for access, scaffolding and edge protection. We look at the site during the quote and include it in the price.",
+    },
+    neighbours: ["helensvale", "southport", "robina"],
+  },
+  {
+    slug: "robina",
+    name: "Robina",
+    region: "gold-coast",
+    summary: "Colorbond roofing and roof replacement in Robina, Gold Coast.",
+    homes:
+      "Robina is a planned suburb built mostly from the 1980s and 1990s, with family homes around lakes and parks, many with hip and valley roofs.",
+    roofs:
+      "Concrete tile roofs from that period are common and are now at the age where leaks and cracked ridges keep coming back.",
+    exposure:
+      "Coastal humidity and summer storms are hard on old pointing and flashings, and lakeside homes catch more wind.",
+    faq: {
+      q: "Can we change from tile to Colorbond on our Robina home?",
+      a: "Yes. It is one of the most common jobs on homes of this age. We check the battens and frame and explain everything included in the written quote.",
+    },
+    neighbours: ["nerang", "southport", "burleigh-heads"],
+  },
+  {
+    slug: "burleigh-heads",
+    name: "Burleigh Heads",
+    region: "gold-coast",
+    summary: "Roof replacement and Colorbond roofing in Burleigh Heads, close to the surf.",
+    homes:
+      "Burleigh Heads has older beach houses, fibro and brick homes from the 1960s and 1970s, and plenty of newer renovations and rebuilds.",
+    roofs:
+      "Older iron roofs here often rust much faster than inland because of the salt. Tile roofs from the 1970s are common on the brick homes.",
+    exposure:
+      "Homes close to the surf are in a harsh marine environment. Product and fixing choice matters most here.",
+    faq: {
+      q: "We are a few streets from the beach in Burleigh. What roof should we use?",
+      a: "Close to breaking surf, a coastal-grade Colorbond product such as Colorbond Ultra and matching fixings are usually recommended. We look at how close you are and recommend the right option in the quote.",
+    },
+    neighbours: ["robina", "southport"],
   },
 
   // ── Moreton Bay ───────────────────────────────────────────────────────────

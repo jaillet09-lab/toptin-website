@@ -9,14 +9,14 @@ import { Icon } from "@/components/ui/Icon";
 import { CtaBand } from "@/components/CtaBand";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Areas We Cover, Brisbane, Moreton Bay and Logan",
+  title: "Areas We Cover, Brisbane to the Gold Coast",
   description:
-    "Top Tin Roofing replaces roofs and installs Colorbond across Brisbane, Moreton Bay and Logan. Find your suburb, or call for a free quote anywhere nearby.",
+    "Top Tin Roofing replaces roofs and installs Colorbond across Brisbane, Ipswich, Logan and the Gold Coast. Find your suburb, or call for a free quote anywhere nearby.",
   path: "/areas",
   ogTitle: "Areas we cover",
 });
 
-const order: Region[] = ["north", "west", "east", "south", "logan", "moreton-bay"];
+const order: Region[] = ["north", "west", "east", "south", "logan", "ipswich", "gold-coast", "moreton-bay"];
 
 export default function AreasPage() {
   return (

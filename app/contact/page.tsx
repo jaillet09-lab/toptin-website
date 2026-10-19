@@ -69,7 +69,7 @@ export default function ContactPage() {
           </div>
           <div className="card p-6">
             <h2 className="font-display text-[20px] font-bold text-navy">Where we work</h2>
-            <p className="mt-2 text-[15.5px] text-mute">Brisbane, Moreton Bay and Logan. See the <Link href="/areas" className="font-semibold text-navy underline">areas we cover</Link>, or call if your suburb is not listed.</p>
+            <p className="mt-2 text-[15.5px] text-mute">Brisbane, Ipswich, Logan and the Gold Coast. See the <Link href="/areas" className="font-semibold text-navy underline">areas we cover</Link>, or call if your suburb is not listed.</p>
           </div>
         </div>
       </Section>

@@ -42,7 +42,7 @@ export const services: Service[] = [
       "Old tile or tired metal roof? We strip it, fix what sits underneath and install a new Colorbond roof, with the price in writing before we start.",
     intro: [
       "Every roof reaches a point where patching stops working. Tiles go porous, mortar on the ridges cracks, iron rusts through at the laps and screws, and leaks start turning up in new places after every storm. When that happens, a full replacement is usually the fix that lasts.",
-      "Top Tin Roofing replaces roofs on homes across Brisbane, Moreton Bay and Logan. We take the old roof off, check the battens and frame underneath, and install a new Colorbond steel roof with new flashings, ridges and valleys. You get a written quote first, the crew keeps you updated through the job, and the site is cleaned up when we leave.",
+      "Top Tin Roofing replaces roofs on homes across Brisbane, Ipswich, Logan and the Gold Coast. We take the old roof off, check the battens and frame underneath, and install a new Colorbond steel roof with new flashings, ridges and valleys. You get a written quote first, the crew keeps you updated through the job, and the site is cleaned up when we leave.",
     ],
     included: [
       "A free on-site inspection and a written, itemised quote",
@@ -143,7 +143,7 @@ export const services: Service[] = [
       "A new Colorbond steel roof in the colour and profile that suits your home, installed by our own crew with new flashings, ridges and valleys.",
     intro: [
       "Colorbond is the roof you see on homes all over Queensland, and for good reason. It is light, it sheds rain quickly, and it comes in a wide range of colours, so it suits an old Queenslander as well as a new build.",
-      "Top Tin Roofing installs Colorbond roofs on homes across Brisbane, Moreton Bay and Logan, as a replacement for an old tile or metal roof or on new and extended roof areas. We help you choose the profile and colour, set the price out in writing, and install it with new flashings, ridges and valleys.",
+      "Top Tin Roofing installs Colorbond roofs on homes across Brisbane, Ipswich, Logan and the Gold Coast, as a replacement for an old tile or metal roof or on new and extended roof areas. We help you choose the profile and colour, set the price out in writing, and install it with new flashings, ridges and valleys.",
     ],
     included: [
       "A free on-site quote with colour and profile samples",

@@ -122,7 +122,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       <Section tone="white" label="Areas">
         <div className="wrap">
-          <SectionHeading eyebrow="Areas" title={`${s.name} near you.`} lead="We work across Brisbane, Moreton Bay and Logan. Find your suburb." />
+          <SectionHeading eyebrow="Areas" title={`${s.name} near you.`} lead="We work across Brisbane, Ipswich, Logan and the Gold Coast. Find your suburb." />
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <li key={a.slug}>

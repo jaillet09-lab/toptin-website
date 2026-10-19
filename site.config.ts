@@ -60,10 +60,10 @@ export const siteConfig = {
   replyLine: "Free quote. We reply Mon to Fri 7am to 6pm, Sat 9am to 5pm.",
 
   serviceArea: {
-    summary: "Brisbane, Moreton Bay and Logan",
-    long: "Brisbane northside and southside, the western suburbs and the bayside, plus Moreton Bay and Logan.",
+    summary: "Brisbane, Ipswich, Logan and the Gold Coast",
+    long: "All of Brisbane, west to Ipswich, south through Logan to the Gold Coast, and the suburbs in between.",
     /** Used in schema.org areaServed. */
-    regions: ["Brisbane", "Moreton Bay", "Logan"],
+    regions: ["Brisbane", "Ipswich", "Logan", "Gold Coast", "Moreton Bay"],
   },
 
   /**
@@ -118,7 +118,7 @@ export const siteConfig = {
   /** NAP block exactly as it should read on Google Business Profile and every directory. */
   nap: {
     name: "Top Tin Roofing",
-    serviceArea: "Brisbane QLD, Moreton Bay and Logan (service area business, no walk-in address)",
+    serviceArea: "Brisbane QLD, Ipswich, Logan and the Gold Coast (service area business, no walk-in address)",
     phone: "0480 095 902",
     email: "toptinroofing@gmail.com",
     website: "https://toptinroofing.com",

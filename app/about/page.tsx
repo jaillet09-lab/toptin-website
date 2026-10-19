@@ -30,7 +30,7 @@ export default function AboutPage() {
         crumbs={[{ name: "About", path: "/about" }]}
         eyebrow="About us"
         title="A Brisbane roofing crew that does the job properly."
-        intro={<p>Top Tin Roofing replaces roofs and installs Colorbond on homes across Brisbane, Moreton Bay and Logan.</p>}
+        intro={<p>Top Tin Roofing replaces roofs and installs Colorbond on homes across Brisbane, Ipswich, Logan and the Gold Coast.</p>}
         photo={{ src: "/photos/green-roof-valleys.jpg", alt: "Top Tin roofer working on the ridge of a new green Colorbond roof" }}
       />
       <Section tone="white" label="Our story">

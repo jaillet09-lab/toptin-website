@@ -11,7 +11,7 @@ Change the values in `site.config.ts` unless another file is named.
 | 2 | Price match or beat offer, and the exact terms | Not published | `claims.priceMatch`. Needs written terms first |
 | 3 | "No hidden fees" and "no upfront costs": accurate for how jobs are billed? | Soft wording: "A written quote with the price set out before any work starts." | `claims.noHiddenFees`, `pricingLine` |
 | 4 | Services: only roof replacement and Colorbond, or also metal roofing, repairs, restoration, gutters, fascia? | Two services, metal roofing as a material option | `data/services.ts`, `services.metalRoofingPage` |
-| 5 | Suburb list (22 default suburbs across Brisbane, Moreton Bay and Logan) | See `data/areas.ts` | `data/areas.ts` (pages, sitemap, footer and redirects follow) |
+| 5 | Suburb list. Owner confirmed Brisbane to Ipswich and the Gold Coast and everything between (19 Oct 2026); 40 suburb pages. Confirm whether Moreton Bay (Strathpine, North Lakes, Albany Creek) is still covered | See `data/areas.ts` | `data/areas.ts` (pages, sitemap, footer and redirects follow) |
 | 6 | Warranty and insurance wording (workmanship warranty, manufacturer warranty, Home Warranty, public liability amount) | Not mentioned anywhere | Add only with written confirmation |
 | 7 | Reviewers happy to appear on the site; keep the rating and count current | Profile linked; 5.0 from 33 Google reviews (read 19 Oct 2026); 10 reviews from the old site shown as "a selection". Add a "write a review" link when available | `reviews.*` in `site.config.ts`; reviews in `content/reviews.json` |
 | 8 | Commercial work offered? | Homeowners first | Copy in `data/services.ts` and the homepage |

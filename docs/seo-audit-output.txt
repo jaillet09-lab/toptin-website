@@ -1,28 +1,46 @@
-SEO audit: 47 prerendered pages checked
+SEO audit: 65 prerendered pages checked
 Errors: 0
 Warnings: 0
 
 Page summary (route | H1s | words | internal links | index):
-  / | 1 | 1509 | 28 | index
-  /about | 1 | 318 | 7 | index
-  /areas | 1 | 304 | 31 | index
-  /areas/acacia-ridge | 1 | 540 | 11 | index
+  / | 1 | 1538 | 46 | index
+  /about | 1 | 320 | 7 | index
+  /areas | 1 | 334 | 49 | index
+  /areas/acacia-ridge | 1 | 545 | 12 | index
   /areas/albany-creek | 1 | 499 | 10 | index
   /areas/ashgrove | 1 | 431 | 10 | index
   /areas/aspley | 1 | 525 | 10 | index
+  /areas/beenleigh | 1 | 535 | 11 | index
   /areas/belmont | 1 | 507 | 11 | index
-  /areas/bethania | 1 | 498 | 10 | index
+  /areas/bethania | 1 | 505 | 12 | index
   /areas/birkdale | 1 | 422 | 9 | index
   /areas/boondall | 1 | 500 | 11 | index
+  /areas/brassall | 1 | 507 | 10 | index
+  /areas/browns-plains | 1 | 533 | 11 | index
+  /areas/burleigh-heads | 1 | 532 | 10 | index
   /areas/capalaba | 1 | 443 | 10 | index
   /areas/carindale | 1 | 507 | 11 | index
   /areas/chermside | 1 | 503 | 11 | index
+  /areas/coomera | 1 | 521 | 10 | index
   /areas/everton-park | 1 | 463 | 10 | index
+  /areas/forest-lake | 1 | 543 | 12 | index
+  /areas/goodna | 1 | 521 | 11 | index
+  /areas/helensvale | 1 | 513 | 11 | index
   /areas/indooroopilly | 1 | 444 | 9 | index
+  /areas/ipswich | 1 | 532 | 11 | index
   /areas/kenmore | 1 | 542 | 11 | index
+  /areas/loganholme | 1 | 547 | 12 | index
   /areas/mitchelton | 1 | 464 | 10 | index
   /areas/mount-gravatt | 1 | 453 | 9 | index
+  /areas/nerang | 1 | 516 | 11 | index
   /areas/north-lakes | 1 | 495 | 9 | index
+  /areas/ormeau | 1 | 502 | 10 | index
+  /areas/redbank-plains | 1 | 530 | 11 | index
+  /areas/robina | 1 | 515 | 11 | index
+  /areas/shailer-park | 1 | 559 | 11 | index
+  /areas/southport | 1 | 512 | 11 | index
+  /areas/springfield-lakes | 1 | 533 | 11 | index
+  /areas/springwood | 1 | 558 | 12 | index
   /areas/stafford | 1 | 505 | 11 | index
   /areas/strathpine | 1 | 472 | 9 | index
   /areas/sunnybank | 1 | 519 | 11 | index
@@ -39,14 +57,14 @@ Page summary (route | H1s | words | internal links | index):
   /blog/roof-replacement-and-storm-season-in-brisbane | 1 | 885 | 13 | index
   /blog/signs-your-roof-needs-replacing | 1 | 912 | 12 | index
   /blog/what-to-check-before-you-hire-a-roofer | 1 | 964 | 13 | index
-  /contact | 1 | 278 | 8 | index
+  /contact | 1 | 282 | 8 | index
   /how-it-works | 1 | 461 | 7 | index
   /privacy | 1 | 321 | 4 | index
   /projects | 1 | 258 | 7 | index
   /quote | 1 | 210 | 5 | index
   /reviews | 1 | 666 | 7 | index
   /services | 1 | 295 | 7 | index
-  /services/colorbond-roof-installation | 1 | 1105 | 33 | index
-  /services/roof-replacement | 1 | 1298 | 33 | index
+  /services/colorbond-roof-installation | 1 | 1187 | 51 | index
+  /services/roof-replacement | 1 | 1380 | 51 | index
   /terms | 1 | 181 | 3 | index
   /thank-you | 1 | 68 | 4 | noindex
