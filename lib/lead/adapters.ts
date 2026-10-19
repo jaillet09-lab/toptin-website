@@ -1,0 +1,141 @@
+import { siteConfig } from "@/site.config";
+import type { Lead, LeadPhoto, SubmitResult } from "./types";
+
+/**
+ * Pluggable lead delivery. Every configured adapter runs; the lead counts as
+ * delivered if at least one succeeds.
+ *
+ * - RESEND_API_KEY      Email the lead (photos attached) to LEAD_TO_EMAIL, default
+ *                       toptinroofing@gmail.com. LEAD_FROM_EMAIL sets the sender
+ *                       (must be a domain verified in Resend).
+ * - LEAD_WEBHOOK_URL    POST the lead as JSON, for example to the TopTin System.
+ *                       Optional LEAD_WEBHOOK_SECRET is sent as a bearer token.
+ *                       LEAD_WEBHOOK_INCLUDE_PHOTOS=true inlines photos as base64.
+ * - Nothing configured  In development the lead is logged to the console. In
+ *                       production it is logged as an error and the form shows
+ *                       the phone number instead.
+ */
+
+type Adapter = { name: string; enabled: () => boolean; send: (lead: Lead, photos: LeadPhoto[]) => Promise<void> };
+
+function rows(lead: Lead): [string, string][] {
+  return [
+    ["Name", lead.name],
+    ["Phone", lead.phone],
+    ["Email", lead.email],
+    ["Property", lead.address],
+    ["Service", lead.serviceLabel],
+    ["Roof type", lead.roofType],
+    ["Roof age", lead.roofAge],
+  ];
+}
+
+function leadToText(lead: Lead, photos: LeadPhoto[]): string {
+  return [
+    "Quote request from the website",
+    "",
+    ...rows(lead).map(([k, v]) => `${k}: ${v || "(not given)"}`),
+    "",
+    "Message:",
+    lead.message || "(none)",
+    "",
+    `Photos: ${photos.length ? photos.map((p) => `${p.filename} (${Math.round(p.size / 1024)} KB)`).join(", ") : "none"}`,
+    `Page: ${lead.sourcePage}`,
+    `Submitted: ${lead.submittedAt}`,
+    `Lead id: ${lead.id}`,
+  ].join("\n");
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
+}
+
+function leadToHtml(lead: Lead, photos: LeadPhoto[]): string {
+  const row = ([k, v]: [string, string]) =>
+    `<tr><td style="padding:6px 12px 6px 0;color:#667085;vertical-align:top">${k}</td><td style="padding:6px 0;color:#101828"><strong>${escapeHtml(v || "(not given)")}</strong></td></tr>`;
+  return `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#101828">
+<h2 style="color:#0F162E;margin:0 0 12px">Quote request: ${escapeHtml(lead.serviceLabel)}</h2>
+<table style="border-collapse:collapse">${rows(lead).map(row).join("")}</table>
+<p style="margin:16px 0 4px;color:#667085">Message</p>
+<p style="white-space:pre-wrap;margin:0">${escapeHtml(lead.message || "(none)")}</p>
+<p style="margin:16px 0 0;color:#667085;font-size:13px">Photos: ${photos.length}. Page: ${escapeHtml(lead.sourcePage)}. Submitted ${escapeHtml(lead.submittedAt)}. Lead id ${lead.id}.</p>
+</div>`;
+}
+
+const emailAdapter: Adapter = {
+  name: "email",
+  enabled: () => Boolean(process.env.RESEND_API_KEY),
+  async send(lead, photos) {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+      body: JSON.stringify({
+        from: process.env.LEAD_FROM_EMAIL || `${siteConfig.name} website <onboarding@resend.dev>`,
+        to: [process.env.LEAD_TO_EMAIL || siteConfig.email],
+        ...(lead.email ? { reply_to: lead.email } : {}),
+        subject: `Quote request: ${lead.serviceLabel} at ${lead.address} (${lead.name}, ${lead.phone})`,
+        text: leadToText(lead, photos),
+        html: leadToHtml(lead, photos),
+        attachments: photos.map((p) => ({ filename: p.filename, content: p.data.toString("base64") })),
+      }),
+    });
+    if (!res.ok) throw new Error(`Email API responded ${res.status} ${(await res.text().catch(() => "")).slice(0, 300)}`);
+  },
+};
+
+const webhookAdapter: Adapter = {
+  name: "webhook",
+  enabled: () => Boolean(process.env.LEAD_WEBHOOK_URL),
+  async send(lead, photos) {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (process.env.LEAD_WEBHOOK_SECRET) headers.Authorization = `Bearer ${process.env.LEAD_WEBHOOK_SECRET}`;
+    const includePhotos = process.env.LEAD_WEBHOOK_INCLUDE_PHOTOS === "true";
+    const res = await fetch(process.env.LEAD_WEBHOOK_URL as string, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        source: "website",
+        site: siteConfig.url,
+        lead,
+        photos: photos.map((p) => ({
+          filename: p.filename,
+          contentType: p.contentType,
+          size: p.size,
+          ...(includePhotos ? { base64: p.data.toString("base64") } : {}),
+        })),
+      }),
+    });
+    if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+  },
+};
+
+const consoleAdapter: Adapter = {
+  name: "console",
+  enabled: () => process.env.NODE_ENV !== "production",
+  async send(lead, photos) {
+    console.info("\n[toptin lead]\n" + leadToText(lead, photos) + "\n");
+  },
+};
+
+const adapters: Adapter[] = [emailAdapter, webhookAdapter, consoleAdapter];
+
+export async function submitLead(lead: Lead, photos: LeadPhoto[]): Promise<SubmitResult> {
+  const active = adapters.filter((a) => a.enabled());
+  const result: SubmitResult = { ok: false, delivered: [], errors: [] };
+  if (!active.length) {
+    console.error(`[toptin lead] No lead adapter configured. Set RESEND_API_KEY or LEAD_WEBHOOK_URL. Lead ${lead.id} from ${lead.name} (${lead.phone}) was NOT delivered.`);
+    return result;
+  }
+  for (const adapter of active) {
+    try {
+      await adapter.send(lead, photos);
+      result.delivered.push(adapter.name);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      result.errors.push(`${adapter.name}: ${message}`);
+      console.error(`[toptin lead] ${adapter.name} failed for ${lead.id}: ${message}`);
+    }
+  }
+  result.ok = result.delivered.length > 0;
+  return result;
+}
