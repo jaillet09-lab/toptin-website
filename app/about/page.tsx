@@ -37,7 +37,12 @@ export default function AboutPage() {
         <div className="wrap grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="prose">
             <h2>Who we are</h2>
-            <p className="placeholder !block !text-left">[OWNER STORY: how Top Tin Roofing started, who runs it and the crew behind it. To be supplied by the owner.]</p>
+            <p>
+              Top Tin Roofing is a Queensland, owner-operated roofing company led by Ethan Farrell. We built the business on one idea: do one trade, and do it properly.
+            </p>
+            <p>
+              <strong>Ethan quotes every job.</strong> The person who measures your roof is the person who runs the business. <strong>Tin roofs only.</strong> No side trades; every day is spent on Colorbond roof replacements. <strong>A young crew</strong>, up to date with modern systems and processes, so your job runs smoothly from start to finish. And <strong>everything in writing</strong>: scope, price and contract, all set out before we start.
+            </p>
             <h2>How we work</h2>
             <p>
               We keep things simple. We come out and look at your roof, give you a written quote, and then our crew does the work and keeps you updated. When the job is done we clean up and walk you through it.
