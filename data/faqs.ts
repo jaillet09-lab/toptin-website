@@ -20,6 +20,10 @@ export const homeFaqs: Faq[] = [
     a: "Roofs containing asbestos must be removed by licensed people under Queensland rules. If we suspect asbestos, we tell you during the quote and explain how its removal is arranged before any work starts.",
   },
   {
+    q: "What about solar panels?",
+    a: "If you already have solar, we take the panels off and put them back, with a licensed electrician handling the disconnect and reconnect. If you want a new solar system, we have a supplier we highly recommend. When we do your roof, we put you in direct contact with them: no middleman and no markup from us.",
+  },
+  {
     q: "Are you licensed?",
     a: `Yes. Top Tin Roofing holds QBCC licence ${siteConfig.qbcc}, and our ABN is ${siteConfig.abn}. You can check any Queensland builder or contractor licence on the QBCC website.`,
   },

@@ -115,6 +115,10 @@ export const services: Service[] = [
         a: "The written quote sets out the removal of the old roof, any batten work, sarking or insulation if chosen, the new sheets, flashings, ridges and valleys, and the clean up. If something is not included, the quote says so.",
       },
       {
+        q: "What happens with my solar panels?",
+        a: "If you already have solar, we take the panels off and put them back, with a licensed electrician handling the disconnect and reconnect. If you want a new solar system, we have a supplier we highly recommend. When we do your roof, we put you in direct contact with them: no middleman and no markup from us.",
+      },
+      {
         q: "Can you replace a tile roof with Colorbond?",
         a: "Yes. Tile to Colorbond is one of our most common jobs. We check the battens and frame during the quote and allow for any changes in writing.",
       },
