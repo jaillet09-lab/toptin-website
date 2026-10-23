@@ -14,7 +14,7 @@ There are two references, used for different things.
 |---|---|
 | Trading name | Top Tin Roofing |
 | ABN | 25 656 843 944 |
-| QBCC licence | **15465551** (must appear in the footer of every page and on the contact page) |
+| QBCC licence | **15587145** (must appear in the footer of every page and on the contact page) |
 | Base | Brisbane, Queensland |
 | Phone | **+61 480 095 902** (display as 0480 095 902, tel link `+61480095902`). Store once in `site.config.ts` field `phone` |
 | Email | toptinroofing@gmail.com |
@@ -106,7 +106,7 @@ Premium trade contractor: big real photography of finished roofs and crews, stro
 ## 5. Homepage specification
 
 1. **Hero** (dark, real roof photo): headline about replacing a roof properly, for example "Roof replacement and Colorbond roofing in Brisbane." Sub line in plain words. Buttons: **Get a free quote** and **Call 0480 095 902**. Beside or below: a small chooser "What do you need?" (Roof replacement, Colorbond installation, Not sure) that pre-selects the quote form.
-2. **Trust bar:** "QBCC licence 15465551", "ABN 25 656 843 944", "Free quote", "Brisbane based", "Google reviews" (rating from the real reviews file). Confirmed claims (50+ projects, 20+ years) only if their flags are on.
+2. **Trust bar:** "QBCC licence 15587145", "ABN 25 656 843 944", "Free quote", "Brisbane based", "Google reviews" (rating from the real reviews file). Confirmed claims (50+ projects, 20+ years) only if their flags are on.
 3. **Services:** two large cards (Roof replacement, Colorbond installation) with a real photo each and a clear link, then a short "Materials we work with" row.
 4. **Projects:** a before and after slider and a gallery of **real** projects only. Use the photos on the current site. Placeholders marked until more arrive.
 5. **How it works:** 1 Free quote and roof inspection, 2 Written quote and colour or material choice, 3 Installation by our crew, 4 Clean up and final walk-through. One line each, no invented timeframes.
@@ -116,7 +116,7 @@ Premium trade contractor: big real photography of finished roofs and crews, stro
 9. **Areas:** suburb pills linking to the area pages.
 10. **FAQ:** 8 to 10 questions with FAQ schema (how a quote works, how long a replacement takes in general terms, what is included, asbestos roofs, insurance and licensing, payment, clean up, storm damage, colour choice, council approval).
 11. **Quote form** and **final call to action** (gold band, phone number large).
-12. **Footer:** logo, services, areas, quick links, phone, email, **QBCC 15465551**, **ABN 25 656 843 944**, hours, privacy and terms.
+12. **Footer:** logo, services, areas, quick links, phone, email, **QBCC 15587145**, **ABN 25 656 843 944**, hours, privacy and terms.
 
 ## 6. Page templates
 
@@ -190,7 +190,7 @@ Blog with category filters, table of contents, author box, related posts, a call
 
 ## 12. Decisions: confirmed and open
 
-Confirmed from the current site: phone 0480 095 902, email toptinroofing@gmail.com, Brisbane QLD, ABN 25 656 843 944, QBCC 15465551, Mon to Fri 9am to 5pm, services roof replacement and Colorbond installation.
+Confirmed from the current site: phone 0480 095 902, email toptinroofing@gmail.com, Brisbane QLD, ABN 25 656 843 944, QBCC 15587145, Mon to Fri 9am to 5pm, services roof replacement and Colorbond installation.
 
 **Open (build with the stated default and list each in `/docs/content-todo.md`):**
 1. **Are "50+ projects", "20+ years combined experience" and "100+ 5-star reviews" current and provable?** Default: off.

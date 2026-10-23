@@ -13,7 +13,7 @@ consistent business.
 | Email | toptinroofing@gmail.com |
 | Website | https://toptinroofing.com |
 | Hours | Mon to Fri 7am to 6pm, Sat 9am to 5pm |
-| QBCC licence | 15465551 |
+| QBCC licence | 15587145 |
 | ABN | 25 656 843 944 |
 | Categories | Roofing contractor (primary); Roofing service; Metal roofing contractor |
 
@@ -23,10 +23,10 @@ consistent business.
 Brisbane roof replacement and Colorbond roofing.
 
 **150 characters**
-Top Tin Roofing replaces old tile and metal roofs with new Colorbond across Brisbane, Ipswich, Logan and the Gold Coast. Free quote. QBCC 15465551.
+Top Tin Roofing replaces old tile and metal roofs with new Colorbond across Brisbane, Ipswich, Logan and the Gold Coast. Free quote. QBCC 15587145.
 
 **750 characters**
-Top Tin Roofing is a Brisbane roofing business that replaces old roofs and installs new Colorbond steel roofs on homes across Brisbane, Ipswich, Logan and the Gold Coast. Most of our work is taking an old concrete tile or rusted iron roof off, checking the battens and frame underneath, and installing a new Colorbond roof with new flashings, ridges and valleys. Every job starts with a free inspection and a written quote that sets out the scope and price. Our own crew does the work, keeps you updated, and cleans up at the end with a walk-through of the finished roof. We help you choose the right colour and profile for Queensland heat and your home. QBCC licence 15465551. ABN 25 656 843 944. Call 0480 095 902.
+Top Tin Roofing is a Brisbane roofing business that replaces old roofs and installs new Colorbond steel roofs on homes across Brisbane, Ipswich, Logan and the Gold Coast. Most of our work is taking an old concrete tile or rusted iron roof off, checking the battens and frame underneath, and installing a new Colorbond roof with new flashings, ridges and valleys. Every job starts with a free inspection and a written quote that sets out the scope and price. Our own crew does the work, keeps you updated, and cleans up at the end with a walk-through of the finished roof. We help you choose the right colour and profile for Queensland heat and your home. QBCC licence 15587145. ABN 25 656 843 944. Call 0480 095 902.
 
 ## Where to list (in order)
 

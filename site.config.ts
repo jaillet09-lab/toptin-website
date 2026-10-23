@@ -14,7 +14,7 @@ export const siteConfig = {
   name: "Top Tin Roofing",
   legalName: "Top Tin Roofing",
   abn: "25 656 843 944",
-  qbcc: "15465551",
+  qbcc: "15587145",
   tagline: "Roof replacement and Colorbond roofing in Brisbane",
   description:
     "Brisbane roof replacement and Colorbond roof installation by a local, QBCC licensed crew. Free on-site quote, a written price, and a clean site when the job is done.",

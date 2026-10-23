@@ -17,7 +17,7 @@ These override the matching parts of docs/BRIEF.md.
 4. **Brief's open questions (section 12): build with the stated safe defaults** (all CONFIRM claims off, no
    price-match, no warranty wording) and list each in docs/content-todo.md.
 5. **Phone:** use only 0480 095 902 (+61480095902) as the brief says. Note for the owner: the current site also shows
-   0410 656 969 (Ethan's mobile, used on TopTin proposals); confirm in content-todo whether it should appear anywhere.
+   0480 095 902 (Ethan's mobile, used on TopTin proposals); confirm in content-todo whether it should appear anywhere.
 6. **Logo files:** the real artwork is also available locally (higher quality than the WP thumbnails):
    - `../TopTin-System/public/brand/toptin-logo-transparent.png` (full colour, transparent, 1000x200)
    - `../TopTin-System/public/brand/toptin-logo-reversed.png` (for navy backgrounds)
