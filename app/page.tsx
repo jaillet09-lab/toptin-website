@@ -14,6 +14,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { QuoteForm } from "@/components/QuoteForm";
 import { ReviewCard, RatingSummary } from "@/components/Reviews";
+import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { FaqList } from "@/components/Faq";
 import { CtaBand } from "@/components/CtaBand";
 import { BeforeAfter } from "@/components/BeforeAfter";
@@ -199,6 +200,11 @@ export default function HomePage() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading eyebrow="Reviews" title="What homeowners say." lead={<RatingSummary />} />
             <Link href="/reviews" className="btn btn-outline shrink-0">Read more reviews <Icon name="arrow" size={18} /></Link>
+          </div>
+          <div className="mt-10">
+            <h3 className="text-[15px] font-bold uppercase tracking-[0.12em] text-tin">Hear it from the homeowners</h3>
+            <p className="mt-2 max-w-[640px] text-[16px] text-mute">Ethan asks a few quick questions once the roof is done. These are real customers on real jobs, unscripted.</p>
+            <div className="mt-6"><VideoTestimonials /></div>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {reviews.reviews.slice(0, 6).map((r) => <ReviewCard key={r.author} review={r} />)}
