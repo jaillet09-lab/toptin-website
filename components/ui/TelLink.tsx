@@ -2,7 +2,7 @@
 
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { siteConfig } from "@/site.config";
-import { track } from "@/lib/analytics";
+import { track, trackConversion } from "@/lib/analytics";
 
 type Props = Omit<ComponentPropsWithoutRef<"a">, "href" | "onClick"> & {
   /** Where on the page the link sits, for reporting (header, hero, footer...). */
@@ -13,7 +13,11 @@ type Props = Omit<ComponentPropsWithoutRef<"a">, "href" | "onClick"> & {
 /** The one phone link. Every click fires a phone_click event. */
 export function TelLink({ location, children, ...rest }: Props) {
   return (
-    <a href={siteConfig.phoneHref} onClick={() => track("phone_click", { location })} {...rest}>
+    <a
+      href={siteConfig.phoneHref}
+      onClick={() => { track("phone_click", { location }); trackConversion(siteConfig.features.adsPhoneConversionId, { location }); }}
+      {...rest}
+    >
       {children ?? siteConfig.phone}
     </a>
   );

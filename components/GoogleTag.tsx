@@ -2,11 +2,13 @@ import Script from "next/script";
 import { siteConfig } from "@/site.config";
 
 /**
- * Google tag, loaded only when NEXT_PUBLIC_GTAG_ID is set. Consent defaults to denied,
- * so no analytics or advertising cookies are written until a consent prompt is added.
+ * Google tag (GA4 + Google Ads), loaded only when a tag id is configured. Australian site,
+ * no consent banner is required, so consent is granted by default; the Google Ads account
+ * is linked to GA4 and configured on the same tag so conversions report to both.
  */
 export function GoogleTag() {
   const id = siteConfig.features.gtagId;
+  const adsId = siteConfig.features.adsAccountId;
   if (!id) return null;
   return (
     <>
@@ -14,9 +16,10 @@ export function GoogleTag() {
       <Script id="toptin-gtag-init" strategy="afterInteractive">
         {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied'});
+gtag('consent', 'default', {ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted'});
 gtag('js', new Date());
-gtag('config', '${id}', {anonymize_ip: true});`}
+gtag('config', '${id}');${adsId ? `
+gtag('config', '${adsId}');` : ''}`}
       </Script>
     </>
   );

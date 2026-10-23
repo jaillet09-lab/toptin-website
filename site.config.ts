@@ -110,9 +110,13 @@ export const siteConfig = {
   },
 
   features: {
-    /** Google tag. Off unless NEXT_PUBLIC_GTAG_ID is set. Consent defaults to denied. */
+    /** GA4 measurement id (G-XXXX). Env var overrides the value here. */
     gtagId: process.env.NEXT_PUBLIC_GTAG_ID || "",
-    adsConversionId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "",
+    /** Google Ads account tag (AW-XXXX), configured on the same gtag. */
+    adsAccountId: process.env.NEXT_PUBLIC_ADS_ACCOUNT_ID || "",
+    /** Google Ads conversion send_to values (AW-XXXX/LABEL). Empty = that conversion is off. */
+    adsConversionId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "",          // quote form submitted (thank-you page)
+    adsPhoneConversionId: process.env.NEXT_PUBLIC_ADS_PHONE_CONVERSION_ID || "", // phone number tapped
   },
 
   /** NAP block exactly as it should read on Google Business Profile and every directory. */
