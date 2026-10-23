@@ -4,7 +4,6 @@ import { buildMetadata } from "@/lib/seo";
 import { photos } from "@/data/photos";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { BeforeAfter } from "@/components/BeforeAfter";
 import { CtaBand } from "@/components/CtaBand";
 
 export const metadata: Metadata = buildMetadata({
@@ -22,15 +21,9 @@ export default function ProjectsPage() {
         crumbs={[{ name: "Projects", path: "/projects" }]}
         eyebrow="Projects"
         title="Real roofs, finished by our crew."
-        intro={<p>Every photo on this page is a Top Tin job. We are adding job details and before and after pairs as we photograph new work.</p>}
+        intro={<p>Every photo on this page is a Top Tin job. No stock images.</p>}
         photo={{ src: "/photos/dark-roof-skylights-wide.jpg", alt: "New dark Colorbond roof with skylights finished by Top Tin Roofing" }}
       />
-      <Section tone="white" label="Before and after">
-        <div className="wrap grid gap-10 lg:grid-cols-2 lg:items-center">
-          <SectionHeading eyebrow="Before and after" title="Tile to Colorbond." lead="Drag the slider to compare. Real before and after photos are being added from upcoming jobs." />
-          <BeforeAfter item={{ title: "Tile to Colorbond replacement", caption: "Before and after photos from a real job are coming soon." }} />
-        </div>
-      </Section>
       <Section tone="page" label="Gallery">
         <div className="wrap">
           <SectionHeading eyebrow="Gallery" title="Recent roofs." />

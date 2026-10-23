@@ -17,7 +17,6 @@ import { ReviewCard, RatingSummary } from "@/components/Reviews";
 import { VideoTestimonials } from "@/components/VideoTestimonials";
 import { FaqList } from "@/components/Faq";
 import { CtaBand } from "@/components/CtaBand";
-import { BeforeAfter } from "@/components/BeforeAfter";
 
 export const metadata: Metadata = buildMetadata({
   title: "Roof Replacement and Colorbond Brisbane",
@@ -44,7 +43,7 @@ const reasons: { icon: IconName; title: string; text: string }[] = [
 
 export default function HomePage() {
   const rating = averageRating();
-  const gallery = photos.filter((p) => !p.hero).slice(0, 6);
+  const gallery = photos.filter((p) => !p.hero).slice(0, 8);
 
   return (
     <>
@@ -148,9 +147,8 @@ export default function HomePage() {
             <SectionHeading eyebrow="Our work" title="Real roofs, finished by our crew." lead="Every photo here is a Top Tin job. No stock images." />
             <Link href="/projects" className="btn btn-outline shrink-0">See all projects <Icon name="arrow" size={18} /></Link>
           </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <BeforeAfter item={{ title: "Tile to Colorbond", caption: "Before and after photos from a real job are coming soon." }} />
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <div className="mt-10">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
               {gallery.map((p) => (
                 <div key={p.src} className="relative aspect-square overflow-hidden rounded-[12px] bg-paper">
                   <Image src={p.src} alt={p.alt} fill sizes="(max-width: 640px) 46vw, 18vw" className="object-cover transition-transform duration-500 hover:scale-105" />

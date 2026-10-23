@@ -22,7 +22,7 @@ Change the values in `site.config.ts` unless another file is named.
 
 - **Second phone number.** The old site also shows 0480 095 902 (Ethan's mobile, used on TopTin proposals). The new site uses only 0480 095 902, and the build fails if any other number appears. Confirm that is right.
 - **Owner story** for the About page: `[OWNER STORY]` placeholder in `app/about/page.tsx`. Who runs Top Tin, how it started, the crew.
-- **Before and after photos**: the slider on the homepage and Projects page shows `[PHOTO: ...]` placeholders until real pairs exist (see `docs/photo-shotlist.md`). Add them in `app/page.tsx` and `app/projects/page.tsx` (`BeforeAfter` component, `before` and `after` props).
+- **Before and after photos**: the slider was removed from the homepage and Projects page on 23 Oct 2026 (owner asked for no blank placeholder). The `BeforeAfter` component is kept; wire it back in with real `before` and `after` photo pairs when they exist (see `docs/photo-shotlist.md`).
 - **Project details**: the 15 real photos have no suburb or job description. To create `/projects/[slug]` pages (brief section 6), supply suburb, roof type and what was done for each job. Until then the Projects page is a gallery only.
 - **Exact Colorbond colour names** for the photos (currently plain words: red, green, dark grey).
 - **Privacy and terms pages**: plain-English drafts. Worth a quick review by the owner's lawyer.
