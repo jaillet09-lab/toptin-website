@@ -79,7 +79,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <aside className="order-first lg:order-none">
               {post.headings.length ? (
                 <nav aria-label="On this page" className="card p-5 lg:sticky lg:top-[calc(var(--header-h)+24px)]">
-                  <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-mute">On this page</p>
+                  <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-mute">On this page</p>
                   <ol className="mt-3 grid gap-2 text-[14.5px]">
                     {post.headings.filter((h) => h.depth === 2).map((h) => (
                       <li key={h.id}><a href={`#${h.id}`} className="text-navy hover:underline">{h.text}</a></li>
@@ -107,16 +107,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
               <p className="text-[15px] text-mute">
                 Written by the team at {siteConfig.name}, a Brisbane roofing business replacing roofs and installing Colorbond. QBCC licence {siteConfig.qbcc}.
               </p>
-              <Link href="/about" className="text-[15px] font-bold text-navy underline">About us</Link>
+              <Link href="/about" className="text-[15px] font-semibold text-navy underline">About us</Link>
             </div>
             <div className="card p-6">
-              <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-mute">Related services and areas</p>
+              <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-mute">Related services and areas</p>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {relatedServices.map((s) => (
-                  <li key={s.slug}><Link href={`/services/${s.slug}`} className="inline-flex min-h-10 items-center rounded-full bg-navy px-4 text-[14px] font-semibold text-white">{s.name}</Link></li>
+                  <li key={s.slug}><Link href={`/services/${s.slug}`} className="inline-flex min-h-10 items-center rounded-lg bg-navy px-4 text-[14px] font-semibold text-white">{s.name}</Link></li>
                 ))}
                 {relatedAreas.map((a) => (
-                  <li key={a.slug}><Link href={`/areas/${a.slug}`} className="inline-flex min-h-10 items-center rounded-full border border-line px-4 text-[14px] font-semibold text-navy">{a.name}</Link></li>
+                  <li key={a.slug}><Link href={`/areas/${a.slug}`} className="inline-flex min-h-10 items-center rounded-lg border border-line px-4 text-[14px] font-semibold text-navy">{a.name}</Link></li>
                 ))}
               </ul>
             </div>

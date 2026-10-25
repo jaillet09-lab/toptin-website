@@ -11,7 +11,7 @@ function Anchor({ href = "", children, ...rest }: ComponentPropsWithoutRef<"a">)
 
 function Table(props: ComponentPropsWithoutRef<"table">) {
   return (
-    <div className="my-6 overflow-x-auto rounded-[14px] border border-line">
+    <div className="my-6 overflow-x-auto rounded-lg border border-line">
       <table {...props} />
     </div>
   );
@@ -21,8 +21,8 @@ function Table(props: ComponentPropsWithoutRef<"table">) {
 export function PostCta({ service }: { service?: string }) {
   const href = service ? `/quote?service=${service}` : "/quote";
   return (
-    <aside className="not-prose my-10 rounded-[14px] bg-navy p-6 text-white md:p-8">
-      <p className="font-display text-[22px] font-extrabold leading-tight">Want a straight answer about your roof?</p>
+    <aside className="not-prose my-10 rounded-lg bg-navy p-6 text-white md:p-8">
+      <p className="font-display text-[22px] font-semibold leading-tight">Want a straight answer about your roof?</p>
       <p className="mt-2 text-[15.5px] text-white/75">We inspect it for free and send you a written quote. {siteConfig.hours.label}.</p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row">
         <Link href={href} className="btn btn-primary">Get a free quote <Icon name="arrow" size={17} /></Link>

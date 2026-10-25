@@ -27,7 +27,7 @@ export function Footer() {
           <p className="mt-5 max-w-[34ch] text-[15px] text-white/70">{siteConfig.tagline}. {siteConfig.serviceArea.summary}.</p>
           <ul className="mt-6 space-y-3 text-[15px]">
             <li>
-              <TelLink location="footer" className="inline-flex items-center gap-2.5 font-bold text-white hover:text-tin">
+              <TelLink location="footer" className="inline-flex items-center gap-2.5 font-semibold text-white hover:text-tin">
                 <Icon name="phone" size={17} className="text-tin" />
                 {siteConfig.phone}
               </TelLink>
@@ -46,14 +46,14 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="text-[15px] font-bold uppercase tracking-[0.12em] text-tin">Services</h2>
+          <h2 className="text-[15px] font-semibold uppercase tracking-[0.12em] text-tin">Services</h2>
           <ul className="mt-4 space-y-2.5 text-[15px]">
             {services.map((s) => (
               <li key={s.slug}><Link href={`/services/${s.slug}`} className="text-white/85 hover:text-white">{s.name}</Link></li>
             ))}
             <li><Link href="/services" className="text-white/85 hover:text-white">All services</Link></li>
           </ul>
-          <h2 className="mt-8 text-[15px] font-bold uppercase tracking-[0.12em] text-tin">Quick links</h2>
+          <h2 className="mt-8 text-[15px] font-semibold uppercase tracking-[0.12em] text-tin">Quick links</h2>
           <ul className="mt-4 space-y-2.5 text-[15px]">
             {quickLinks.map((l) => (
               <li key={l.href}><Link href={l.href} className="text-white/85 hover:text-white">{l.label}</Link></li>
@@ -62,7 +62,7 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-2">
-          <h2 className="text-[15px] font-bold uppercase tracking-[0.12em] text-tin">Areas we cover</h2>
+          <h2 className="text-[15px] font-semibold uppercase tracking-[0.12em] text-tin">Areas we cover</h2>
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-[15px] sm:grid-cols-3">
             {areas.map((a) => (
               <li key={a.slug}><Link href={`/areas/${a.slug}`} className="text-white/85 hover:text-white">{a.name}</Link></li>

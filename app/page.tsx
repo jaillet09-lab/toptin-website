@@ -47,11 +47,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1. Hero */}
-      <section className="on-dark relative overflow-hidden bg-navy text-white">
-        <Image src={heroPhoto.src} alt={heroPhoto.alt} fill priority sizes="(max-width: 767px) 1px, 100vw" quality={70} className="hidden object-cover opacity-45 md:block" />
-        <div className="absolute inset-0 hidden bg-gradient-to-r from-navy via-navy/85 to-navy/30 md:block" aria-hidden="true" />
-        <div className="wrap relative grid gap-10 py-14 md:py-24 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      {/* 1. Hero: text on navy, the photo as its own block, a yellow rule along the bottom (docs/BRAND.md) */}
+      <section className="on-dark border-b-4 border-tin bg-navy text-white">
+        <div className="wrap grid gap-10 py-14 md:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <span className="eyebrow">Brisbane roofing contractor · QBCC {siteConfig.qbcc}</span>
             <h1 className="display-xl mt-4 max-w-[16ch]">
@@ -66,19 +64,24 @@ export default function HomePage() {
             </div>
             <div className="mt-7"><RatingSummary dark /></div>
           </div>
-          <div className="rounded-[14px] bg-white/[0.06] p-6 ring-1 ring-white/15 backdrop-blur-sm">
-            <h2 className="font-display text-[22px] font-bold">What do you need?</h2>
-            <p className="mt-1.5 text-[15px] text-white/70">Pick one and we will set up your free quote.</p>
-            <div className="mt-5 grid gap-3">
+          <div className="relative hidden aspect-[4/3] overflow-hidden rounded-lg bg-navy-2 lg:block">
+            <Image src={heroPhoto.src} alt={heroPhoto.alt} fill priority sizes="(max-width: 1023px) 1px, 46vw" quality={75} className="object-cover" />
+          </div>
+        </div>
+        <div className="wrap pb-14 md:pb-20">
+          <div className="border-t border-white/15 pt-8">
+            <h2 className="display-md">What do you need?</h2>
+            <p className="mt-1.5 text-[15px] text-mist">Pick one and we will set up your free quote.</p>
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
               {[
                 { href: "/quote?service=roof-replacement", label: "Roof replacement", sub: "Old tile or metal roof" },
                 { href: "/quote?service=colorbond-roof-installation", label: "Colorbond installation", sub: "New Colorbond roof" },
                 { href: "/quote?service=not-sure", label: "Not sure", sub: "We will help you work it out" },
               ].map((o) => (
-                <Link key={o.href} href={o.href} className="group flex min-h-16 items-center justify-between rounded-[10px] bg-white px-4 text-navy transition-transform hover:-translate-y-0.5">
+                <Link key={o.href} href={o.href} className="group flex min-h-16 items-center justify-between rounded-lg bg-white px-4 text-navy hover:bg-page">
                   <span>
-                    <b className="block text-[16px]">{o.label}</b>
-                    <span className="text-[13.5px] text-mute">{o.sub}</span>
+                    <b className="block text-[16px] font-semibold">{o.label}</b>
+                    <span className="text-[14px] text-mute">{o.sub}</span>
                   </span>
                   <Icon name="arrow" size={18} className="text-tin-ink transition-transform group-hover:translate-x-0.5" />
                 </Link>
@@ -101,7 +104,7 @@ export default function HomePage() {
             ...(siteConfig.claims.experience.enabled ? [{ icon: "users" as IconName, text: siteConfig.claims.experience.label }] : []),
           ].map((t) => (
             <li key={t.text} className="flex items-center gap-2.5">
-              <span className="grid size-9 flex-none place-items-center rounded-full bg-tin/15 text-tin-ink"><Icon name={t.icon} size={17} /></span>
+              <span className="grid size-9 flex-none place-items-center rounded-lg bg-tin/15 text-tin-ink"><Icon name={t.icon} size={17} /></span>
               {t.text}
             </li>
           ))}
@@ -120,9 +123,9 @@ export default function HomePage() {
                     <Image src={s.photo} alt={`${s.name} by Top Tin Roofing in Brisbane`} fill sizes="(max-width: 768px) 92vw, 46vw" className="object-cover" />
                   </div>
                   <div className="flex flex-1 flex-col p-6 md:p-7">
-                    <h3 className="font-display text-[26px] font-extrabold text-navy">{s.name}</h3>
+                    <h3 className="font-display text-[26px] font-semibold text-navy">{s.name}</h3>
                     <p className="mt-3 flex-1 text-[16px] text-mute">{s.summary}</p>
-                    <span className="mt-5 inline-flex items-center gap-2 font-bold text-navy">
+                    <span className="mt-5 inline-flex items-center gap-2 font-semibold text-navy">
                       <span className="hl">Learn about {s.short.toLowerCase()}</span>
                       <Icon name="arrow" size={18} className="transition-transform group-hover:translate-x-1" />
                     </span>
@@ -131,7 +134,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-[14px] border border-line bg-white px-6 py-5">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-lg border border-line bg-white px-6 py-5">
             <b className="text-[15px] text-navy">Materials we work with:</b>
             {["Colorbond steel", "Corrugated profile", "Trimdek-style profile", "Sarking and insulation blanket", "New flashings, ridges and valleys"].map((m) => (
               <span key={m} className="inline-flex items-center gap-2 text-[15px] text-mute"><Icon name="check" size={16} className="text-tin-ink" />{m}</span>
@@ -150,7 +153,7 @@ export default function HomePage() {
           <div className="mt-10">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
               {gallery.map((p) => (
-                <div key={p.src} className="relative aspect-square overflow-hidden rounded-[12px] bg-paper">
+                <div key={p.src} className="relative aspect-square overflow-hidden rounded-lg bg-paper">
                   <Image src={p.src} alt={p.alt} fill sizes="(max-width: 640px) 46vw, 18vw" className="object-cover transition-transform duration-500 hover:scale-105" />
                 </div>
               ))}
@@ -166,13 +169,13 @@ export default function HomePage() {
           <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
               <li key={s.title} className="card p-6">
-                <span aria-hidden="true" className="font-display text-[40px] font-extrabold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 font-display text-[19px] font-bold text-navy">{s.title}</h3>
+                <span aria-hidden="true" className="font-display text-[40px] font-semibold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-4 font-display text-[19px] font-semibold text-navy">{s.title}</h3>
                 <p className="mt-2 text-[15px] text-mute">{s.text}</p>
               </li>
             ))}
           </ol>
-          <Link href="/how-it-works" className="mt-8 inline-flex items-center gap-2 font-bold text-navy"><span className="hl">More on how we work</span><Icon name="arrow" size={18} /></Link>
+          <Link href="/how-it-works" className="mt-8 inline-flex items-center gap-2 font-semibold text-navy"><span className="hl">More on how we work</span><Icon name="arrow" size={18} /></Link>
         </div>
       </Section>
 
@@ -183,8 +186,8 @@ export default function HomePage() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {reasons.map((r) => (
               <div key={r.title} className="card-dark p-6">
-                <span className="grid size-11 place-items-center rounded-full bg-tin text-navy"><Icon name={r.icon} size={20} /></span>
-                <h3 className="mt-5 font-display text-[19px] font-bold">{r.title}</h3>
+                <span className="grid size-11 place-items-center rounded-lg bg-tin text-navy"><Icon name={r.icon} size={20} /></span>
+                <h3 className="mt-5 font-display text-[19px] font-semibold">{r.title}</h3>
                 <p className="mt-2 text-[15px] text-white/75">{r.text}</p>
               </div>
             ))}
@@ -200,7 +203,7 @@ export default function HomePage() {
             <Link href="/reviews" className="btn btn-outline shrink-0">Read more reviews <Icon name="arrow" size={18} /></Link>
           </div>
           <div className="mt-10">
-            <h3 className="text-[15px] font-bold uppercase tracking-[0.12em] text-tin">Hear it from the homeowners</h3>
+            <h3 className="text-[15px] font-semibold uppercase tracking-[0.12em] text-tin">Hear it from the homeowners</h3>
             <p className="mt-2 max-w-[640px] text-[16px] text-mute">Ethan asks a few quick questions once the roof is done. These are real customers on real jobs, unscripted.</p>
             <div className="mt-6"><VideoTestimonials /></div>
           </div>
@@ -222,7 +225,7 @@ export default function HomePage() {
             </div>
             <Link href="/services/colorbond-roof-installation" className="btn btn-navy mt-8">Colorbond roof installation <Icon name="arrow" size={18} /></Link>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-paper">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-paper">
             <Image src="/photos/pale-green-roof.jpg" alt="New pale green Colorbond roof on an acreage home in Brisbane" fill sizes="(max-width: 1024px) 92vw, 46vw" className="object-cover" />
           </div>
         </div>
@@ -235,7 +238,7 @@ export default function HomePage() {
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <li key={a.slug}>
-                <Link href={`/areas/${a.slug}`} className="inline-flex min-h-11 items-center rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-navy hover:border-navy">
+                <Link href={`/areas/${a.slug}`} className="inline-flex min-h-11 items-center rounded-lg border border-line bg-white px-4 text-[15px] font-semibold text-navy hover:border-navy">
                   {a.name}
                 </Link>
               </li>
@@ -263,7 +266,7 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-[14px] bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
+          <div className="rounded-lg bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
             <QuoteForm source="home" dark />
           </div>
         </div>

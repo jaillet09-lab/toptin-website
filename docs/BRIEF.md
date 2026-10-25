@@ -56,7 +56,7 @@ No "#1", "best in Brisbane", "leading", "unbeatable", "award winning", "market l
 Gold and black are the brand. Use gold sparingly and confidently (buttons, key numbers, underlines), black and white for structure. Colorbond colour swatches may appear as small accents in the Colorbond page only.
 
 ### Typography
-- **Headings:** a bold, confident, slightly condensed sans (for example **Barlow Condensed** or **Archivo**, weights 600 to 800), large, tight, uppercase only for small labels. Roofing is a trade: the look is strong, clear and physical, not soft or corporate.
+- **Headings (superseded by Plain Sight, see docs/BRAND.md: Inter only, weights 400 to 600):** a bold, confident, slightly condensed sans (for example **Barlow Condensed** or **Archivo**, weights 600 to 800), large, tight, uppercase only for small labels. Roofing is a trade: the look is strong, clear and physical, not soft or corporate.
 - **Body:** Inter, 16px, line-height 1.55.
 - Load with `next/font`, no layout shift.
 

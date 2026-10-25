@@ -59,7 +59,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
           <aside className="lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:self-start">
             <div className="card p-6 md:p-7">
-              <h2 className="font-display text-[22px] font-extrabold text-navy">What is included</h2>
+              <h2 className="font-display text-[22px] font-semibold text-navy">What is included</h2>
               <ul className="mt-5 grid gap-3">
                 {s.included.map((item) => (
                   <li key={item} className="flex gap-3 text-[15.5px]">
@@ -80,7 +80,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {s.materials.map((m) => (
               <div key={m.title} className="card p-6">
-                <h3 className="font-display text-[20px] font-bold text-navy">{m.title}</h3>
+                <h3 className="font-display text-[20px] font-semibold text-navy">{m.title}</h3>
                 <p className="mt-2 text-[15.5px] text-mute">{m.text}</p>
               </div>
             ))}
@@ -94,20 +94,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {s.steps.map((st, i) => (
               <li key={st.title} className="card p-6">
-                <span aria-hidden="true" className="font-display text-[40px] font-extrabold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 font-display text-[19px] font-bold text-navy">{st.title}</h3>
+                <span aria-hidden="true" className="font-display text-[40px] font-semibold leading-none text-tin-ink">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-4 font-display text-[19px] font-semibold text-navy">{st.title}</h3>
                 <p className="mt-2 text-[15px] text-mute">{st.text}</p>
               </li>
             ))}
           </ol>
           <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
             {gallery.map((p) => (
-              <div key={p.src} className="relative aspect-[4/5] overflow-hidden rounded-[12px] bg-paper">
+              <div key={p.src} className="relative aspect-[4/5] overflow-hidden rounded-lg bg-paper">
                 <Image src={p.src} alt={p.alt} fill sizes="(max-width: 768px) 46vw, 23vw" className="object-cover" />
               </div>
             ))}
           </div>
-          <Link href="/projects" className="mt-6 inline-flex items-center gap-2 font-bold text-navy"><span className="hl">See more of our work</span><Icon name="arrow" size={18} /></Link>
+          <Link href="/projects" className="mt-6 inline-flex items-center gap-2 font-semibold text-navy"><span className="hl">See more of our work</span><Icon name="arrow" size={18} /></Link>
         </div>
       </Section>
 
@@ -126,7 +126,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <li key={a.slug}>
-                <Link href={`/areas/${a.slug}`} className="inline-flex min-h-11 items-center rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-navy hover:border-navy">
+                <Link href={`/areas/${a.slug}`} className="inline-flex min-h-11 items-center rounded-lg border border-line bg-white px-4 text-[15px] font-semibold text-navy hover:border-navy">
                   {s.short} in {a.name}
                 </Link>
               </li>
@@ -147,7 +147,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Section tone="navy" id="quote" label="Get a free quote">
         <div className="wrap grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading eyebrow="Free quote" title={`Get a price for ${s.short.toLowerCase()}.`} lead="Two short steps. We come out, look at the roof and send a written quote." />
-          <div className="rounded-[14px] bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
+          <div className="rounded-lg bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
             <QuoteForm source={`service-${s.slug}`} service={s.slug} dark />
           </div>
         </div>

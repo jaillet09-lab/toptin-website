@@ -18,7 +18,7 @@ export default function ThankYouPage() {
     <section className="bg-page">
       <ConversionPing />
       <div className="wrap section max-w-[760px] text-center">
-        <span className="mx-auto grid size-16 place-items-center rounded-full bg-tin text-navy"><Icon name="check" size={30} strokeWidth={3} /></span>
+        <span className="mx-auto grid size-16 place-items-center rounded-lg bg-tin text-navy"><Icon name="check" size={30} strokeWidth={3} /></span>
         <h1 className="display-lg mt-6">Thanks. Your quote request is in.</h1>
         <p className="lead mx-auto mt-5">
           We reply {siteConfig.hours.label}. We will be in touch to arrange a time to look at your roof, then send you a written quote.

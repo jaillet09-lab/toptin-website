@@ -55,7 +55,7 @@ export default function AboutPage() {
               Top Tin Roofing holds <strong>QBCC licence {siteConfig.qbcc}</strong>, and our ABN is <strong>{siteConfig.abn}</strong>. You can check any Queensland contractor&apos;s licence on the QBCC website before you hire them, and we encourage you to.
             </p>
           </div>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[14px] bg-paper">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-paper">
             <Image src="/photos/green-roof-crew.jpg" alt="Top Tin crew member on a new green Colorbond roof" fill sizes="(max-width: 1024px) 92vw, 40vw" className="object-cover" />
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function AboutPage() {
             {values.map((v) => (
               <div key={v.title} className="card-dark p-6">
                 <Icon name="check" size={22} className="text-tin" />
-                <h3 className="mt-4 font-display text-[19px] font-bold">{v.title}</h3>
+                <h3 className="mt-4 font-display text-[19px] font-semibold">{v.title}</h3>
                 <p className="mt-2 text-[15px] text-white/75">{v.text}</p>
               </div>
             ))}

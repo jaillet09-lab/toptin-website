@@ -49,7 +49,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 nav:flex">
-          <TelLink location="header" className="flex items-center gap-2 text-[16px] font-bold text-navy hover:underline">
+          <TelLink location="header" className="flex items-center gap-2 text-[16px] font-semibold text-navy hover:underline">
             <Icon name="phone" size={18} />
             {siteConfig.phone}
           </TelLink>
@@ -57,7 +57,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2 nav:hidden">
-          <TelLink location="header-mobile" className="grid size-11 place-items-center rounded-full bg-navy text-white" aria-label={`Call ${siteConfig.phone}`}>
+          <TelLink location="header-mobile" className="grid size-11 place-items-center rounded-lg bg-navy text-white" aria-label={`Call ${siteConfig.phone}`}>
             <Icon name="phone" size={18} />
           </TelLink>
           <button
@@ -66,7 +66,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid size-11 place-items-center rounded-full border border-line text-navy"
+            className="grid size-11 place-items-center rounded-lg border border-line text-navy"
           >
             <Icon name={open ? "close" : "menu"} size={20} />
           </button>
@@ -80,7 +80,7 @@ export function Header() {
             <ul className="divide-y divide-line">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="flex min-h-14 items-center justify-between text-[19px] font-bold text-navy">
+                  <Link href={l.href} className="flex min-h-14 items-center justify-between text-[19px] font-semibold text-navy">
                     {l.label}
                     <Icon name="chevronRight" size={18} className="text-mute" />
                   </Link>

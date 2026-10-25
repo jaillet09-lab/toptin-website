@@ -35,7 +35,7 @@ export default function AreasPage() {
             if (!list.length) return null;
             return (
               <div key={region} className="card p-6">
-                <h2 className="font-display text-[22px] font-extrabold text-navy">{regionLabels[region]}</h2>
+                <h2 className="font-display text-[22px] font-semibold text-navy">{regionLabels[region]}</h2>
                 <ul className="mt-4 grid gap-1">
                   {list.map((a) => (
                     <li key={a.slug}>

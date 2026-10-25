@@ -27,3 +27,13 @@ These override the matching parts of docs/BRIEF.md.
 7. **Leads:** default lead destination email toptinroofing@gmail.com; `LEAD_WEBHOOK_URL` can later point at the
    TopTin System. Note: TopTin System's GHL sync must stay invisible to GHL users (read-only), so do not add
    anything inside GHL.
+
+# Brand system adopted by the owner (Jackson), 2026-10-26
+
+8. **Brand: Plain Sight (Option A of three).** Supersedes decisions 1 and the typography and colour notes in docs/BRIEF.md.
+   Inter only (weights 400 to 600), Navy 700 #1D2B4F and Navy 900 #0F162E, Tin Yellow #F8BC26 used rarely, 8 px corners, no shadows,
+   no gradients. Full spec in docs/BRAND.md and docs/brand-tokens.json. The Archivo display font, heavy 700 to 800 headlines, pill
+   shapes and the photo-and-gradient hero are retired. Heroes are text on navy with the photo as its own block and a yellow rule.
+   The logo option (three redesigns of ROOFING) is not chosen yet: keep the current logo files until it is.
+9. **Who looks after a client:** Jackson answers every enquiry and follows up. Ethan inspects, gives the quote and, once accepted,
+   takes over the job. Never promise one point of contact in copy.

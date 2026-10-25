@@ -27,7 +27,7 @@ Node 22.18 or newer.
 | Blog posts | `content/blog/*.mdx` |
 | Quote form | `components/QuoteForm.tsx`, API `app/api/lead/route.ts`, delivery `lib/lead/adapters.ts` |
 | SEO audit | `scripts/seo-audit.ts` (runs after every build) |
-| Brand colours and type | `app/globals.css` (Tin Navy #0F162E, Tin Yellow #F8BC26, Archivo + Inter) |
+| Brand colours and type | `app/globals.css` (Tin Navy #0F162E, Tin Yellow #F8BC26, Inter only, Plain Sight, see docs/BRAND.md) |
 
 ## Environment variables (Vercel)
 

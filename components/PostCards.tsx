@@ -5,10 +5,10 @@ import { Icon } from "@/components/ui/Icon";
 export function PostCard({ post }: { post: PostSummary }) {
   return (
     <Link href={`/blog/${post.slug}`} className="card card-hover group flex h-full flex-col p-6">
-      <span className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-tin-ink">{categoryLabel(post.category)}</span>
-      <h3 className="mt-3 font-display text-[20px] font-bold leading-snug text-navy">{post.title}</h3>
+      <span className="text-[12.5px] font-semibold uppercase tracking-[0.1em] text-tin-ink">{categoryLabel(post.category)}</span>
+      <h3 className="mt-3 font-display text-[20px] font-semibold leading-snug text-navy">{post.title}</h3>
       <p className="mt-3 flex-1 text-[15px] text-mute">{post.description}</p>
-      <span className="mt-5 inline-flex items-center gap-2 text-[14.5px] font-bold text-navy">
+      <span className="mt-5 inline-flex items-center gap-2 text-[14.5px] font-semibold text-navy">
         Read the guide · {post.readingMinutes} min
         <Icon name="arrow" size={16} className="transition-transform group-hover:translate-x-1" />
       </span>

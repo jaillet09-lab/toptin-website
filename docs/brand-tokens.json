@@ -1,0 +1,55 @@
+{
+  "name": "Top Tin brand: Plain Sight",
+  "adopted": "2026-10-26",
+  "colors": {
+    "navy700": "#1D2B4F",
+    "navy900": "#0F162E",
+    "navy300": "#9AA7C7",
+    "yellow": "#F8BC26",
+    "yellowHover": "#E9AC14",
+    "yellowInk": "#8A6100",
+    "yellowWash": "#FFF6DB",
+    "yellowLine": "#FDE4A0",
+    "ink": "#101828",
+    "slate700": "#344054",
+    "slate600": "#475467",
+    "slate500": "#667085",
+    "line": "#E4E7EC",
+    "wash": "#F5F6F8",
+    "mist": "#C9D3E6",
+    "white": "#FFFFFF",
+    "success": "#067647",
+    "warning": "#B54708",
+    "danger": "#B42318"
+  },
+  "font": {
+    "family": "Inter",
+    "fallback": "Arial, system-ui, sans-serif",
+    "weights": [400, 500, 600],
+    "opticalSize": true,
+    "tabularFigures": true
+  },
+  "scale": {
+    "document": {
+      "display": { "size": 44, "line": 48, "weight": 600, "tracking": "-0.035em" },
+      "title": { "size": 36, "line": 42, "weight": 600, "tracking": "-0.03em" },
+      "heading": { "size": 20, "line": 26, "weight": 600, "tracking": "-0.015em" },
+      "subheading": { "size": 15, "line": 22, "weight": 600, "tracking": "0" },
+      "body": { "size": 14, "line": 22, "weight": 400, "tracking": "0" },
+      "small": { "size": 12, "line": 18, "weight": 400, "tracking": "0" },
+      "overline": { "size": 12, "line": 16, "weight": 600, "tracking": "0.12em", "caps": true }
+    },
+    "web": {
+      "display": { "size": 64, "line": 68, "weight": 600, "tracking": "-0.035em" },
+      "title": { "size": 44, "line": 50, "weight": 600, "tracking": "-0.03em" },
+      "heading": { "size": 30, "line": 36, "weight": 600, "tracking": "-0.02em" },
+      "subheading": { "size": 20, "line": 26, "weight": 600, "tracking": "-0.015em" },
+      "body": { "size": 17, "line": 28, "weight": 400, "tracking": "0" },
+      "small": { "size": 14, "line": 22, "weight": 400, "tracking": "0" },
+      "overline": { "size": 13, "line": 18, "weight": 600, "tracking": "0.12em", "caps": true }
+    }
+  },
+  "spacing": [4, 8, 12, 16, 24, 32, 48, 64, 96],
+  "radius": 8,
+  "page": { "a4": { "width": 794, "height": 1123, "margin": 56, "headerBand": 96, "ruleBelowHeader": 3 }, "webContent": 1160, "webGutter": 40 }
+}

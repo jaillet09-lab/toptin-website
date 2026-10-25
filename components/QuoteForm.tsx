@@ -134,10 +134,10 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
   return (
     <form onSubmit={submit} noValidate className="grid gap-5" aria-label="Free quote request">
       <div className="flex items-center gap-3 text-[13px] font-semibold">
-        <span className={`grid size-7 place-items-center rounded-full ${step === 1 ? "bg-tin text-navy" : dark ? "bg-white/15 text-white" : "bg-paper text-mute"}`}>1</span>
+        <span className={`grid size-7 place-items-center rounded-lg ${step === 1 ? "bg-tin text-navy" : dark ? "bg-white/15 text-white" : "bg-paper text-mute"}`}>1</span>
         <span className={dark ? "text-white/80" : "text-mute"}>Your details</span>
         <span className={`h-px flex-1 ${dark ? "bg-white/20" : "bg-line"}`} />
-        <span className={`grid size-7 place-items-center rounded-full ${step === 2 ? "bg-tin text-navy" : dark ? "bg-white/15 text-white" : "bg-paper text-mute"}`}>2</span>
+        <span className={`grid size-7 place-items-center rounded-lg ${step === 2 ? "bg-tin text-navy" : dark ? "bg-white/15 text-white" : "bg-paper text-mute"}`}>2</span>
         <span className={dark ? "text-white/80" : "text-mute"}>Your roof</span>
       </div>
 
@@ -156,7 +156,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
                 const on = v.service === o.value;
                 return (
                   <button key={o.value} type="button" onClick={() => set("service", o.value)} aria-pressed={on}
-                    className={`min-h-12 rounded-[10px] px-3 text-[14.5px] font-semibold transition-colors ${
+                    className={`min-h-12 rounded-lg px-3 text-[14.5px] font-semibold transition-colors ${
                       on ? "bg-navy text-white ring-2 ring-tin" : dark ? "bg-white/10 text-white hover:bg-white/15" : "border border-line bg-white text-navy hover:border-navy/40"
                     }`}>
                     {o.label}
@@ -215,7 +215,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
           </div>
           <div>
             <span className={label}>Photos of the roof <span className="font-normal opacity-70">(optional, up to {MAX_PHOTOS})</span></span>
-            <label htmlFor={fid("photos")} className={`flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-[10px] border-2 border-dashed px-4 text-[14.5px] font-semibold ${dark ? "border-white/30 text-white" : "border-line bg-white text-navy"}`}>
+            <label htmlFor={fid("photos")} className={`flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 text-[14.5px] font-semibold ${dark ? "border-white/30 text-white" : "border-line bg-white text-navy"}`}>
               <Icon name="camera" size={18} />
               {files.length ? `${files.length} photo${files.length > 1 ? "s" : ""} added. Add more` : "Add photos"}
             </label>
@@ -223,7 +223,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
             {files.length ? (
               <ul className={`mt-2 flex flex-wrap gap-2 text-[13px] ${dark ? "text-white/80" : "text-mute"}`}>
                 {files.map((f, i) => (
-                  <li key={i} className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 ${dark ? "bg-white/10" : "bg-paper"}`}>
+                  <li key={i} className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 ${dark ? "bg-white/10" : "bg-paper"}`}>
                     {f.name.slice(0, 22)}
                     <button type="button" aria-label={`Remove ${f.name}`} onClick={() => setFiles(files.filter((_, j) => j !== i))}><Icon name="close" size={13} /></button>
                   </li>
@@ -241,7 +241,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
         </>
       )}
 
-      {formError ? <p role="alert" className="rounded-[10px] bg-[#fef3f2] px-4 py-3 text-[14.5px] text-[#b42318]">{formError}</p> : null}
+      {formError ? <p role="alert" className="rounded-lg bg-[#fef3f2] px-4 py-3 text-[14.5px] text-[#b42318]">{formError}</p> : null}
       <p className={`text-[13.5px] ${dark ? "text-white/65" : "text-mute"}`}>
         {siteConfig.replyLine} Prefer to talk?{" "}
         <TelLink location={`${source}-form`} className={`font-semibold underline ${dark ? "text-white" : "text-navy"}`}>Call {siteConfig.phone}</TelLink>

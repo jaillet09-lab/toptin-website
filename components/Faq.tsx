@@ -10,9 +10,9 @@ export function FaqList({ faqs, schema = true, className = "" }: { faqs: Faq[]; 
       <div className="border-t border-line">
         {faqs.map((f, i) => (
           <details key={f.q} className="group border-b border-line" open={i === 0 ? true : undefined}>
-            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-5 font-display text-[18px] font-bold text-navy md:text-[20px] [&::-webkit-details-marker]:hidden">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-5 font-display text-[18px] font-semibold text-navy md:text-[20px] [&::-webkit-details-marker]:hidden">
               <span>{f.q}</span>
-              <span aria-hidden="true" className="grid size-9 flex-none place-items-center rounded-full border border-line bg-white text-navy transition-colors group-open:border-tin group-open:bg-tin">
+              <span aria-hidden="true" className="grid size-9 flex-none place-items-center rounded-lg border border-line bg-white text-navy transition-colors group-open:border-tin group-open:bg-tin">
                 <Icon name="plus" size={16} className="transition-transform duration-300 group-open:rotate-45" />
               </span>
             </summary>

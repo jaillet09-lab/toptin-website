@@ -86,12 +86,12 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
           <aside className="grid gap-5 self-start">
             {services.map((s) => (
               <Link key={s.slug} href={`/services/${s.slug}`} className="card card-hover group p-6">
-                <h2 className="font-display text-[21px] font-extrabold text-navy">{s.name} in {a.name}</h2>
+                <h2 className="font-display text-[21px] font-semibold text-navy">{s.name} in {a.name}</h2>
                 <p className="mt-2 text-[15px] text-mute">{s.summary}</p>
-                <span className="mt-4 inline-flex items-center gap-2 font-bold text-navy"><span className="hl">How it works</span><Icon name="arrow" size={17} /></span>
+                <span className="mt-4 inline-flex items-center gap-2 font-semibold text-navy"><span className="hl">How it works</span><Icon name="arrow" size={17} /></span>
               </Link>
             ))}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[14px] bg-paper">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-paper">
               <Image src={photos[(idx + 3) % photos.length].src} alt={photos[(idx + 3) % photos.length].alt} fill sizes="(max-width: 1024px) 92vw, 30vw" className="object-cover" />
             </div>
           </aside>
@@ -108,7 +108,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
       <Section tone="navy" id="quote" label="Get a free quote">
         <div className="wrap grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading eyebrow="Free quote" title={`Get a free quote in ${a.name}.`} lead="Two short steps. Your suburb is already filled in." />
-          <div className="rounded-[14px] bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
+          <div className="rounded-lg bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
             <QuoteForm source={`area-${a.slug}`} suburb={a.name} dark />
           </div>
         </div>
@@ -122,13 +122,13 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
               <ul className="mt-8 flex flex-wrap gap-2.5">
                 {neighbours.map((n) => (
                   <li key={n.slug}>
-                    <Link href={`/areas/${n.slug}`} className="inline-flex min-h-11 items-center rounded-full border border-line bg-white px-4 text-[15px] font-semibold text-navy hover:border-navy">
+                    <Link href={`/areas/${n.slug}`} className="inline-flex min-h-11 items-center rounded-lg border border-line bg-white px-4 text-[15px] font-semibold text-navy hover:border-navy">
                       Roof replacement in {n.name}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href="/areas" className="inline-flex min-h-11 items-center rounded-full bg-navy px-4 text-[15px] font-semibold text-white">All areas</Link>
+                  <Link href="/areas" className="inline-flex min-h-11 items-center rounded-lg bg-navy px-4 text-[15px] font-semibold text-white">All areas</Link>
                 </li>
               </ul>
             </>

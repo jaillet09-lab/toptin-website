@@ -30,15 +30,15 @@ export default function QuotePage() {
             ))}
           </ul>
           <div className="mt-8"><RatingSummary dark /></div>
-          <div className="mt-8 rounded-[14px] bg-white/[0.06] p-5 ring-1 ring-white/12">
+          <div className="mt-8 rounded-lg bg-white/[0.06] p-5 ring-1 ring-white/12">
             <p className="text-[15px] text-white/80">Rather talk it through?</p>
-            <TelLink location="quote-page" className="mt-1 inline-flex items-center gap-2 font-display text-[28px] font-extrabold text-white hover:text-tin">
+            <TelLink location="quote-page" className="mt-1 inline-flex items-center gap-2 font-display text-[28px] font-semibold text-white hover:text-tin">
               <Icon name="phone" size={22} className="text-tin" />{siteConfig.phone}
             </TelLink>
             <p className="mt-1 text-[14px] text-white/65">{siteConfig.hours.label}</p>
           </div>
         </div>
-        <div className="rounded-[14px] bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
+        <div className="rounded-lg bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
           <QuoteForm source="quote-page" dark fromUrl />
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function QuotePage() {
             { t: "No pressure", d: "Take the time you need. The quote is free and there is no obligation to go ahead." },
           ].map((x) => (
             <div key={x.t} className="card p-6">
-              <h2 className="font-display text-[20px] font-bold text-navy">{x.t}</h2>
+              <h2 className="font-display text-[20px] font-semibold text-navy">{x.t}</h2>
               <p className="mt-2 text-[15.5px] text-mute">{x.d}</p>
             </div>
           ))}

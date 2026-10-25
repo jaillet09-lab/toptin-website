@@ -34,14 +34,14 @@ export default function ServicesPage() {
                 <Image src={s.photo} alt={`${s.name} by Top Tin Roofing`} fill sizes="(max-width: 768px) 92vw, 46vw" className="object-cover" />
               </div>
               <div className="flex flex-1 flex-col p-7">
-                <h2 className="font-display text-[28px] font-extrabold text-navy">{s.name}</h2>
+                <h2 className="font-display text-[28px] font-semibold text-navy">{s.name}</h2>
                 <p className="mt-3 text-[16px] text-mute">{s.summary}</p>
                 <ul className="mt-5 grid gap-2.5">
                   {s.included.slice(0, 4).map((i) => (
                     <li key={i} className="flex gap-3 text-[15px]"><Icon name="check" size={18} className="mt-0.5 flex-none text-tin-ink" />{i}</li>
                   ))}
                 </ul>
-                <span className="mt-6 inline-flex items-center gap-2 font-bold text-navy"><span className="hl">More about {s.short.toLowerCase()}</span><Icon name="arrow" size={18} /></span>
+                <span className="mt-6 inline-flex items-center gap-2 font-semibold text-navy"><span className="hl">More about {s.short.toLowerCase()}</span><Icon name="arrow" size={18} /></span>
               </div>
             </Link>
           ))}
@@ -51,7 +51,7 @@ export default function ServicesPage() {
         <div className="wrap grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
           <SectionHeading eyebrow="Materials" title="Metal roofing as an option." lead="Colorbond steel is our standard material. For some homes, for example very close to the bay, other metal roofing products suit better. We explain the options during your free quote." />
           <div className="card p-7">
-            <h2 className="font-display text-[22px] font-extrabold text-navy">Not sure what you need?</h2>
+            <h2 className="font-display text-[22px] font-semibold text-navy">Not sure what you need?</h2>
             <p className="mt-3 text-[16px] text-mute">Tell us about the roof and we will help you work it out. The quote is free and there is no obligation.</p>
             <Link href="/quote?service=not-sure" className="btn btn-primary mt-6">Get a free quote <Icon name="arrow" size={18} /></Link>
           </div>
