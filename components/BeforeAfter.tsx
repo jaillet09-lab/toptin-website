@@ -33,8 +33,8 @@ export function BeforeAfter({ item }: { item: CompareItem }) {
             <div className="placeholder absolute inset-0 rounded-none bg-[#dfe3ea]">[PHOTO: {item.title}, after]</div>
           )}
         </div>
-        <span className="pointer-events-none absolute left-3 top-3 rounded-lg bg-navy/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-white">Before</span>
-        <span className="pointer-events-none absolute right-3 top-3 rounded-lg bg-tin px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-navy">After</span>
+        <span className="pointer-events-none absolute left-3 top-3 rounded-lg bg-navy/80 px-2.5 py-1 text-[12px] font-semibold uppercase tracking-[0.08em] text-white">Before</span>
+        <span className="pointer-events-none absolute right-3 top-3 rounded-lg bg-tin px-2.5 py-1 text-[12px] font-semibold uppercase tracking-[0.08em] text-navy">After</span>
         <div className="pointer-events-none absolute bottom-0 top-0 w-0.5 -translate-x-px bg-white ring-1 ring-black/25" style={{ left: "var(--x)" }} aria-hidden="true" />
         <div className="pointer-events-none absolute top-1/2 grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-lg border border-line bg-white text-navy" style={{ left: "var(--x)" }} aria-hidden="true">
           <span className="flex"><Icon name="chevronLeft" size={14} className="-mr-1" /><Icon name="chevronRight" size={14} className="-ml-1" /></span>

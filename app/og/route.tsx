@@ -24,8 +24,8 @@ export async function GET(request: NextRequest) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} width={360} height={72} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ width: 90, height: 8, backgroundColor: "#f8bc26", borderRadius: 4, marginBottom: 28 }} />
-          <div style={{ fontSize: size, fontWeight: 800, lineHeight: 1.05, letterSpacing: -1.5, maxWidth: 1000 }}>{title}</div>
+          <div style={{ width: 90, height: 8, backgroundColor: "#f8bc26", marginBottom: 28 }} />
+          <div style={{ fontSize: size, fontWeight: 600, lineHeight: 1.05, letterSpacing: -1.5, maxWidth: 1000 }}>{title}</div>
           {subtitle ? <div style={{ fontSize: 30, color: "rgba(255,255,255,0.75)", marginTop: 20, maxWidth: 1000 }}>{subtitle}</div> : null}
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "rgba(255,255,255,0.8)" }}>
