@@ -27,4 +27,4 @@ Change the values in `site.config.ts` unless another file is named.
 - **Exact Colorbond colour names** for the photos (currently plain words: red, green, dark grey).
 - **Privacy and terms pages**: plain-English drafts. Worth a quick review by the owner's lawyer.
 - **Lead delivery**: set `RESEND_API_KEY` (and `LEAD_FROM_EMAIL` on a verified domain) in Vercel so quote requests email toptinroofing@gmail.com. Optionally `LEAD_WEBHOOK_URL` to send leads to the TopTin System.
-- **Analytics**: set `NEXT_PUBLIC_GTAG_ID` (and `NEXT_PUBLIC_ADS_CONVERSION_ID` for Google Ads) when wanted. Consent defaults to denied.
+- **Analytics**: GA4 property "toptinroofing.com" (G-H199T0RY74) created 26 Oct 2026 and set in `site.config.ts`; the site sends `quote_submitted` and `phone_click`. Set `NEXT_PUBLIC_ADS_CONVERSION_ID` for Google Ads when wanted.

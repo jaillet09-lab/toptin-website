@@ -112,7 +112,7 @@ export const siteConfig = {
 
   features: {
     /** GA4 measurement id (G-XXXX). Env var overrides the value here. */
-    gtagId: process.env.NEXT_PUBLIC_GTAG_ID || "",
+    gtagId: process.env.NEXT_PUBLIC_GTAG_ID || "G-H199T0RY74", // GA4 property toptinroofing.com, created 26 Oct 2026 under toptinroofing@gmail.com
     /** Google Ads account tag (AW-XXXX), configured on the same gtag. */
     adsAccountId: process.env.NEXT_PUBLIC_ADS_ACCOUNT_ID || "",
     /** Google Ads conversion send_to values (AW-XXXX/LABEL). Empty = that conversion is off. */
