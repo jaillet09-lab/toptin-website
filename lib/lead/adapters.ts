@@ -5,6 +5,7 @@ import type { Lead, LeadPhoto, SubmitResult } from "./types";
  * Pluggable lead delivery. Every configured adapter runs; the lead counts as
  * delivered if at least one succeeds.
  *
+ * - GHL_LEAD_WEBHOOK_URL  POST to the live GHL website-lead workflow (see ghlAdapter).
  * - RESEND_API_KEY      Email the lead (photos attached) to LEAD_TO_EMAIL, default
  *                       toptinroofing@gmail.com. LEAD_FROM_EMAIL sets the sender
  *                       (must be a domain verified in Resend).
@@ -109,6 +110,48 @@ const webhookAdapter: Adapter = {
   },
 };
 
+/**
+ * The live GHL account's "New Website Lead - Contact Us Page" workflow (inbound webhook): it creates
+ * the contact with source Website, alerts the call team and starts New Lead In, exactly as the old
+ * WordPress site did. The payload copies the old site's shape ({ fields: { first_name, … } }) so the
+ * published workflow's mapping works unchanged. Added 26 Oct 2026 after leads were found going
+ * nowhere since the launch. GHL_LEAD_WEBHOOK_URL is that workflow's Inbound Webhook URL (kept out of
+ * the repo); point it at the new account's workflow at cut-over.
+ */
+const ghlAdapter: Adapter = {
+  name: "ghl",
+  enabled: () => Boolean(process.env.GHL_LEAD_WEBHOOK_URL),
+  async send(lead, photos) {
+    const [first, ...rest] = lead.name.trim().split(/\s+/);
+    const details = [
+      lead.roofType && `Roof: ${lead.roofType}`,
+      lead.roofAge && `Age: ${lead.roofAge}`,
+      photos.length ? `${photos.length} photo(s) sent with the form (not attached in GHL)` : "",
+      lead.message,
+    ].filter(Boolean).join("\n");
+    const res = await fetch(process.env.GHL_LEAD_WEBHOOK_URL as string, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        formId: "toptinroofing.com/quote",
+        fields: {
+          first_name: first ?? "",
+          last_name: rest.join(" "),
+          phone: lead.phone,
+          email: lead.email,
+          address: lead.address,
+          services: lead.serviceLabel,
+          message: details,
+        },
+        referer: `${siteConfig.url}${lead.sourcePage}`,
+        userAgent: lead.userAgent,
+        lead_id: lead.id,
+      }),
+    });
+    if (!res.ok) throw new Error(`GHL webhook responded ${res.status} ${(await res.text().catch(() => "")).slice(0, 200)}`);
+  },
+};
+
 const consoleAdapter: Adapter = {
   name: "console",
   enabled: () => process.env.NODE_ENV !== "production",
@@ -117,13 +160,13 @@ const consoleAdapter: Adapter = {
   },
 };
 
-const adapters: Adapter[] = [emailAdapter, webhookAdapter, consoleAdapter];
+const adapters: Adapter[] = [ghlAdapter, emailAdapter, webhookAdapter, consoleAdapter];
 
 export async function submitLead(lead: Lead, photos: LeadPhoto[]): Promise<SubmitResult> {
   const active = adapters.filter((a) => a.enabled());
   const result: SubmitResult = { ok: false, delivered: [], errors: [] };
   if (!active.length) {
-    console.error(`[toptin lead] No lead adapter configured. Set RESEND_API_KEY or LEAD_WEBHOOK_URL. Lead ${lead.id} from ${lead.name} (${lead.phone}) was NOT delivered.`);
+    console.error(`[toptin lead] No lead adapter configured. Set GHL_LEAD_WEBHOOK_URL, RESEND_API_KEY or LEAD_WEBHOOK_URL. Lead ${lead.id} from ${lead.name} (${lead.phone}) was NOT delivered.`);
     return result;
   }
   for (const adapter of active) {
