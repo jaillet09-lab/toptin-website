@@ -34,7 +34,8 @@ const forbidden: { label: string; re: RegExp }[] = [
   { label: "price match", re: /\bprice[- ]match|\bmatch (it|or beat)|\bbeat (it|any|their)/i },
   { label: "since 20xx", re: /\bsince 20\d\d\b/i },
   { label: "decades", re: /\bdecades?\b/i },
-  { label: "unconfirmed counts", re: /\b(50|100)\+|\b20\+ years/i },
+  // "50+ Google reviews" is confirmed (owner, 26 Oct 2026); other counts are not.
+  { label: "unconfirmed counts", re: /\b(50|100)\+(?! (Google )?reviews)|\b20\+ years/i },
   { label: "no hidden fees", re: /no hidden (fees|charges|costs)|no upfront cost/i },
   { label: "hype words", re: /\b(world[- ]class|cutting[- ]edge|seamless solutions?)\b/i },
 ];
