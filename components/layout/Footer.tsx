@@ -43,6 +43,26 @@ export function Footer() {
               {siteConfig.hours.label}
             </li>
           </ul>
+          {(siteConfig.social.facebook || siteConfig.social.instagram) && (
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[15px]">
+              {siteConfig.social.facebook && (
+                <li>
+                  <a href={siteConfig.social.facebook} target="_blank" rel="noopener" className="inline-flex items-center gap-2 text-white/85 hover:text-white">
+                    <Icon name="facebook" size={17} className="text-tin" />
+                    Facebook
+                  </a>
+                </li>
+              )}
+              {siteConfig.social.instagram && (
+                <li>
+                  <a href={siteConfig.social.instagram} target="_blank" rel="noopener" className="inline-flex items-center gap-2 text-white/85 hover:text-white">
+                    <Icon name="instagram" size={17} className="text-tin" />
+                    Instagram
+                  </a>
+                </li>
+              )}
+            </ul>
+          )}
         </div>
 
         <div>

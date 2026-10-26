@@ -104,9 +104,10 @@ export const siteConfig = {
     googleCount: 50 as number | null,
   },
 
+  /** Top Tin's own pages (found from the Google profile search, 26 Oct 2026). Footer links and schema sameAs. */
   social: {
-    facebook: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/p/Top-tin-roofing-61566904766687/",
+    instagram: "https://www.instagram.com/toptinroofing/",
     googleBusinessProfile: "",
   },
 
