@@ -99,7 +99,7 @@ export default function HomePage() {
             { icon: "file" as IconName, text: `ABN ${siteConfig.abn}` },
             { icon: "check" as IconName, text: "Free, no-obligation quote" },
             { icon: "pin" as IconName, text: "Brisbane based" },
-            ...(rating ? [{ icon: "star" as IconName, text: siteConfig.reviews.googleCount ? `${(siteConfig.reviews.googleRating ?? rating).toFixed(1)} on Google (${siteConfig.reviews.googleCount} reviews)` : "5-star Google reviews" }] : []),
+            ...(rating ? [{ icon: "star" as IconName, text: siteConfig.reviews.googleCount ? `${(siteConfig.reviews.googleRating ?? rating).toFixed(1)} on Google (${siteConfig.reviews.googleCount}+ reviews)` : "5-star Google reviews" }] : []),
             ...(siteConfig.claims.projectsCount.enabled ? [{ icon: "home" as IconName, text: siteConfig.claims.projectsCount.label }] : []),
             ...(siteConfig.claims.experience.enabled ? [{ icon: "users" as IconName, text: siteConfig.claims.experience.label }] : []),
           ].map((t) => (

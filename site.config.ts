@@ -98,9 +98,9 @@ export const siteConfig = {
     /** Google Business Profile (owner supplied 2026-10-19; Google id /g/11wqmn70hn). */
     googleProfileUrl: "https://share.google/xvkUlSB603EpsoDZD",
     googleReviewUrl: "",
-    /** Overall Google rating and total count, read from the profile on 2026-10-19. Update as reviews grow. */
+    /** Overall Google rating and a floor for the count (owner confirmed 50+ five-star reviews on 2026-10-26; shown as "50+"). Update as reviews grow. */
     googleRating: 5.0 as number | null,
-    googleCount: 33 as number | null,
+    googleCount: 50 as number | null,
   },
 
   social: {

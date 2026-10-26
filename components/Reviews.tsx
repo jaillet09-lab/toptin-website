@@ -32,7 +32,7 @@ export function RatingSummary({ dark = false }: { dark?: boolean }) {
   const { googleRating, googleCount } = siteConfig.reviews;
   const rating = googleRating ?? averageRating();
   if (!rating) return null;
-  const label = googleRating && googleCount ? `${googleRating.toFixed(1)} from ${googleCount} Google reviews` : `${rating.toFixed(1)} star reviews on Google`;
+  const label = googleRating && googleCount ? `${googleRating.toFixed(1)} from ${googleCount}+ Google reviews` : `${rating.toFixed(1)} star reviews on Google`;
   const inner = (
     <span className="inline-flex items-center gap-2.5">
       <Stars rating={rating} size={18} />
