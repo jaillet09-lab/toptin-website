@@ -16,6 +16,7 @@ import { FaqList } from "@/components/Faq";
 import { QuoteForm } from "@/components/QuoteForm";
 import { PostGrid } from "@/components/PostCards";
 import { siteConfig } from "@/site.config";
+import { recentJobsNear } from "@/lib/recentJobs";
 
 export function generateStaticParams() {
   return areas.map((a) => ({ slug: a.slug }));
@@ -46,6 +47,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   const neighbours = a.neighbours.map(getArea).filter((n): n is NonNullable<typeof n> => Boolean(n));
   const related = getPostsRelatedTo("area", a.slug);
   const posts = related.length ? related : getAllPosts().slice(idx % 4, (idx % 4) + 3);
+  const recent = await recentJobsNear(a.slug);
 
   const faqs: Faq[] = [
     a.faq,
@@ -97,6 +99,29 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
           </aside>
         </div>
       </Section>
+
+      {recent.length > 0 && (
+        <Section tone="page" label={`Recent roofs near ${a.name}`}>
+          <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <SectionHeading
+              eyebrow="Recent roofs"
+              title={`Roofs we have finished near ${a.name}.`}
+              lead="Streets where the owner said we could mention their roof. House numbers stay private."
+            />
+            <ul className="grid gap-3">
+              {recent.map((j) => (
+                <li key={`${j.street}-${j.suburb}`} className="flex items-center justify-between gap-4 rounded-lg border border-line bg-white px-5 py-4">
+                  <span>
+                    <span className="block text-[16px] font-semibold text-navy">{j.street}{j.suburb ? `, ${j.suburb}` : ""}</span>
+                    <span className="block text-[14px] text-mute">{j.job}</span>
+                  </span>
+                  <span className="shrink-0 text-[14px] text-mute">{j.km} km away</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      )}
 
       <Section tone="page" label="Questions">
         <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
