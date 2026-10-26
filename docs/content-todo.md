@@ -13,7 +13,7 @@ Change the values in `site.config.ts` unless another file is named.
 | 4 | Services: only roof replacement and Colorbond, or also metal roofing, repairs, restoration, gutters, fascia? | Two services, metal roofing as a material option | `data/services.ts`, `services.metalRoofingPage` |
 | 5 | Suburb list. Owner confirmed Brisbane to Ipswich and the Gold Coast and everything between (19 Oct 2026); 40 suburb pages. North Brisbane and Moreton Bay also covered (owner confirmed 19 Oct 2026) | See `data/areas.ts` | `data/areas.ts` (pages, sitemap, footer and redirects follow) |
 | 6 | Warranty and insurance wording (workmanship warranty, manufacturer warranty, Home Warranty, public liability amount) | Not mentioned anywhere | Add only with written confirmation |
-| 7 | Reviewers happy to appear on the site; keep the rating and count current | Profile linked; 5.0 from 50+ Google reviews (owner confirmed 26 Oct 2026; was 33 on 19 Oct); 10 reviews from the old site shown as "a selection". Add a "write a review" link when available | `reviews.*` in `site.config.ts`; reviews in `content/reviews.json` |
+| 7 | Reviewers happy to appear on the site; keep the rating and count current | Profile linked; 5.0 from 50+ Google reviews (owner confirmed 26 Oct 2026; was 33 on 19 Oct); 10 reviews from the old site shown as "a selection". "Leave a Google review" link on /reviews (added 26 Oct 2026) | `reviews.*` in `site.config.ts`; reviews in `content/reviews.json` |
 | 8 | Commercial work offered? | Homeowners first | Copy in `data/services.ts` and the homepage |
 
 ## Other open items

@@ -97,7 +97,8 @@ export const siteConfig = {
   reviews: {
     /** Google Business Profile (owner supplied 2026-10-19; Google id /g/11wqmn70hn). */
     googleProfileUrl: "https://share.google/xvkUlSB603EpsoDZD",
-    googleReviewUrl: "",
+    /** Review link from the profile ("Ask for reviews"), 26 Oct 2026. */
+    googleReviewUrl: "https://g.page/r/CcU3g2bKcP1VEAE/review",
     /** Overall Google rating and a floor for the count (owner confirmed 50+ five-star reviews on 2026-10-26; shown as "50+"). Update as reviews grow. */
     googleRating: 5.0 as number | null,
     googleCount: 50 as number | null,

@@ -36,6 +36,11 @@ export default function ReviewsPage() {
               Read more on <a className="font-semibold text-navy underline" href={siteConfig.reviews.googleProfileUrl} target="_blank" rel="noopener noreferrer">our Google profile</a>.
             </p>
           ) : null}
+          {siteConfig.reviews.googleReviewUrl ? (
+            <p className="mt-2 text-[15px] text-mute">
+              Had your roof done by us? <a className="font-semibold text-navy underline" href={siteConfig.reviews.googleReviewUrl} target="_blank" rel="noopener noreferrer">Leave a Google review</a>.
+            </p>
+          ) : null}
         </div>
       </Section>
       <CtaBand title="Want the same result? Get a free quote." />
