@@ -16,6 +16,12 @@ Checked on 19 October 2026: all 71 old URLs land on a live page.
 | `/{city}-brisbane-qld` service pages | the matching service page |
 | Old blog posts at the site root | the closest new guide (insurance, asbestos, leaks, metal vs tile, roof colour and heat, condensation), otherwise `/blog` |
 
+On 26 October 2026 Search Console showed 19 more old URLs that were not in the old sitemap and returned 404: the
+same suburb pages under `/service-areas/` (and a trashed `/service-areas__trashed/` copy), `/metal-roof-repair`, and
+old posts on insurance, condensation, roof colours, parapets, whirlybirds, roof bedding and gutter holes. They now
+redirect the same way: suburb pages to `/areas/{suburb}` or `/areas`, `/metal-roof-repair` to the roof replacement
+service, and each post to its closest new guide or `/blog`.
+
 Some old suburb pages were for places that are not in the Brisbane area (for example Abermain) or misspelt
 ("badgen"). They redirect to `/areas`.
 

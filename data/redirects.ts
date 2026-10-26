@@ -24,6 +24,14 @@ const suburbRedirects: Redirect[] = OLD_SUBURB_PREFIXES.flatMap((prefix) =>
   OLD_SUBURBS.map((s) => r(`/${prefix}-${s}-qld`, suburbTarget(s))),
 );
 
+/** The same suburb pages also sat under /service-areas/ (and a trashed copy) and Google still shows them. */
+const OLD_SUBURB_FOLDERS = ["service-areas", "service-areas__trashed"];
+const suburbFolderRedirects: Redirect[] = OLD_SUBURB_FOLDERS.flatMap((folder) =>
+  OLD_SUBURB_PREFIXES.flatMap((prefix) =>
+    OLD_SUBURBS.map((s) => r(`/${folder}/${prefix}-${s}-qld`, suburbTarget(s))),
+  ),
+);
+
 const BLOG = "/blog";
 const post = (slug: string) => `/blog/${slug}`;
 
@@ -44,6 +52,9 @@ export const redirects: Redirect[] = [
 
   // Old suburb pages
   ...suburbRedirects,
+  ...suburbFolderRedirects,
+  r("/service-areas/:path*", "/areas"),
+  r("/service-areas__trashed/:path*", "/areas"),
 
   // Old blog posts (they sat at the site root) mapped to the closest new post
   r("/will-insurance-cover-a-leaking-roof", post("roof-replacement-and-insurance-claims")),
@@ -69,4 +80,17 @@ export const redirects: Redirect[] = [
   r("/putting-metal-roofing-around-turbin-vents", BLOG),
   r("/types-of-roof-slopes", BLOG),
   r("/hello-world", BLOG),
+
+  // Old posts missing from the old sitemap but still shown in Google (Search Console, 26 Oct 2026)
+  r("/metal-roof-repair", "/services/roof-replacement"),
+  r("/leaking-roof-insurance-claim", post("roof-replacement-and-insurance-claims")),
+  r("/how-to-stop-a-metal-roof-from-sweating", post("roof-insulation-and-thermal-performance-basics")),
+  r("/best-colour-for-roof-tiles", post("choosing-a-colorbond-colour-for-queensland-heat")),
+  r("/roof-tile-colours", post("choosing-a-colorbond-colour-for-queensland-heat")),
+  r("/roofing-tile-paint-colors", post("choosing-a-colorbond-colour-for-queensland-heat")),
+  r("/colourbond-roof-colours", post("choosing-a-colorbond-colour-for-queensland-heat")),
+  r("/what-is-a-parapet-wall-on-a-roof", BLOG),
+  r("/what-is-a-whirlybird", BLOG),
+  r("/roof-bedding", BLOG),
+  r("/how-to-fix-hole-in-gutter", BLOG),
 ];
