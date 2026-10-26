@@ -29,7 +29,7 @@ Chosen 26 October 2026: **Logo 4**. ROOFING is spaced as in option 2 (no box) at
 - ROOFING is Montserrat Black 900, capitals, 44 units against a 516-unit TOP TIN, tracked to 380 and centred under TOP TIN. TOP TIN is the traced original artwork.
 - In code use the `Logo` component (`layout` primary, stacked or icon; `variant` positive or reversed), never a hard-coded file.
 - The old filenames (`toptin-logo-transparent.png`, `toptin-logo-reversed.png`, `toptin-logo-white.png`, `toptin-logo.png`, `toptin-mark-white.png`) now hold the new artwork, so outside links keep working.
-- Still needed: a vector master of TOP TIN from Ethan. The one here is a trace of the 1000 px artwork.
+- The traced TOP TIN artwork in the logo pack (`toptin-website/docs/logo-pack`) is the master. Nothing more is needed from Ethan (owner, 27 Oct 2026).
 
 ## Colour
 
