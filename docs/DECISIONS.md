@@ -37,3 +37,5 @@ These override the matching parts of docs/BRIEF.md.
    The logo option (three redesigns of ROOFING) is not chosen yet: keep the current logo files until it is.
 9. **Who looks after a client:** Jackson answers every enquiry and follows up. Ethan inspects, gives the quote and, once accepted,
    takes over the job. Never promise one point of contact in copy.
+
+10. **Logo 4 adopted (26 Oct 2026).** Primary, stacked secondary and icon, as vector SVG plus PNG in public/brand. ROOFING has no box and matches the stroke weight of option 1. Old logo filenames now hold the new artwork. Full spec in docs/BRAND.md, Logo section.

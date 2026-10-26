@@ -1,21 +1,33 @@
-import Image from "next/image";
-
 /**
- * The real Top Tin logo artwork (never redrawn or recoloured).
- * positive: navy + yellow, for light backgrounds. reversed: white + yellow, for navy.
- * The PNGs are 1000x200 with the artwork spanning most of the height.
+ * Top Tin Roofing logo (docs/BRAND.md, "Logo"). Vector artwork in public/brand.
+ *
+ *   <Logo />                       primary, full colour, for white and light grounds
+ *   <Logo variant="reversed" />    primary, white and yellow, for Navy 700 and Navy 900 grounds
+ *   <Logo layout="stacked" />      secondary, for square and narrow spaces
+ *   <Logo layout="icon" />         the roof mark alone
+ *
+ * `height` is the visible height in px. The files are cropped tight to the artwork, so the width
+ * follows from the file's own proportions and nothing needs trimming.
  */
-export function Logo({ variant = "positive", height = 40, priority = false, className = "" }: { variant?: "positive" | "reversed"; height?: number; priority?: boolean; className?: string }) {
-  const src = variant === "reversed" ? "/brand/toptin-logo-reversed.png" : "/brand/toptin-logo-transparent.png";
+type Layout = "primary" | "stacked" | "icon";
+
+const RATIO: Record<Layout, number> = { primary: 841.5 / 170.75, stacked: 508.5 / 350.75, icon: 272.5 / 164 };
+const FILE: Record<Layout, string> = { primary: "toptin-logo-primary", stacked: "toptin-logo-stacked", icon: "toptin-icon" };
+
+export function Logo({ variant = "positive", layout = "primary", height = 40, priority = false, className = "" }: { variant?: "positive" | "reversed"; layout?: Layout; height?: number; priority?: boolean; className?: string }) {
+  const src = `/brand/${FILE[layout]}${variant === "reversed" ? "-reversed" : ""}.svg`;
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       src={src}
       alt="Top Tin Roofing"
-      width={Math.round(height * 5)}
+      width={Math.round(height * RATIO[layout])}
       height={height}
-      priority={priority}
-      className={`block h-auto ${className}`.trim()}
-      style={{ height, width: "auto" }}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : undefined}
+      draggable={false}
+      className={`block ${className}`.trim()}
+      style={{ height, width: "auto", maxWidth: "none" }}
     />
   );
 }

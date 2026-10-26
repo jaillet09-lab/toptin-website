@@ -25,31 +25,151 @@
   "font": {
     "family": "Inter",
     "fallback": "Arial, system-ui, sans-serif",
-    "weights": [400, 500, 600],
+    "weights": [
+      400,
+      500,
+      600
+    ],
     "opticalSize": true,
     "tabularFigures": true
   },
   "scale": {
     "document": {
-      "display": { "size": 44, "line": 48, "weight": 600, "tracking": "-0.035em" },
-      "title": { "size": 36, "line": 42, "weight": 600, "tracking": "-0.03em" },
-      "heading": { "size": 20, "line": 26, "weight": 600, "tracking": "-0.015em" },
-      "subheading": { "size": 15, "line": 22, "weight": 600, "tracking": "0" },
-      "body": { "size": 14, "line": 22, "weight": 400, "tracking": "0" },
-      "small": { "size": 12, "line": 18, "weight": 400, "tracking": "0" },
-      "overline": { "size": 12, "line": 16, "weight": 600, "tracking": "0.12em", "caps": true }
+      "display": {
+        "size": 44,
+        "line": 48,
+        "weight": 600,
+        "tracking": "-0.035em"
+      },
+      "title": {
+        "size": 36,
+        "line": 42,
+        "weight": 600,
+        "tracking": "-0.03em"
+      },
+      "heading": {
+        "size": 20,
+        "line": 26,
+        "weight": 600,
+        "tracking": "-0.015em"
+      },
+      "subheading": {
+        "size": 15,
+        "line": 22,
+        "weight": 600,
+        "tracking": "0"
+      },
+      "body": {
+        "size": 14,
+        "line": 22,
+        "weight": 400,
+        "tracking": "0"
+      },
+      "small": {
+        "size": 12,
+        "line": 18,
+        "weight": 400,
+        "tracking": "0"
+      },
+      "overline": {
+        "size": 12,
+        "line": 16,
+        "weight": 600,
+        "tracking": "0.12em",
+        "caps": true
+      }
     },
     "web": {
-      "display": { "size": 64, "line": 68, "weight": 600, "tracking": "-0.035em" },
-      "title": { "size": 44, "line": 50, "weight": 600, "tracking": "-0.03em" },
-      "heading": { "size": 30, "line": 36, "weight": 600, "tracking": "-0.02em" },
-      "subheading": { "size": 20, "line": 26, "weight": 600, "tracking": "-0.015em" },
-      "body": { "size": 17, "line": 28, "weight": 400, "tracking": "0" },
-      "small": { "size": 14, "line": 22, "weight": 400, "tracking": "0" },
-      "overline": { "size": 13, "line": 18, "weight": 600, "tracking": "0.12em", "caps": true }
+      "display": {
+        "size": 64,
+        "line": 68,
+        "weight": 600,
+        "tracking": "-0.035em"
+      },
+      "title": {
+        "size": 44,
+        "line": 50,
+        "weight": 600,
+        "tracking": "-0.03em"
+      },
+      "heading": {
+        "size": 30,
+        "line": 36,
+        "weight": 600,
+        "tracking": "-0.02em"
+      },
+      "subheading": {
+        "size": 20,
+        "line": 26,
+        "weight": 600,
+        "tracking": "-0.015em"
+      },
+      "body": {
+        "size": 17,
+        "line": 28,
+        "weight": 400,
+        "tracking": "0"
+      },
+      "small": {
+        "size": 14,
+        "line": 22,
+        "weight": 400,
+        "tracking": "0"
+      },
+      "overline": {
+        "size": 13,
+        "line": 18,
+        "weight": 600,
+        "tracking": "0.12em",
+        "caps": true
+      }
     }
   },
-  "spacing": [4, 8, 12, 16, 24, 32, 48, 64, 96],
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+  ],
   "radius": 8,
-  "page": { "a4": { "width": 794, "height": 1123, "margin": 56, "headerBand": 96, "ruleBelowHeader": 3 }, "webContent": 1160, "webGutter": 40 }
+  "page": {
+    "a4": {
+      "width": 794,
+      "height": 1123,
+      "margin": 56,
+      "headerBand": 96,
+      "ruleBelowHeader": 3
+    },
+    "webContent": 1160,
+    "webGutter": 40
+  },
+  "logo": {
+    "chosen": "Logo 4, spacing option A, 26 October 2026",
+    "dir": "public/brand",
+    "primary": [
+      "toptin-logo-primary",
+      "toptin-logo-primary-reversed"
+    ],
+    "secondary": [
+      "toptin-logo-stacked",
+      "toptin-logo-stacked-reversed"
+    ],
+    "icon": [
+      "toptin-icon",
+      "toptin-icon-reversed"
+    ],
+    "grounds": [
+      "#FFFFFF",
+      "#1D2B4F",
+      "#0F162E"
+    ],
+    "minWidthPx": 170,
+    "minWidthMm": 45,
+    "component": "Logo (layout: primary | stacked | icon)"
+  }
 }

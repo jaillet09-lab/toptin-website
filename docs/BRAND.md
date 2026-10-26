@@ -10,7 +10,26 @@ One typeface family. Large, calm headlines. Space does the work. Hierarchy comes
 
 ## Logo
 
-Use the current logo files until a logo option is chosen from the canvas (Logo 1, 2 or 3). White version on navy, full colour on white. Never recolour, stretch, outline or shadow it. Clear space is the height of the letter T. Minimum width 120 px on screen, 30 mm in print.
+Chosen 26 October 2026: **Logo 4**. ROOFING is spaced as in option 2 (no box) at the stroke weight of option 1, and sits on the bottom line of the roof mark (spacing option A). Vector files live in `public/brand` in both repos.
+
+| Use | File (SVG and PNG) |
+|---|---|
+| Primary, full colour, for white and light grounds | `toptin-logo-primary` |
+| Primary, reversed, for Navy 700 and Navy 900 | `toptin-logo-primary-reversed` |
+| Secondary (stacked), full colour | `toptin-logo-stacked` |
+| Secondary (stacked), reversed | `toptin-logo-stacked-reversed` |
+| Icon (roof mark), full colour and reversed | `toptin-icon`, `toptin-icon-reversed` |
+| App icons, favicon, apple touch icon | `icon-192`, `icon-512`, `icon-maskable-512`, `app/icon.png`, `app/apple-icon.png` (icon on Navy 700) |
+
+- **Primary** goes in headers, document header bands, footers and signage: anywhere there is width.
+- **Secondary** goes wherever the primary would go but the space is square or narrow, and in centred layouts: the compliance page header, the booklet back cover, social avatars, stamps, vehicle doors.
+- **Icon** goes wherever the name is already present, or the space is tiny: favicon, app icons, stamps.
+- Grounds: white, Navy 700 (#1D2B4F) or Navy 900 only. Full colour on white, reversed on navy. Never recolour, stretch, outline, or add a box or shadow.
+- Clear space is the height of the letter T. Minimum width 170 px on screen, 45 mm in print. Below that use the stacked logo down to 110 px (30 mm), or the icon.
+- ROOFING is Montserrat Black 900, capitals, 44 units against a 516-unit TOP TIN, tracked to 380 and centred under TOP TIN. TOP TIN is the traced original artwork.
+- In code use the `Logo` component (`layout` primary, stacked or icon; `variant` positive or reversed), never a hard-coded file.
+- The old filenames (`toptin-logo-transparent.png`, `toptin-logo-reversed.png`, `toptin-logo-white.png`, `toptin-logo.png`, `toptin-mark-white.png`) now hold the new artwork, so outside links keep working.
+- Still needed: a vector master of TOP TIN from Ethan. The one here is a trace of the 1000 px artwork.
 
 ## Colour
 
@@ -54,7 +73,7 @@ Inter, variable, with the optical size axis switched on. Free, prints well. Weig
 
 A 4 px scale: 4, 8, 12, 16, 24, 32, 48, 64, 96. Everything snaps to it.
 
-- **A4 document:** 794 × 1123 px. Margins 56 px. Header band 96 px of Navy 700 with the white logo on the left and the document type and reference on the right, then a 3 px yellow rule. Footer 12/16 with a hairline above. Twelve columns, 24 px gutter. 24 to 32 px between sections.
+- **A4 document:** 794 × 1123 px. Margins 56 px. Header band 96 px of Navy 700 with the primary reversed logo on the left and the document type and reference on the right, then a 3 px yellow rule. Footer 12/16 with a hairline above. Twelve columns, 24 px gutter. 24 to 32 px between sections.
 - **Website:** content width 1160 px, 40 px side padding. Sections 64 to 96 px apart.
 - **Corner radius:** 8 px for buttons, cards and photos.
 - **Rules:** 1 px Line, 1.5 px strong, 3 px yellow.

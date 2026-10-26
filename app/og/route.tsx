@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { siteConfig } from "@/site.config";
 
 /** Generated Open Graph image: /og?t=Title&s=Subtitle (navy, real reversed logo, yellow rule). */
-const logo = readFile(join(process.cwd(), "public/brand/toptin-logo-reversed.png")).then((b) => `data:image/png;base64,${b.toString("base64")}`);
+const logo = readFile(join(process.cwd(), "public/brand/toptin-logo-primary-reversed.png")).then((b) => `data:image/png;base64,${b.toString("base64")}`);
 
 function clean(value: string | null, max: number): string {
   return (value ?? "").replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, max);
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "60px 72px", backgroundColor: "#0f162e", color: "#fff" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} width={360} height={72} alt="" />
+        <img src={src} width={420} height={85} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ width: 90, height: 8, backgroundColor: "#f8bc26", marginBottom: 28 }} />
           <div style={{ fontSize: size, fontWeight: 600, lineHeight: 1.05, letterSpacing: -1.5, maxWidth: 1000 }}>{title}</div>
