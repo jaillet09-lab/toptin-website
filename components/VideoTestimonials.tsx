@@ -20,13 +20,13 @@ export type VideoTestimonial = {
 
 export const videoTestimonials: VideoTestimonial[] = [
   {
-    src: "/videos/testimonial-1.mp4",
-    poster: "/videos/testimonial-1-poster.jpg",
-    captions: "/videos/testimonial-1.vtt",
-    name: "Adrian, Clear Island Waters",
-    title: "Adrian on his new Colorbond roof, Clear Island Waters",
-    description: "Adrian tells Ethan from Top Tin Roofing the crew were quick with the demolition on day one and the house is already cooler.",
-    duration: "PT21S",
+    src: "/videos/testimonial-3.mp4",
+    poster: "/videos/testimonial-3-poster.jpg",
+    captions: "/videos/testimonial-3.vtt",
+    name: "Brett, insurance roof replacement",
+    title: "Brett on his insurance roof replacement by Top Tin Roofing",
+    description: "On the finished roof, Brett explains how Top Tin Roofing helped with his insurance claim, worked in with the solar installers and delivered a fantastic finish.",
+    duration: "PT60S",
     uploadDate: "2026-10-23",
   },
   {
@@ -40,13 +40,13 @@ export const videoTestimonials: VideoTestimonial[] = [
     uploadDate: "2026-10-23",
   },
   {
-    src: "/videos/testimonial-3.mp4",
-    poster: "/videos/testimonial-3-poster.jpg",
-    captions: "/videos/testimonial-3.vtt",
-    name: "Brett, insurance roof replacement",
-    title: "Brett on his insurance roof replacement by Top Tin Roofing",
-    description: "On the finished roof, Brett explains how Top Tin Roofing helped with his insurance claim, worked in with the solar installers and delivered a fantastic finish.",
-    duration: "PT60S",
+    src: "/videos/testimonial-1.mp4",
+    poster: "/videos/testimonial-1-poster.jpg",
+    captions: "/videos/testimonial-1.vtt",
+    name: "Adrian, Clear Island Waters",
+    title: "Adrian on his new Colorbond roof, Clear Island Waters",
+    description: "Adrian tells Ethan from Top Tin Roofing the crew were quick with the demolition on day one and the house is already cooler.",
+    duration: "PT21S",
     uploadDate: "2026-10-23",
   },
 ];
