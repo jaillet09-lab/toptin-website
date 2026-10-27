@@ -1,5 +1,5 @@
 import { quoteServiceOptions } from "@/data/services";
-import { extraOptions, optionLabel, roofAgeOptions, roofTypeOptions, storeyOptions, timingOptions, toQuoteAnswers, type Lead, type LeadPhoto } from "./types";
+import { extraOptions, insuranceOptions, optionLabel, roofAgeOptions, roofTypeOptions, storeyOptions, timingOptions, toQuoteAnswers, type Lead, type LeadPhoto } from "./types";
 
 export type LeadInput = {
   name: string;
@@ -14,6 +14,8 @@ export type LeadInput = {
   /** Comma-separated extraOptions values, or "none". */
   extras?: string;
   timing?: string;
+  /** "yes" or "no": is the insurer paying for the roof? */
+  insurance?: string;
   message: string;
 };
 
@@ -60,6 +62,7 @@ export function validateLeadInput(input: LeadInput): FieldErrors {
   if (input.storeys && !storeyOptions.some((o) => o.value === input.storeys)) errors.storeys = "Pick single or double storey.";
   if (input.extras && input.extras !== "none" && !input.extras.split(",").every((x) => extraOptions.some((o) => o.value === x))) errors.extras = "Pick from the list.";
   if (input.timing && !timingOptions.some((o) => o.value === input.timing)) errors.timing = "Pick when you would like it done.";
+  if (input.insurance && !insuranceOptions.some((o) => o.value === input.insurance)) errors.insurance = "Pick yes or no.";
   if (input.message.length > 4000) errors.message = "Please keep the message under 4,000 characters.";
   if (input.address.length > 300) errors.address = "Address is too long.";
   return errors;
@@ -96,6 +99,7 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     storeys: str(fd, "storeys", 20),
     extras: str(fd, "extras", 100),
     timing: str(fd, "timing", 20),
+    insurance: str(fd, "insurance", 5),
     message: str(fd, "message", 4000),
   };
   const errors = validateLeadInput(input);
@@ -125,6 +129,7 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     storeys: input.storeys ? optionLabel(storeyOptions, input.storeys) : "",
     extras: input.extras === "none" ? "None of these" : (input.extras ?? "").split(",").filter(Boolean).map((x) => optionLabel(extraOptions, x)).join(", "),
     timing: input.timing ? optionLabel(timingOptions, input.timing) : "",
+    insurance: input.insurance ? optionLabel(insuranceOptions, input.insurance) : "",
     quoteAnswers: toQuoteAnswers({ roofType: input.roofType, storeys: input.storeys ?? "", extras: input.extras === "none" ? "none" : input.extras ?? "" }),
     addressStatus: (["picked", "manual"] as const).find((s) => s === str(fd, "addressStatus", 10)) ?? "",
     flags: [],

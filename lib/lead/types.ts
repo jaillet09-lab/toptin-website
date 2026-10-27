@@ -13,6 +13,8 @@ export type Lead = {
   storeys: string;
   extras: string;
   timing: string;
+  /** "Yes" when the insurer is paying for the roof (ads landing page). */
+  insurance: string;
   message: string;
   /**
    * The answers in the TopTin System quote flow's own ids and values (lib/questions.ts there), sent
@@ -61,6 +63,12 @@ export const extraOptions: Option[] = [
   { value: "skylights", label: "Skylights" },
   { value: "whirlybirds", label: "Whirlybirds" },
   { value: "gutters", label: "New gutters too" },
+];
+
+/** Ads landing page (owner, 27 Oct 2026): asked instead of the roof's age. */
+export const insuranceOptions: Option[] = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
 ];
 
 export const timingOptions: Option[] = [

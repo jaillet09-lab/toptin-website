@@ -32,6 +32,7 @@ function rows(lead: Lead): [string, string][] {
     ...(lead.storeys ? [["Storeys", lead.storeys] as [string, string]] : []),
     ...(lead.extras ? [["Also include", lead.extras] as [string, string]] : []),
     ...(lead.timing ? [["Timing", lead.timing] as [string, string]] : []),
+    ...(lead.insurance ? [["Insurance job", lead.insurance] as [string, string]] : []),
   ];
 }
 
@@ -175,6 +176,7 @@ const ghlAdapter: Adapter = {
       lead.roofAge && `Age: ${lead.roofAge}`,
       lead.extras && `Also include: ${lead.extras}`,
       lead.timing && `Timing: ${lead.timing}`,
+      lead.insurance && `Insurance job: ${lead.insurance}`,
       photos.length ? `${photos.length} photo(s) sent with the form (not attached in GHL)` : "",
       lead.message,
       quoteAnswersLine(lead),

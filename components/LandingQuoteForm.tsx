@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/site.config";
-import { extraOptions, optionLabel, roofAgeOptions, roofTypeOptions, storeyOptions, timingOptions } from "@/lib/lead/types";
+import { extraOptions, insuranceOptions, optionLabel, roofTypeOptions, storeyOptions, timingOptions } from "@/lib/lead/types";
 import { validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
 import { track, trackConversion } from "@/lib/analytics";
 import { readRecentRequest, recentDate, saveRecentRequest, type RecentRequest } from "@/lib/lead/recent";
@@ -12,14 +12,15 @@ import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 
 type Input = Required<LeadInput>;
-const EMPTY: Input = { name: "", phone: "", email: "", address: "", service: "roof-replacement", roofType: "", roofAge: "", storeys: "", extras: "", timing: "", message: "" };
+const EMPTY: Input = { name: "", phone: "", email: "", address: "", service: "roof-replacement", roofType: "", roofAge: "", storeys: "", extras: "", timing: "", insurance: "", message: "" };
 const STEPS = 6;
 
 /** The tap questions, in order. Each answer fills a question in the System's quote flow. */
 const TAPS = [
   { key: "roofType", title: "What is on the roof now?", options: roofTypeOptions },
   { key: "storeys", title: "Single or double storey?", options: storeyOptions },
-  { key: "roofAge", title: "Roughly how old is the roof?", options: roofAgeOptions },
+  // Asked instead of the roof's age (owner, 27 Oct 2026)
+  { key: "insurance", title: "Is this an insurance job?", options: insuranceOptions },
 ] as const;
 
 /**
@@ -64,7 +65,7 @@ export function LandingQuoteForm({ source = "landing" }: { source?: string }) {
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
   }
 
-  function tap(k: "roofType" | "storeys" | "roofAge" | "timing", value: string) {
+  function tap(k: "roofType" | "storeys" | "insurance" | "timing", value: string) {
     set(k, value);
     setStep((s) => s + 1);
   }
@@ -118,7 +119,7 @@ export function LandingQuoteForm({ source = "landing" }: { source?: string }) {
     [
       x.roofType && x.roofType !== "unsure" ? `${optionLabel(roofTypeOptions, x.roofType)} roof` : "",
       x.storeys && x.storeys !== "unsure" ? optionLabel(storeyOptions, x.storeys) : "",
-      x.roofAge && x.roofAge !== "unsure" ? optionLabel(roofAgeOptions, x.roofAge) : "",
+      x.insurance === "yes" ? "Insurance job" : "",
       ...(x.extras && x.extras !== "none" ? x.extras.split(",").map((e) => optionLabel(extraOptions, e)) : []),
     ].filter(Boolean);
 
@@ -127,7 +128,7 @@ export function LandingQuoteForm({ source = "landing" }: { source?: string }) {
     const glance: [string, string][] = [
       ["Roof", optionLabel(roofTypeOptions, sent.roofType)],
       ["Storeys", optionLabel(storeyOptions, sent.storeys)],
-      ["Age", optionLabel(roofAgeOptions, sent.roofAge)],
+      ["Insurance job", optionLabel(insuranceOptions, sent.insurance)],
       ["Also include", sent.extras === "none" ? "Nothing extra" : sent.extras.split(",").filter(Boolean).map((e) => optionLabel(extraOptions, e)).join(", ")],
       ["Timing", optionLabel(timingOptions, sent.timing)],
       ["Address", sent.address],
