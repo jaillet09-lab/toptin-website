@@ -98,7 +98,7 @@ Say it plainly. Say who does what. Stand behind it. Full guide on the canvas, "V
 - No exclamation marks. "And", not "&". No dashes inside a sentence.
 - Never: best, leading, premium, unbeatable, cheap, bargain, solutions, state-of-the-art, "guarantee" outside the written warranty.
 - Three document names: Estimate, Quote, Contract.
-- Who looks after a client: Jackson answers every enquiry and follows up. Ethan inspects, gives the quote and, once the client accepts, takes over the job. Say who owns each step. Never promise one point of contact.
+- Who looks after a client: we answer every enquiry and follow up. Ethan inspects, gives the quote and, once the client accepts, takes over the job. Never name anyone else on the site, in ads or in documents: say "we" (owner, 27 October 2026). Never promise one point of contact.
 
 ## Where it is implemented
 

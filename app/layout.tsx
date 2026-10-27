@@ -5,6 +5,7 @@ import { siteConfig } from "@/site.config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBar } from "@/components/layout/MobileBar";
+import { SiteOnly } from "@/components/layout/SiteOnly";
 import { GoogleTag } from "@/components/GoogleTag";
 import { JsonLd } from "@/components/JsonLd";
 import { localBusinessSchema, websiteSchema } from "@/lib/schema";
@@ -41,8 +42,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <Header />
         <main id="main" className="flex-1">{children}</main>
-        <Footer />
-        <MobileBar />
+        <SiteOnly>
+          <Footer />
+          <MobileBar />
+        </SiteOnly>
         <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
         <GoogleTag />
       </body>

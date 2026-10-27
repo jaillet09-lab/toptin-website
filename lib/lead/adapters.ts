@@ -31,6 +31,17 @@ function rows(lead: Lead): [string, string][] {
   ];
 }
 
+/** "Google Ads" when the form was sent from a page reached through an ad click, else "". */
+export function adSource(sourcePage: string): string {
+  const [path, query = ""] = sourcePage.split("?");
+  if (/(^|&)(gclid|gbraid|wbraid)=/.test(query)) return `Google Ads (${path})`;
+  const utm = /(^|&)utm_source=([^&]+)/.exec(query);
+  if (!utm) return "";
+  let name = utm[2];
+  try { name = decodeURIComponent(name.replace(/\+/g, " ")); } catch { /* keep it as sent */ }
+  return `${name.slice(0, 40)} (${path})`;
+}
+
 function leadToText(lead: Lead, photos: LeadPhoto[]): string {
   return [
     "Quote request from the website",
@@ -125,7 +136,9 @@ const ghlAdapter: Adapter = {
   enabled: () => Boolean(process.env.GHL_LEAD_WEBHOOK_URL),
   async send(lead, photos) {
     const [first, ...rest] = lead.name.trim().split(/\s+/);
+    const ad = adSource(lead.sourcePage);
     const details = [
+      ad && `Came from: ${ad}`,
       lead.roofType && `Roof: ${lead.roofType}`,
       lead.roofAge && `Age: ${lead.roofAge}`,
       photos.length ? `${photos.length} photo(s) sent with the form (not attached in GHL)` : "",

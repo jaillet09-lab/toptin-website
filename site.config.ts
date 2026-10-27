@@ -115,10 +115,11 @@ export const siteConfig = {
     /** GA4 measurement id (G-XXXX). Env var overrides the value here. */
     gtagId: process.env.NEXT_PUBLIC_GTAG_ID || "G-H199T0RY74", // GA4 property toptinroofing.com, created 26 Oct 2026 under toptinroofing@gmail.com
     /** Google Ads account tag (AW-XXXX), configured on the same gtag. */
-    adsAccountId: process.env.NEXT_PUBLIC_ADS_ACCOUNT_ID || "",
+    /** Top Tin's Google Ads account (run by the agency), read from the ads landing page's tag on 27 Oct 2026. */
+    adsAccountId: process.env.NEXT_PUBLIC_ADS_ACCOUNT_ID || "AW-17187907072",
     /** Google Ads conversion send_to values (AW-XXXX/LABEL). Empty = that conversion is off. */
-    adsConversionId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "",          // quote form submitted (thank-you page)
-    adsPhoneConversionId: process.env.NEXT_PUBLIC_ADS_PHONE_CONVERSION_ID || "", // phone number tapped
+    adsConversionId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "",          // quote form submitted: no label yet, the Ads account needs a form conversion action
+    adsPhoneConversionId: process.env.NEXT_PUBLIC_ADS_PHONE_CONVERSION_ID || "AW-17187907072/bMTjCITHoZcbEIDM6oNA", // phone number tapped: the same conversion the old ads page fires on tel: clicks
   },
 
   /** NAP block exactly as it should read on Google Business Profile and every directory. */

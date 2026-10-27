@@ -9,6 +9,23 @@ import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 import { services } from "@/data/services";
 import { navLinks } from "./nav";
+import { isLandingPath } from "./landing";
+
+/** Slim header for the paid-ads landing pages: logo and phone only, no menu or links away. */
+function LandingHeader() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-line bg-white" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+      <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-4">
+        <Logo height={38} priority />
+        <TelLink location="landing-header" className="btn btn-outline btn-sm gap-2">
+          <Icon name="phone" size={17} />
+          <span className="hidden sm:inline">{siteConfig.phone}</span>
+          <span className="sm:hidden">Call</span>
+        </TelLink>
+      </div>
+    </header>
+  );
+}
 
 /** Sticky white header: logo left, nav centre, phone and Get a free quote right. Hamburger below 1080px. */
 export function Header() {
@@ -19,6 +36,8 @@ export function Header() {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  if (isLandingPath(pathname)) return <LandingHeader />;
 
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
