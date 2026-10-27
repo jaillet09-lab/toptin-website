@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { submitLead } from "@/lib/lead/adapters";
 import { parseSubmission } from "@/lib/lead/validate";
+import { qualityFlags } from "@/lib/lead/quality";
 import { siteConfig } from "@/site.config";
 
 /* Best-effort rate limit per IP: 6 submissions per 10 minutes on this instance. */
@@ -35,6 +36,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, message: parsed.message, errors: parsed.errors }, { status: parsed.status });
   }
 
+  if (parsed.suspectedBot) {
+    // Not sent to GHL (no call-team alert for a bot), but logged in full so a real person is never lost.
+    const l = parsed.lead;
+    console.warn(`[toptin lead] hidden field filled, held back from GHL. ${l.id}: ${l.name}, ${l.phone}, ${l.email || "no email"}, ${l.address}, ${l.serviceLabel}, page ${l.sourcePage}`);
+    return NextResponse.json({ ok: true, id: l.id });
+  }
+
+  parsed.lead.flags = qualityFlags(parsed.lead, { previousRequestAt: parsed.previousRequestAt });
   const result = await submitLead(parsed.lead, parsed.photos);
   if (!result.ok) {
     return NextResponse.json(

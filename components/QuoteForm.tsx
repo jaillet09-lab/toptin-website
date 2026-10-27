@@ -9,6 +9,8 @@ import { MAX_PHOTOS, MAX_PHOTO_BYTES, validateLeadInput, type FieldErrors, type 
 import { track } from "@/lib/analytics";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
+import { AddressField, addressPickError, type AddressStatus } from "@/components/AddressField";
+import { readRecentRequest, recentDate, saveRecentRequest, type RecentRequest } from "@/lib/lead/recent";
 
 type Props = {
   /** Pre-selected service value (roof-replacement, colorbond-roof-installation, not-sure). */
@@ -41,7 +43,11 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
   const [fileError, setFileError] = useState("");
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState("");
+  const [addressStatus, setAddressStatus] = useState<AddressStatus>("");
+  const [recent, setRecent] = useState<RecentRequest | null>(null);
   const startedAt = useRef<number>(0);
+
+  useEffect(() => setRecent(readRecentRequest()), []);
   const honeypot = useRef<HTMLInputElement>(null);
 
   // Read ?service= and ?suburb= after mount, so the page itself can stay static.
@@ -72,7 +78,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
 
   function next() {
     const all = validateLeadInput(v);
-    const stepOne: FieldErrors = { name: all.name, phone: all.phone, address: all.address, service: all.service };
+    const stepOne: FieldErrors = { name: all.name, phone: all.phone, address: all.address ?? addressPickError(v.address, addressStatus), service: all.service };
     const has = Object.values(stepOne).some(Boolean);
     setErrors(stepOne);
     if (!has) setStep(2);
@@ -95,6 +101,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
     e.preventDefault();
     if (step === 1) return next();
     const errs = validateLeadInput(v);
+    errs.address ??= addressPickError(v.address, addressStatus);
     setErrors(errs);
     if (Object.values(errs).some(Boolean)) {
       if (errs.name || errs.phone || errs.address || errs.service) setStep(1);
@@ -105,6 +112,8 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
     const fd = new FormData();
     Object.entries(v).forEach(([k, val]) => fd.append(k, val));
     files.forEach((f) => fd.append("photos", f));
+    fd.append("addressStatus", addressStatus);
+    if (recent) fd.append("previousRequestAt", recent.at);
     fd.append("startedAt", String(startedAt.current || Date.now() - 10000));
     fd.append("sourcePage", typeof window !== "undefined" ? window.location.pathname : source);
     fd.append("website", honeypot.current?.value ?? "");
@@ -118,6 +127,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
         return;
       }
       track("quote_submitted", { source, service: v.service });
+      saveRecentRequest(v.phone.trim());
       router.push("/thank-you");
     } catch {
       setFormError(`No connection. Please try again or call ${siteConfig.phone}.`);
@@ -140,6 +150,12 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
         <span className={`grid size-7 place-items-center rounded-lg ${step === 2 ? "bg-tin text-navy" : dark ? "bg-white/15 text-white" : "bg-paper text-mute"}`}>2</span>
         <span className={dark ? "text-white/80" : "text-mute"}>Your roof</span>
       </div>
+
+      {recent ? (
+        <p className={`rounded-lg p-3.5 text-[14.5px] ${dark ? "bg-white/10 text-white/85" : "border border-[var(--tin-line)] bg-[var(--tin-wash)] text-text"}`}>
+          We already have your request from {recentDate(recent)} and will call you on {recent.phone}. Need to change something? Send it again below.
+        </p>
+      ) : null}
 
       {/* Honeypot: hidden from people */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
@@ -174,15 +190,20 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
             </div>
             <div>
               <label htmlFor={fid("phone")} className={label}>Phone</label>
-              <input id={fid("phone")} className="field" type="tel" inputMode="tel" autoComplete="tel" value={v.phone} onChange={(e) => set("phone", e.target.value)} {...aria("phone")} />
+              <input id={fid("phone")} className="field" type="tel" inputMode="tel" autoComplete="tel" placeholder="04XX XXX XXX" value={v.phone} onChange={(e) => set("phone", e.target.value)} {...aria("phone")} />
               {err("phone")}
             </div>
           </div>
-          <div>
-            <label htmlFor={fid("address")} className={label}>Property address <span className="font-normal opacity-70">(suburb is enough to start)</span></label>
-            <input id={fid("address")} className="field" autoComplete="street-address" value={v.address} onChange={(e) => set("address", e.target.value)} {...aria("address")} />
-            {err("address")}
-          </div>
+          <AddressField
+            id={fid("address")}
+            label="Property address"
+            value={v.address}
+            status={addressStatus}
+            onChange={(value, status) => { set("address", value); setAddressStatus(status); }}
+            error={errors.address}
+            errorId={`${source}-address-err`}
+            dark={dark}
+          />
           <button type="submit" className="btn btn-primary btn-lg w-full">Next: your roof <Icon name="arrow" size={18} /></button>
         </>
       ) : (

@@ -1,5 +1,6 @@
 import { siteConfig } from "@/site.config";
 import type { Lead, LeadPhoto, SubmitResult } from "./types";
+import { toAuE164 } from "./validate";
 
 /**
  * Pluggable lead delivery. Every configured adapter runs; the lead counts as
@@ -28,7 +29,20 @@ function rows(lead: Lead): [string, string][] {
     ["Service", lead.serviceLabel],
     ["Roof type", lead.roofType],
     ["Roof age", lead.roofAge],
+    ...(lead.storeys ? [["Storeys", lead.storeys] as [string, string]] : []),
+    ...(lead.extras ? [["Also include", lead.extras] as [string, string]] : []),
+    ...(lead.timing ? [["Timing", lead.timing] as [string, string]] : []),
   ];
+}
+
+/**
+ * "Quote answers: storeys=double; job_type=tile_tin; ..." in the System quote flow's own ids.
+ * The System reads this line from the GHL contact and pre-selects the answers (TopTin-System
+ * lib/quotePrefill.ts parseQuoteAnswers). Keep the format: key=value pairs split by "; ".
+ */
+export function quoteAnswersLine(lead: Lead): string {
+  const pairs = Object.entries(lead.quoteAnswers);
+  return pairs.length ? `Quote answers: ${pairs.map(([k, v]) => `${k}=${v}`).join("; ")}` : "";
 }
 
 /** "Google Ads" when the form was sent from a page reached through an ad click, else "". */
@@ -42,17 +56,32 @@ export function adSource(sourcePage: string): string {
   return `${name.slice(0, 40)} (${path})`;
 }
 
+/** "Check before calling: ..." when lib/lead/quality.ts raised anything, else "". */
+function checkLine(lead: Lead): string {
+  return lead.flags.length ? `Check before calling: ${lead.flags.join("; ")}.` : "";
+}
+
+/** Whether the address was picked from the suggestions or typed by hand. */
+function addressLine(lead: Lead): string {
+  if (lead.addressStatus === "picked") return "Address: picked from the address list";
+  if (lead.addressStatus === "manual") return "Address: typed by hand (not found in the address list)";
+  return "";
+}
+
 function leadToText(lead: Lead, photos: LeadPhoto[]): string {
   return [
     "Quote request from the website",
+    ...(checkLine(lead) ? [checkLine(lead)] : []),
     "",
     ...rows(lead).map(([k, v]) => `${k}: ${v || "(not given)"}`),
+    ...(addressLine(lead) ? [addressLine(lead)] : []),
     "",
     "Message:",
     lead.message || "(none)",
     "",
     `Photos: ${photos.length ? photos.map((p) => `${p.filename} (${Math.round(p.size / 1024)} KB)`).join(", ") : "none"}`,
     `Page: ${lead.sourcePage}`,
+    ...(quoteAnswersLine(lead) ? [quoteAnswersLine(lead)] : []),
     `Submitted: ${lead.submittedAt}`,
     `Lead id: ${lead.id}`,
   ].join("\n");
@@ -138,11 +167,17 @@ const ghlAdapter: Adapter = {
     const [first, ...rest] = lead.name.trim().split(/\s+/);
     const ad = adSource(lead.sourcePage);
     const details = [
+      checkLine(lead),
       ad && `Came from: ${ad}`,
+      addressLine(lead),
       lead.roofType && `Roof: ${lead.roofType}`,
+      lead.storeys && `Storeys: ${lead.storeys}`,
       lead.roofAge && `Age: ${lead.roofAge}`,
+      lead.extras && `Also include: ${lead.extras}`,
+      lead.timing && `Timing: ${lead.timing}`,
       photos.length ? `${photos.length} photo(s) sent with the form (not attached in GHL)` : "",
       lead.message,
+      quoteAnswersLine(lead),
     ].filter(Boolean).join("\n");
     const res = await fetch(process.env.GHL_LEAD_WEBHOOK_URL as string, {
       method: "POST",
@@ -152,7 +187,8 @@ const ghlAdapter: Adapter = {
         fields: {
           first_name: first ?? "",
           last_name: rest.join(" "),
-          phone: lead.phone,
+          // +61 format, so GHL matches the number to an existing contact instead of making a duplicate
+          phone: toAuE164(lead.phone) || lead.phone,
           email: lead.email,
           address: lead.address,
           services: lead.serviceLabel,

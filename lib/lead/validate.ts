@@ -1,5 +1,5 @@
 import { quoteServiceOptions } from "@/data/services";
-import { optionLabel, roofAgeOptions, roofTypeOptions, type Lead, type LeadPhoto } from "./types";
+import { extraOptions, optionLabel, roofAgeOptions, roofTypeOptions, storeyOptions, timingOptions, toQuoteAnswers, type Lead, type LeadPhoto } from "./types";
 
 export type LeadInput = {
   name: string;
@@ -9,6 +9,11 @@ export type LeadInput = {
   service: string;
   roofType: string;
   roofAge: string;
+  /** The ads landing page asks these too. "" when not asked. */
+  storeys?: string;
+  /** Comma-separated extraOptions values, or "none". */
+  extras?: string;
+  timing?: string;
   message: string;
 };
 
@@ -24,8 +29,21 @@ export function normalisePhone(raw: string): string {
   return raw.replace(/[\s().-]/g, "");
 }
 
+/**
+ * Australian numbers only (owner, 27 Oct 2026): a mobile starting 04 (10 digits), or any
+ * number written with +61 (nine digits after it; a stray 0 after +61 is allowed).
+ */
 export function isValidPhone(raw: string): boolean {
-  return /^\+?\d{8,15}$/.test(normalisePhone(raw));
+  const p = normalisePhone(raw);
+  return /^04\d{8}$/.test(p) || /^\+610?\d{9}$/.test(p);
+}
+
+/** The same number as +61 and nine digits, so GHL matches an existing contact. "" when not Australian. */
+export function toAuE164(raw: string): string {
+  const p = normalisePhone(raw);
+  if (/^04\d{8}$/.test(p)) return "+61" + p.slice(1);
+  const m = /^\+610?(\d{9})$/.exec(p);
+  return m ? "+61" + m[1] : "";
 }
 
 /** Field-level validation shared by the browser and the API. Name, phone and suburb are required. */
@@ -33,12 +51,15 @@ export function validateLeadInput(input: LeadInput): FieldErrors {
   const errors: FieldErrors = {};
   if (input.name.trim().length < 2) errors.name = "Please enter your name.";
   if (!input.phone.trim()) errors.phone = "Please enter a phone number so we can call you about the quote.";
-  else if (!isValidPhone(input.phone)) errors.phone = "That phone number does not look right.";
+  else if (!isValidPhone(input.phone)) errors.phone = "Please enter an Australian number starting with 04 or +61.";
   if (input.email.trim() && !emailRe.test(input.email.trim())) errors.email = "That email address does not look right.";
   if (input.address.trim().length < 3) errors.address = "Please enter the suburb or address of the property.";
   if (!quoteServiceOptions.some((o) => o.value === input.service)) errors.service = "Please choose a service, or Not sure yet.";
   if (input.roofType && !roofTypeOptions.some((o) => o.value === input.roofType)) errors.roofType = "Pick a roof type from the list.";
   if (input.roofAge && !roofAgeOptions.some((o) => o.value === input.roofAge)) errors.roofAge = "Pick a roof age from the list.";
+  if (input.storeys && !storeyOptions.some((o) => o.value === input.storeys)) errors.storeys = "Pick single or double storey.";
+  if (input.extras && input.extras !== "none" && !input.extras.split(",").every((x) => extraOptions.some((o) => o.value === x))) errors.extras = "Pick from the list.";
+  if (input.timing && !timingOptions.some((o) => o.value === input.timing)) errors.timing = "Pick when you would like it done.";
   if (input.message.length > 4000) errors.message = "Please keep the message under 4,000 characters.";
   if (input.address.length > 300) errors.address = "Address is too long.";
   return errors;
@@ -50,13 +71,14 @@ function str(fd: FormData, key: string, max = 500): string {
 }
 
 export type ParsedSubmission =
-  | { ok: true; lead: Lead; photos: LeadPhoto[] }
+  | { ok: true; lead: Lead; photos: LeadPhoto[]; suspectedBot: boolean; previousRequestAt: string }
   | { ok: false; status: number; message: string; errors?: FieldErrors };
 
 /** Parse and validate a multipart submission from the quote form. */
 export async function parseSubmission(fd: FormData, meta: { userAgent: string }): Promise<ParsedSubmission> {
-  // Honeypot: real people never fill this field.
-  if (str(fd, "website")) return { ok: false, status: 400, message: "Submission rejected." };
+  // Honeypot: real people never fill this field. The route still answers "sent" and logs the
+  // request in full, so a real person caught by it (a password manager, say) is never lost.
+  const suspectedBot = Boolean(str(fd, "website"));
   // Time check: bots submit instantly.
   const startedAt = Number(str(fd, "startedAt"));
   if (!startedAt || Date.now() - startedAt < MIN_FILL_MS) {
@@ -71,6 +93,9 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     service: str(fd, "service", 60) || "not-sure",
     roofType: str(fd, "roofType", 30),
     roofAge: str(fd, "roofAge", 30),
+    storeys: str(fd, "storeys", 20),
+    extras: str(fd, "extras", 100),
+    timing: str(fd, "timing", 20),
     message: str(fd, "message", 4000),
   };
   const errors = validateLeadInput(input);
@@ -97,9 +122,15 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     serviceLabel: optionLabel(quoteServiceOptions, input.service),
     roofType: input.roofType ? optionLabel(roofTypeOptions, input.roofType) : "",
     roofAge: input.roofAge ? optionLabel(roofAgeOptions, input.roofAge) : "",
+    storeys: input.storeys ? optionLabel(storeyOptions, input.storeys) : "",
+    extras: input.extras === "none" ? "None of these" : (input.extras ?? "").split(",").filter(Boolean).map((x) => optionLabel(extraOptions, x)).join(", "),
+    timing: input.timing ? optionLabel(timingOptions, input.timing) : "",
+    quoteAnswers: toQuoteAnswers({ roofType: input.roofType, storeys: input.storeys ?? "", extras: input.extras === "none" ? "none" : input.extras ?? "" }),
+    addressStatus: (["picked", "manual"] as const).find((s) => s === str(fd, "addressStatus", 10)) ?? "",
+    flags: [],
     sourcePage: str(fd, "sourcePage", 300) || "/",
     submittedAt: new Date().toISOString(),
     userAgent: meta.userAgent.slice(0, 300),
   };
-  return { ok: true, lead, photos };
+  return { ok: true, lead, photos, suspectedBot, previousRequestAt: str(fd, "previousRequestAt", 40) };
 }
