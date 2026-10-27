@@ -48,7 +48,7 @@ export default function AboutPage() {
               We keep things simple. We come out and look at your roof, give you a written quote, and then our crew does the work and keeps you updated. When the job is done we clean up and walk you through it.
             </p>
             <p>
-              Most of what we do is roof replacement, often taking an old concrete tile or rusted iron roof off and putting new Colorbond on. Doing that every day is how we get good at it.
+              We are a small company that takes pride in doing everything right. We use the best materials and the best labour available.
             </p>
             <h2>Licensed and registered</h2>
             <p>
