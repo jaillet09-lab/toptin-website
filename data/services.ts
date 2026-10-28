@@ -1,7 +1,9 @@
 /**
  * Service pages. Copy is original (not from the old site) and only states facts
  * from site.config.ts or general, well-established information about roofing.
- * No warranty lengths, timeframes, prices or certifications (brief section 1).
+ * No warranty lengths, timeframes or prices (brief section 1). The forms and certifications on every
+ * job (building approval, certifier, Form 16, Form 21, QBCC Home Warranty Insurance) may be named
+ * (owner, 28 Oct 2026).
  */
 import type { Faq } from "@/lib/schema";
 
@@ -112,7 +114,7 @@ export const services: Service[] = [
       },
       {
         q: "What is included in the quote?",
-        a: "The written quote sets out the removal of the old roof, any batten work, sarking or insulation if chosen, the new sheets, flashings, ridges and valleys, and the clean up. If something is not included, the quote says so.",
+        a: "The written quote sets out the removal of the old roof, any batten work, sarking or insulation if chosen, the new sheets, flashings, ridges and valleys, and the clean up. It also lists the forms and certifications: building approval, the independent certifier, the Form 16 and Form 21 certificates, and QBCC Home Warranty Insurance. If something is not included, the quote says so.",
       },
       {
         q: "What happens with my solar panels?",

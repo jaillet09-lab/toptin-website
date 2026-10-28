@@ -13,7 +13,8 @@ export const homeFaqs: Faq[] = [
   },
   {
     q: "What is included in a roof replacement?",
-    a: "Usually the removal and disposal of the old roof, any batten work needed, sarking or insulation if you choose it, new Colorbond sheets, new flashings, ridges and valleys, and a full clean up. Everything included is listed in your written quote.",
+    // Owner, 28 Oct 2026: name the forms and certifications too.
+    a: "Usually the removal and disposal of the old roof, any batten work needed, sarking or insulation if you choose it, new Colorbond sheets, new flashings, ridges and valleys, and a full clean up. We also look after the paperwork: building approval, the independent certifier, the Form 16 and Form 21 certificates, and QBCC Home Warranty Insurance. Everything included, forms and certifications too, is listed in your written quote.",
   },
   {
     q: "Can you replace an asbestos roof?",
