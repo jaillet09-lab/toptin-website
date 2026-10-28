@@ -71,11 +71,11 @@ export const insuranceOptions: Option[] = [
   { value: "no", label: "No" },
 ];
 
+// Owner, 28 Oct 2026: three answers only. "In the next 3 months" and "Later this year" are gone.
 export const timingOptions: Option[] = [
-  { value: "asap", label: "As soon as possible" },
-  { value: "3-months", label: "In the next 3 months" },
-  { value: "later", label: "Later this year" },
+  { value: "asap", label: "As soon as possible (urgent)" },
   { value: "prices", label: "Just getting prices" },
+  { value: "no-rush", label: "Not fussed" },
 ];
 
 export function optionLabel(options: Option[], value: string): string {

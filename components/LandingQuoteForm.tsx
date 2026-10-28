@@ -189,7 +189,7 @@ export function LandingQuoteForm({ source = "landing" }: { source?: string }) {
   return (
     <form onSubmit={submit} noValidate aria-label="Free quote request">
       <div className="flex items-baseline justify-between gap-4">
-        <h2 className="font-display text-[21px] font-semibold leading-tight text-ink sm:text-[24px]">Get your free quote</h2>
+        <h2 className="font-display text-[21px] font-semibold leading-tight text-ink sm:text-[24px] lg:text-[30px] lg:tracking-[-0.02em]">Get your free quote</h2>
         <span className="shrink-0 text-[14px] font-semibold text-caption">{step < STEPS ? `Step ${step} of ${STEPS}` : "Last step"}</span>
       </div>
       <div className="mt-3 grid gap-1.5" style={{ gridTemplateColumns: `repeat(${STEPS}, 1fr)` }} aria-hidden="true">
