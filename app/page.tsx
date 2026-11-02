@@ -31,7 +31,17 @@ const steps = [
   { title: "Free quote and roof inspection", text: "We come out, look at the roof and access, and listen to what you want." },
   { title: "Written quote and colour choice", text: "The scope and price in writing, then you choose your profile and colour." },
   { title: "Installation by our crew", text: "Old roof off, structure checked, new roof on, with updates as we go." },
-  { title: "Clean up and final walk-through", text: "We clear the site and walk you through the finished roof." },
+  { title: "Clean up and final walk-through", text: "We clear the site and walk you through the finished roof. You receive all certifications." },
+];
+
+/** The six job photos chosen for the homepage (owner, 3 Nov 2026). The object-top crop keeps the photographer's shadow out of frame. */
+const bestPhotos: { src: string; crop?: string }[] = [
+  { src: "/photos/red-roof-crew.jpg" },
+  { src: "/photos/dark-roof-skylights-wide.jpg" },
+  { src: "/photos/pale-green-roof.jpg" },
+  { src: "/photos/light-grey-hip-roof.jpg" },
+  { src: "/photos/green-roof-crew.jpg" },
+  { src: "/photos/light-grey-valley-roof.jpg", crop: "object-top" },
 ];
 
 const reasons: { icon: IconName; title: string; text: string }[] = [
@@ -43,7 +53,10 @@ const reasons: { icon: IconName; title: string; text: string }[] = [
 
 export default function HomePage() {
   const rating = averageRating();
-  const gallery = photos.filter((p) => !p.hero).slice(0, 8);
+  const gallery = bestPhotos.flatMap((b) => {
+    const photo = photos.find((p) => p.src === b.src);
+    return photo ? [{ ...photo, crop: b.crop ?? "" }] : [];
+  });
 
   return (
     <>
@@ -114,7 +127,7 @@ export default function HomePage() {
       {/* 3. Services */}
       <Section tone="page" label="Services">
         <div className="wrap">
-          <SectionHeading eyebrow="What we do" title="Two things, done properly." lead="We focus on roof replacement and Colorbond roofing, so that is what our crew does every day." />
+          <SectionHeading eyebrow="What we do" title="One thing, done properly: Colorbond roof installation." lead="Whether it replaces an old tile or metal roof or covers a new extension, it is what our crew does every day." />
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {services.map((s, i) => (
               <Reveal key={s.slug} delay={i * 80}>
@@ -134,27 +147,18 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-lg border border-line bg-white px-6 py-5">
-            <b className="text-[15px] text-navy">Materials we work with:</b>
-            {["Colorbond steel", "Corrugated profile", "Trimdek-style profile", "Sarking and insulation blanket", "New flashings, ridges and valleys"].map((m) => (
-              <span key={m} className="inline-flex items-center gap-2 text-[15px] text-mute"><Icon name="check" size={16} className="text-tin-ink" />{m}</span>
-            ))}
-          </div>
         </div>
       </Section>
 
       {/* 4. Projects */}
       <Section tone="white" label="Our work">
         <div className="wrap">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <SectionHeading eyebrow="Our work" title="Real roofs, finished by our crew." lead="Every photo here is a Top Tin job. No stock images." />
-            <Link href="/projects" className="btn btn-outline shrink-0">See all projects <Icon name="arrow" size={18} /></Link>
-          </div>
+          <SectionHeading eyebrow="Our work" title="Real roofs, finished by our team." lead="Every photo here is a Top Tin job. No stock images." />
           <div className="mt-10">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {gallery.map((p) => (
                 <div key={p.src} className="relative aspect-square overflow-hidden rounded-lg bg-paper">
-                  <Image src={p.src} alt={p.alt} fill sizes="(max-width: 640px) 46vw, 18vw" className="object-cover transition-transform duration-500 hover:scale-105" />
+                  <Image src={p.src} alt={p.alt} fill sizes="(max-width: 640px) 46vw, (max-width: 1200px) 31vw, 380px" className={`object-cover transition-transform duration-500 hover:scale-105 ${p.crop}`.trim()} />
                 </div>
               ))}
             </div>
@@ -179,7 +183,15 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 6. Why Top Tin */}
+      {/* 6. Video testimonials, straight after the steps */}
+      <Section tone="white" label="Video testimonials">
+        <div className="wrap">
+          <SectionHeading eyebrow="From our customers" title="Hear it from the homeowners." lead="Ethan asks a few quick questions once the roof is done. These are real customers on real jobs, unscripted." />
+          <div className="mt-10"><VideoTestimonials /></div>
+        </div>
+      </Section>
+
+      {/* 7. Why Top Tin */}
       <Section tone="navy" label="Why Top Tin">
         <div className="wrap">
           <SectionHeading eyebrow="Why Top Tin" title="What our customers mention most." lead="These come straight from what people say in their reviews." />
@@ -195,17 +207,12 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 7. Reviews */}
+      {/* 8. Reviews */}
       <Section tone="page" label="Reviews">
         <div className="wrap">
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <SectionHeading eyebrow="Reviews" title="What homeowners say." lead={<RatingSummary />} />
             <Link href="/reviews" className="btn btn-outline shrink-0">Read more reviews <Icon name="arrow" size={18} /></Link>
-          </div>
-          <div className="mt-10">
-            <h3 className="text-[15px] font-semibold uppercase tracking-[0.12em] text-tin">Hear it from the homeowners</h3>
-            <p className="mt-2 max-w-[640px] text-[16px] text-mute">Ethan asks a few quick questions once the roof is done. These are real customers on real jobs, unscripted.</p>
-            <div className="mt-6"><VideoTestimonials /></div>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {reviews.reviews.slice(0, 6).map((r) => <ReviewCard key={r.author} review={r} />)}
@@ -213,7 +220,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 8. Colorbond */}
+      {/* 9. Colorbond */}
       <Section tone="white" label="Colorbond roofing">
         <div className="wrap grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
@@ -231,7 +238,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 9. Areas */}
+      {/* 10. Areas */}
       <Section tone="paper" label="Areas we cover">
         <div className="wrap">
           <SectionHeading eyebrow="Areas" title="Across Brisbane, Ipswich, Logan and the Gold Coast." lead={siteConfig.serviceArea.long} />
@@ -247,7 +254,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 10. FAQ */}
+      {/* 11. FAQ */}
       <Section tone="page" label="Common questions">
         <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeading eyebrow="FAQ" title="Common questions." lead="Straight answers about quotes, timing and what is included." />
@@ -255,7 +262,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 11. Quote form */}
+      {/* 12. Quote form */}
       <Section tone="navy" id="quote" label="Get a free quote">
         <div className="wrap grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>

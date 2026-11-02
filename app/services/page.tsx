@@ -23,7 +23,7 @@ export default function ServicesPage() {
         crumbs={[{ name: "Services", path: "/services" }]}
         eyebrow="Services"
         title="Roofing services in Brisbane."
-        intro={<p>We focus on two things: replacing old roofs and installing new Colorbond roofs. Doing fewer things means our crew does them well, every day.</p>}
+        intro={<p>We focus on one thing: Colorbond roof installation, whether it replaces an old roof or covers a new extension. Doing one thing means our crew does it well, every day.</p>}
         photo={{ src: "/photos/red-roof-crew.jpg", alt: "Top Tin roofer installing a new red Colorbond roof" }}
       />
       <Section tone="page" label="Our services">

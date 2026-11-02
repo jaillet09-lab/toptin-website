@@ -35,7 +35,7 @@ const steps = [
   {
     title: "Clean up and final walk-through",
     text: "When the roof is on, the old material is taken away and the site is cleaned up. We walk you through the finished roof and answer any questions.",
-    points: ["Old roof removed from site", "Yard and driveway cleaned", "A final walk-through with you"],
+    points: ["Old roof removed from site", "Yard and driveway cleaned", "A final walk-through with you", "You receive all certifications"],
   },
 ];
 
