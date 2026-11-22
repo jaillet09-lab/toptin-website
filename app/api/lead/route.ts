@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { submitLead } from "@/lib/lead/adapters";
 import { parseSubmission } from "@/lib/lead/validate";
 import { qualityFlags } from "@/lib/lead/quality";
+import { recordReferral, referrerFirstName } from "@/lib/referral";
 import { siteConfig } from "@/site.config";
 
 /* Best-effort rate limit per IP: 6 submissions per 10 minutes on this instance. */
@@ -44,6 +45,7 @@ export async function POST(request: Request) {
   }
 
   parsed.lead.flags = qualityFlags(parsed.lead, { previousRequestAt: parsed.previousRequestAt });
+  if (parsed.lead.referralCode) parsed.lead.referredBy = await referrerFirstName(parsed.lead.referralCode);
   const result = await submitLead(parsed.lead, parsed.photos);
   if (!result.ok) {
     return NextResponse.json(
@@ -51,5 +53,6 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
+  await recordReferral(parsed.lead);
   return NextResponse.json({ ok: true, id: parsed.lead.id });
 }

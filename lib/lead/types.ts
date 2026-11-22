@@ -27,6 +27,10 @@ export type Lead = {
   flags: string[];
   /** Page the form was submitted from, for example /areas/aspley */
   sourcePage: string;
+  /** The referral link's code when the form came from toptinroofing.com/refer/<code>, else "". */
+  referralCode: string;
+  /** The referring client's first name, looked up in the TopTin System from the code ("" if unknown). */
+  referredBy: string;
   submittedAt: string;
   userAgent: string;
 };

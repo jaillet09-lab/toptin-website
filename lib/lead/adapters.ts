@@ -33,7 +33,13 @@ function rows(lead: Lead): [string, string][] {
     ...(lead.extras ? [["Also include", lead.extras] as [string, string]] : []),
     ...(lead.timing ? [["Timing", lead.timing] as [string, string]] : []),
     ...(lead.insurance ? [["Insurance job", lead.insurance] as [string, string]] : []),
+    ...(lead.referralCode ? [["Referred by", referralLine(lead)] as [string, string]] : []),
   ];
+}
+
+/** "Sarah (referral link sarah-m4k2)", or just the code when the System didn't know it. */
+export function referralLine(lead: Lead): string {
+  return lead.referredBy ? `${lead.referredBy} (referral link ${lead.referralCode})` : `referral link ${lead.referralCode} (name not found)`;
 }
 
 /**
@@ -168,6 +174,7 @@ const ghlAdapter: Adapter = {
     const [first, ...rest] = lead.name.trim().split(/\s+/);
     const ad = adSource(lead.sourcePage);
     const details = [
+      lead.referralCode && `Referred by: ${referralLine(lead)}. A finished client's referral: $1,000 when this roof is finished and paid.`,
       checkLine(lead),
       ad && `Came from: ${ad}`,
       addressLine(lead),
@@ -204,7 +211,8 @@ const ghlAdapter: Adapter = {
           timing: lead.timing,
           insurance_job: lead.insurance,
           service: lead.serviceLabel,
-          came_from: ad,
+          came_from: lead.referralCode ? `Referral: ${referralLine(lead)}` : ad,
+          referred_by: lead.referralCode ? referralLine(lead) : "",
           address_check: lead.addressStatus === "picked" ? "Picked from the address list" : lead.addressStatus === "manual" ? "Typed by hand (not found in the address list)" : "",
           check_before_calling: lead.flags.join("; "),
           page: lead.sourcePage,

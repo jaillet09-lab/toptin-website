@@ -22,6 +22,8 @@ type Props = {
   dark?: boolean;
   /** Pre-fill service and suburb from ?service= and ?suburb= in the page URL (the /quote page). */
   fromUrl?: boolean;
+  /** Sent with the lead when the form sits on a referral page (/refer/<code>). */
+  referralCode?: string;
 };
 
 const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service: "not-sure", roofType: "", roofAge: "", message: "" };
@@ -30,7 +32,7 @@ const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service:
  * The one quote form, used everywhere. Two short steps: contact first (so a lead is
  * never lost to a long form), then roof details and optional photos.
  */
-export function QuoteForm({ service, suburb, source, dark = false, fromUrl = false }: Props) {
+export function QuoteForm({ service, suburb, source, dark = false, fromUrl = false, referralCode }: Props) {
   const router = useRouter();
   const [v, setV] = useState<LeadInput>({
     ...EMPTY,
@@ -117,6 +119,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
     fd.append("startedAt", String(startedAt.current || Date.now() - 10000));
     fd.append("sourcePage", typeof window !== "undefined" ? window.location.pathname : source);
     fd.append("website", honeypot.current?.value ?? "");
+    if (referralCode) fd.append("referralCode", referralCode);
     try {
       const res = await fetch("/api/lead", { method: "POST", body: fd });
       const j = await res.json().catch(() => ({}));

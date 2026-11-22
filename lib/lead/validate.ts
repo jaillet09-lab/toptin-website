@@ -134,6 +134,8 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     addressStatus: (["picked", "manual"] as const).find((s) => s === str(fd, "addressStatus", 10)) ?? "",
     flags: [],
     sourcePage: str(fd, "sourcePage", 300) || "/",
+    referralCode: /^[a-z0-9-]{3,40}$/.exec(str(fd, "referralCode", 40).toLowerCase())?.[0] ?? "",
+    referredBy: "",
     submittedAt: new Date().toISOString(),
     userAgent: meta.userAgent.slice(0, 300),
   };
