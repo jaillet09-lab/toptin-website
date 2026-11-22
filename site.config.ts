@@ -118,7 +118,7 @@ export const siteConfig = {
     /** Top Tin's Google Ads account (run by the agency), read from the ads landing page's tag on 27 Oct 2026. */
     adsAccountId: process.env.NEXT_PUBLIC_ADS_ACCOUNT_ID || "AW-17187907072",
     /** Google Ads conversion send_to values (AW-XXXX/LABEL). Empty = that conversion is off. */
-    adsConversionId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "",          // quote form submitted: no label yet, the Ads account needs a form conversion action
+    adsConversionId: process.env.NEXT_PUBLIC_ADS_CONVERSION_ID || "AW-17187907072/lgZkCImShL0dEIDM6oNA", // quote form submitted: "Website quote form - toptinroofing.com" conversion action, created 22 Nov 2026
     adsPhoneConversionId: process.env.NEXT_PUBLIC_ADS_PHONE_CONVERSION_ID || "AW-17187907072/bMTjCITHoZcbEIDM6oNA", // phone number tapped: the same conversion the old ads page fires on tel: clicks
   },
 
