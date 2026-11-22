@@ -27,8 +27,9 @@ export const siteConfig = {
   phoneHref: "tel:+61480095902",
   phoneE164: "+61480095902",
 
-  email: "toptinroofing@gmail.com",
-  emailHref: "mailto:toptinroofing@gmail.com",
+  // Owner, 22 Nov 2026: every email is info@toptinroofing.com, never a Gmail address.
+  email: "info@toptinroofing.com",
+  emailHref: "mailto:info@toptinroofing.com",
 
   base: {
     city: "Brisbane",
@@ -127,7 +128,7 @@ export const siteConfig = {
     name: "Top Tin Roofing",
     serviceArea: "Brisbane QLD, Ipswich, Logan and the Gold Coast (service area business, no walk-in address)",
     phone: "0480 095 902",
-    email: "toptinroofing@gmail.com",
+    email: "info@toptinroofing.com",
     website: "https://toptinroofing.com",
     categories: ["Roofing contractor", "Roofing service", "Metal roofing contractor"],
   },

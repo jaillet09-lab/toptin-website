@@ -24,7 +24,7 @@ These override the matching parts of docs/BRIEF.md.
    - `../TopTin-System/public/brand/toptin-mark-white.png` (stacked white logo, 500x500)
    - favicon/app icons already generated there (`app/icon.png`, `app/apple-icon.png`, `public/brand/icon-*.png`)
    Do not redraw or recolour the logo.
-7. **Leads:** default lead destination email toptinroofing@gmail.com; `LEAD_WEBHOOK_URL` can later point at the
+7. **Leads:** default lead destination email info@toptinroofing.com (owner, 22 Nov 2026: every email is info@, never Gmail); `LEAD_WEBHOOK_URL` can later point at the
    TopTin System. Note: TopTin System's GHL sync must stay invisible to GHL users (read-only), so do not add
    anything inside GHL.
 

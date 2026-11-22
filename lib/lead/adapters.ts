@@ -7,8 +7,9 @@ import { toAuE164 } from "./validate";
  * delivered if at least one succeeds.
  *
  * - GHL_LEAD_WEBHOOK_URL  POST to the live GHL website-lead workflow (see ghlAdapter).
- * - RESEND_API_KEY      Email the lead (photos attached) to LEAD_TO_EMAIL, default
- *                       ethanfarrell9678@gmail.com. LEAD_FROM_EMAIL sets the sender
+ * - RESEND_API_KEY      Email the lead (photos attached) to info@toptinroofing.com, or to
+ *                       LEAD_TO_EMAIL if it is another @toptinroofing.com address (never a
+ *                       Gmail address, owner 22 Nov 2026). LEAD_FROM_EMAIL sets the sender
  *                       (must be a domain verified in Resend).
  * - LEAD_WEBHOOK_URL    POST the lead as JSON, for example to the TopTin System.
  *                       Optional LEAD_WEBHOOK_SECRET is sent as a bearer token.
@@ -118,10 +119,10 @@ const emailAdapter: Adapter = {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
       body: JSON.stringify({
-        // Owner, 26 Oct 2026: lead emails go to Ethan, never the toptinroofing inbox. The sender
+        // Owner, 22 Nov 2026: every email is info@toptinroofing.com, never a Gmail address. The sender
         // needs toptinroofing.com verified in Resend (set up 26 Oct 2026).
         from: process.env.LEAD_FROM_EMAIL || `${siteConfig.name} website <notifications@toptinroofing.com>`,
-        to: [process.env.LEAD_TO_EMAIL || "ethanfarrell9678@gmail.com"],
+        to: [/@toptinroofing\.com$/i.test(process.env.LEAD_TO_EMAIL ?? "") ? (process.env.LEAD_TO_EMAIL as string) : "info@toptinroofing.com"],
         ...(lead.email ? { reply_to: lead.email } : {}),
         subject: `Quote request: ${lead.serviceLabel} at ${lead.address} (${lead.name}, ${lead.phone})`,
         text: leadToText(lead, photos),

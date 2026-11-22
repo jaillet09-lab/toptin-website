@@ -33,7 +33,7 @@ Node 22.18 or newer.
 
 | Variable | Purpose |
 |---|---|
-| `RESEND_API_KEY` | Email quote requests (with photos) to `LEAD_TO_EMAIL` (default toptinroofing@gmail.com) |
+| `RESEND_API_KEY` | Email quote requests (with photos) to `LEAD_TO_EMAIL` (default info@toptinroofing.com; only @toptinroofing.com addresses are used) |
 | `LEAD_FROM_EMAIL` | Sender, on a domain verified in Resend |
 | `LEAD_WEBHOOK_URL`, `LEAD_WEBHOOK_SECRET` | Optional: also send leads to the TopTin System |
 | `NEXT_PUBLIC_GTAG_ID`, `NEXT_PUBLIC_ADS_CONVERSION_ID` | Optional analytics and Google Ads conversion |

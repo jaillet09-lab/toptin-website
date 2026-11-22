@@ -10,7 +10,7 @@ consistent business.
 | Name | Top Tin Roofing |
 | Service area | Brisbane QLD, Ipswich, Logan and the Gold Coast (service area business, no walk-in address) |
 | Phone | 0480 095 902 |
-| Email | toptinroofing@gmail.com |
+| Email | info@toptinroofing.com |
 | Website | https://toptinroofing.com |
 | Hours | Mon to Fri 7am to 6pm, Sat 9am to 5pm |
 | QBCC licence | 15587145 |

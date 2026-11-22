@@ -17,7 +17,7 @@ There are two references, used for different things.
 | QBCC licence | **15587145** (must appear in the footer of every page and on the contact page) |
 | Base | Brisbane, Queensland |
 | Phone | **+61 480 095 902** (display as 0480 095 902, tel link `+61480095902`). Store once in `site.config.ts` field `phone` |
-| Email | toptinroofing@gmail.com |
+| Email | info@toptinroofing.com (owner, 22 Nov 2026: never a Gmail address) |
 | Hours | Mon to Fri, 9:00am to 5:00pm (as on the current site) |
 | Services | Roof replacement. Colorbond roof installation. Metal roofing as a material option within a replacement |
 | Customers | Homeowners mainly. Also commercial and business properties ("Australian homes and businesses" is on the current site) |
@@ -132,7 +132,7 @@ The phone number and a free quote must be **unmissable on every page**.
 - A call band on every page above the footer.
 - **Quote form** (one component, used everywhere): name, phone, email, **property address** (suburb is enough to start), service (pre-filled), roof type (tile, metal, unsure), roughly how old the roof is, message, **optional photo upload (up to 5 images)**. Short multi-step version on mobile. Honeypot and time check, server-side validation.
 - Copy under the form: "Free quote. We reply Mon to Fri, 9am to 5pm." (do not promise a faster response time unless the owner confirms one).
-- On submit: POST to `/api/lead` with a pluggable adapter. Default sends an email to toptinroofing@gmail.com. Environment variable `LEAD_WEBHOOK_URL` points it at the owner's TopTin System / GoHighLevel webhook with no code change. Redirect to `/thank-you`.
+- On submit: POST to `/api/lead` with a pluggable adapter. Default sends an email to info@toptinroofing.com. Environment variable `LEAD_WEBHOOK_URL` points it at the owner's TopTin System / GoHighLevel webhook with no code change. Redirect to `/thank-you`.
 - Events: `phone_click`, `quote_started`, `quote_submitted`.
 - One phone number everywhere, enforced by a build check.
 
