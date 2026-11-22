@@ -240,13 +240,36 @@ const consoleAdapter: Adapter = {
 
 const adapters: Adapter[] = [ghlAdapter, emailAdapter, webhookAdapter, consoleAdapter];
 
+const SYSTEM_URL = process.env.TOPTIN_SYSTEM_URL || "https://toptin-system.vercel.app";
+
+/**
+ * Safety net (22 Nov 2026: the old GHL refused website leads with "Billing failure", and the form showed
+ * an error). Every lead also goes to the TopTin System, which keeps it and, when GHL did not take it,
+ * emails the whole request to info@toptinroofing.com. Owner rule: never lose a real client.
+ */
+async function sendToSystem(lead: Lead, photos: LeadPhoto[], ghlOk: boolean, ghlError: string): Promise<boolean> {
+  try {
+    const r = await fetch(`${SYSTEM_URL}/api/public/website-lead`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: lead.id, name: lead.name, phone: lead.phone, email: lead.email, address: lead.address, service: lead.serviceLabel,
+        details: leadToText(lead, photos), referralCode: lead.referralCode, sourcePage: lead.sourcePage, ghlOk, ghlError: ghlError.slice(0, 500),
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+    const j = (await r.json().catch(() => ({}))) as { ok?: boolean };
+    if (!r.ok || !j.ok) throw new Error(`System answered ${r.status}`);
+    return true;
+  } catch (err) {
+    console.error(`[toptin lead] system copy failed for ${lead.id}: ${err instanceof Error ? err.message : String(err)}`);
+    return false;
+  }
+}
+
 export async function submitLead(lead: Lead, photos: LeadPhoto[]): Promise<SubmitResult> {
   const active = adapters.filter((a) => a.enabled());
   const result: SubmitResult = { ok: false, delivered: [], errors: [] };
-  if (!active.length) {
-    console.error(`[toptin lead] No lead adapter configured. Set GHL_LEAD_WEBHOOK_URL, RESEND_API_KEY or LEAD_WEBHOOK_URL. Lead ${lead.id} from ${lead.name} (${lead.phone}) was NOT delivered.`);
-    return result;
-  }
   for (const adapter of active) {
     try {
       await adapter.send(lead, photos);
@@ -257,6 +280,15 @@ export async function submitLead(lead: Lead, photos: LeadPhoto[]): Promise<Submi
       console.error(`[toptin lead] ${adapter.name} failed for ${lead.id}: ${message}`);
     }
   }
-  result.ok = result.delivered.length > 0;
+  // The System copy counts as delivered: when GHL refuses a lead, info@ gets it by email instead
+  const ghlOk = result.delivered.includes("ghl");
+  const ghlError = result.errors.find((e) => e.startsWith("ghl:")) ?? (active.some((a) => a.name === "ghl") ? "" : "GHL webhook not configured");
+  // Only the live site sends the copy, so a local test never emails info@
+  const live = process.env.NODE_ENV === "production";
+  if (live && (await sendToSystem(lead, photos, ghlOk, ghlError))) result.delivered.push("system");
+  result.ok = live ? result.delivered.some((d) => d !== "console") : result.delivered.length > 0;
+  if (!result.ok) {
+    console.error(`[toptin lead] NOT delivered anywhere: ${lead.id} from ${lead.name} (${lead.phone}, ${lead.email || "no email"}, ${lead.address}). ${result.errors.join(" | ")}`);
+  }
   return result;
 }
