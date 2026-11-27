@@ -60,7 +60,7 @@ export default async function ReferPage({ params }: { params: Promise<{ code: st
           </div>
         </div>
         <div id="quote" className="scroll-mt-24 self-start rounded-lg bg-white p-6 text-text md:p-8">
-          <LandingQuoteForm source="referral-page" referralCode={valid ? code : undefined} />
+          <LandingQuoteForm source="referral-page" referralCode={valid ? code : undefined} referrerName={name} />
         </div>
       </div>
       <div className="bg-page text-text">

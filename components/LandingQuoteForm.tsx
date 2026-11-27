@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/site.config";
 import { extraOptions, insuranceOptions, optionLabel, roofTypeOptions, storeyOptions, timingOptions } from "@/lib/lead/types";
-import { validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
+import { referralAnswerErrors, validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
+import { ReferralQuestion } from "@/components/ReferralQuestion";
 import { track, trackConversion } from "@/lib/analytics";
 import { readRecentRequest, recentDate, saveRecentRequest, type RecentRequest } from "@/lib/lead/recent";
 import { callbackLine, nextSteps } from "@/data/next-steps";
@@ -12,7 +13,7 @@ import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 
 type Input = Required<LeadInput>;
-const EMPTY: Input = { name: "", phone: "", email: "", address: "", service: "roof-replacement", roofType: "", roofAge: "", storeys: "", extras: "", timing: "", insurance: "", message: "" };
+const EMPTY: Input = { name: "", phone: "", email: "", address: "", service: "roof-replacement", roofType: "", roofAge: "", storeys: "", extras: "", timing: "", insurance: "", referred: "", referrerName: "", message: "" };
 const STEPS = 6;
 
 /** The tap questions, in order. Each answer fills a question in the System's quote flow. */
@@ -31,8 +32,9 @@ const TAPS = [
  * roof at a glance and exactly what happens next. Also the form on the referral page (owner,
  * 27 Nov 2026), where it carries the referral code so the lead reaches GHL marked "Referred by".
  */
-export function LandingQuoteForm({ source = "landing", referralCode }: { source?: string; referralCode?: string }) {
-  const [v, setV] = useState<Input>(EMPTY);
+export function LandingQuoteForm({ source = "landing", referralCode, referrerName }: { source?: string; referralCode?: string; referrerName?: string }) {
+  // From a referral link: already "Yes", with the name from the link (they can add the surname)
+  const [v, setV] = useState<Input>(referralCode ? { ...EMPTY, referred: "yes", referrerName: referrerName ?? "" } : EMPTY);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [busy, setBusy] = useState(false);
@@ -83,7 +85,7 @@ export function LandingQuoteForm({ source = "landing", referralCode }: { source?
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    const errs = validateLeadInput(v);
+    const errs = { ...validateLeadInput(v), ...referralAnswerErrors(v) };
     errs.address ??= addressPickError(v.address, addressStatus);
     setErrors(errs);
     if (Object.values(errs).some(Boolean)) return;
@@ -133,6 +135,7 @@ export function LandingQuoteForm({ source = "landing", referralCode }: { source?
       ["Insurance job", optionLabel(insuranceOptions, sent.insurance)],
       ["Also include", sent.extras === "none" ? "Nothing extra" : sent.extras.split(",").filter(Boolean).map((e) => optionLabel(extraOptions, e)).join(", ")],
       ["Timing", optionLabel(timingOptions, sent.timing)],
+      ["Referred by", sent.referred === "yes" ? sent.referrerName.trim() : ""],
       ["Address", sent.address],
     ].filter(([, val]) => Boolean(val)) as [string, string][];
     return (
@@ -300,6 +303,14 @@ export function LandingQuoteForm({ source = "landing", referralCode }: { source?
               <input id={fid("email")} className="field" type="email" inputMode="email" autoComplete="email" value={v.email} onChange={(e) => set("email", e.target.value)} {...aria("email")} />
               {err("email")}
             </div>
+            <ReferralQuestion
+              id={fid("ref")}
+              referred={v.referred}
+              referrerName={v.referrerName}
+              onReferred={(x) => set("referred", x)}
+              onName={(x) => set("referrerName", x)}
+              errors={errors}
+            />
             <button type="submit" disabled={busy} className="btn btn-primary btn-lg mt-1 w-full disabled:opacity-60">
               {busy ? "Sending..." : "Get my free quote"}
               {busy ? null : <Icon name="arrow" size={18} />}

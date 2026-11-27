@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/site.config";
 import { quoteServiceOptions } from "@/data/services";
 import { roofAgeOptions, roofTypeOptions } from "@/lib/lead/types";
-import { validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
+import { referralAnswerErrors, validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
+import { ReferralQuestion } from "@/components/ReferralQuestion";
 import { track } from "@/lib/analytics";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
@@ -26,7 +27,7 @@ type Props = {
   referralCode?: string;
 };
 
-const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service: "not-sure", roofType: "", roofAge: "", message: "" };
+const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service: "not-sure", roofType: "", roofAge: "", referred: "", referrerName: "", message: "" };
 
 /**
  * The one quote form, used everywhere. Two short steps: contact first (so a lead is
@@ -38,6 +39,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
     ...EMPTY,
     service: quoteServiceOptions.some((o) => o.value === service) ? (service as string) : "not-sure",
     address: suburb ?? "",
+    ...(referralCode ? { referred: "yes" } : {}),
   });
   const [step, setStep] = useState<1 | 2>(1);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -87,7 +89,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (step === 1) return next();
-    const errs = validateLeadInput(v);
+    const errs = { ...validateLeadInput(v), ...referralAnswerErrors(v) };
     errs.address ??= addressPickError(v.address, addressStatus);
     setErrors(errs);
     if (Object.values(errs).some(Boolean)) {
@@ -216,6 +218,15 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
               </select>
             </div>
           </div>
+          <ReferralQuestion
+            id={fid("ref")}
+            referred={v.referred ?? ""}
+            referrerName={v.referrerName ?? ""}
+            onReferred={(x) => set("referred", x)}
+            onName={(x) => set("referrerName", x)}
+            errors={errors}
+            dark={dark}
+          />
           <div>
             <label htmlFor={fid("message")} className={label}>Anything else? <span className="font-normal opacity-70">(optional)</span></label>
             <textarea id={fid("message")} className="field min-h-28" rows={4} value={v.message} onChange={(e) => set("message", e.target.value)} {...aria("message")} />

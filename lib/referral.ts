@@ -26,17 +26,21 @@ export async function referrerFirstName(code: string): Promise<string> {
   }
 }
 
-/** Adds the friend to the System's referral list. Best effort: the lead has already gone to GHL. */
+/**
+ * Adds the friend to the System's referral list: from a referral link, or (owner, 27 Nov 2026) when they
+ * answered "Did someone refer you to us?" with a name. The System puts a star on Referrals in its menu.
+ * Best effort: the lead has already gone to GHL.
+ */
 export async function recordReferral(lead: Lead): Promise<void> {
-  if (!lead.referralCode) return;
+  if (!lead.referralCode && !(lead.referred === "Yes" && lead.referrerName)) return;
   try {
     await fetch(`${SYSTEM_URL}/api/public/referral`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code: lead.referralCode, name: lead.name, phone: lead.phone, email: lead.email, address: lead.address, leadId: lead.id }),
+      body: JSON.stringify({ code: lead.referralCode, referrerName: lead.referrerName, name: lead.name, phone: lead.phone, email: lead.email, address: lead.address, leadId: lead.id }),
       signal: AbortSignal.timeout(4000),
     });
   } catch (e) {
-    console.error(`[toptin lead] referral ${lead.referralCode} not recorded in the System for ${lead.id}`, e);
+    console.error(`[toptin lead] referral (${lead.referralCode || lead.referrerName}) not recorded in the System for ${lead.id}`, e);
   }
 }

@@ -34,13 +34,29 @@ function rows(lead: Lead): [string, string][] {
     ...(lead.extras ? [["Also include", lead.extras] as [string, string]] : []),
     ...(lead.timing ? [["Timing", lead.timing] as [string, string]] : []),
     ...(lead.insurance ? [["Insurance job", lead.insurance] as [string, string]] : []),
-    ...(lead.referralCode ? [["Referred by", referralLine(lead)] as [string, string]] : []),
+    ...(isReferral(lead) ? [["Referred by", referralLine(lead)] as [string, string]] : []),
   ];
 }
 
-/** "Sarah (referral link sarah-m4k2)", or just the code when the System didn't know it. */
+/** Came through a referral link, or answered yes to "Did someone refer you to us?". */
+export function isReferral(lead: Lead): boolean {
+  return Boolean(lead.referralCode) || lead.referred === "Yes";
+}
+
+/**
+ * Who referred them. The name they typed comes first; the link says whose it is.
+ *   "Sarah Mills (referral link sarah-m4k2)"
+ *   "Sarah Mills (referral link sarah-m4k2, the link belongs to Tom)"   typed name differs from the link
+ *   "Sarah (referral link sarah-m4k2)"                                   older form, no typed name
+ *   "Sarah Mills (typed on the form, no referral link)"
+ */
 export function referralLine(lead: Lead): string {
-  return lead.referredBy ? `${lead.referredBy} (referral link ${lead.referralCode})` : `referral link ${lead.referralCode} (name not found)`;
+  const typed = lead.referrerName.trim();
+  if (!lead.referralCode) return `${typed || "Name not given"} (typed on the form, no referral link)`;
+  const owner = lead.referredBy;
+  if (!typed) return owner ? `${owner} (referral link ${lead.referralCode})` : `referral link ${lead.referralCode} (name not found)`;
+  const differs = owner && !typed.toLowerCase().startsWith(owner.toLowerCase());
+  return `${typed} (referral link ${lead.referralCode}${differs ? `, the link belongs to ${owner}` : owner ? "" : ", link name not found"})`;
 }
 
 /**
@@ -175,7 +191,7 @@ const ghlAdapter: Adapter = {
     const [first, ...rest] = lead.name.trim().split(/\s+/);
     const ad = adSource(lead.sourcePage);
     const details = [
-      lead.referralCode && `Referred by: ${referralLine(lead)}. A finished client's referral: $1,000 when this roof is finished and paid.`,
+      isReferral(lead) && `Referred by: ${referralLine(lead)}. A finished client's referral: $1,000 when this roof is finished and paid.${lead.referralCode ? "" : " Not on the System's referral list yet: add it on the Referrals page."}`,
       checkLine(lead),
       ad && `Came from: ${ad}`,
       addressLine(lead),
@@ -212,8 +228,8 @@ const ghlAdapter: Adapter = {
           timing: lead.timing,
           insurance_job: lead.insurance,
           service: lead.serviceLabel,
-          came_from: lead.referralCode ? `Referral: ${referralLine(lead)}` : ad,
-          referred_by: lead.referralCode ? referralLine(lead) : "",
+          came_from: isReferral(lead) ? `Referral: ${referralLine(lead)}` : ad,
+          referred_by: isReferral(lead) ? referralLine(lead) : "",
           address_check: lead.addressStatus === "picked" ? "Picked from the address list" : lead.addressStatus === "manual" ? "Typed by hand (not found in the address list)" : "",
           check_before_calling: lead.flags.join("; "),
           page: lead.sourcePage,
@@ -254,7 +270,7 @@ async function sendToSystem(lead: Lead, photos: LeadPhoto[], ghlOk: boolean, ghl
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: lead.id, name: lead.name, phone: lead.phone, email: lead.email, address: lead.address, service: lead.serviceLabel,
-        details: leadToText(lead, photos), referralCode: lead.referralCode, sourcePage: lead.sourcePage, ghlOk, ghlError: ghlError.slice(0, 500),
+        details: leadToText(lead, photos), referralCode: lead.referralCode, referred: lead.referred, referrerName: lead.referrerName, sourcePage: lead.sourcePage, ghlOk, ghlError: ghlError.slice(0, 500),
       }),
       signal: AbortSignal.timeout(8000),
     });

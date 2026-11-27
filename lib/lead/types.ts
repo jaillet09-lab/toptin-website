@@ -31,6 +31,10 @@ export type Lead = {
   referralCode: string;
   /** The referring client's first name, looked up in the TopTin System from the code ("" if unknown). */
   referredBy: string;
+  /** "Did someone refer you to us?" (owner, 27 Nov 2026): "Yes", "No", or "" from an older form. */
+  referred: string;
+  /** Who they said referred them, as typed on the form. "" when not referred. */
+  referrerName: string;
   submittedAt: string;
   userAgent: string;
 };

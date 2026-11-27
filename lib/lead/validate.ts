@@ -16,6 +16,10 @@ export type LeadInput = {
   timing?: string;
   /** "yes" or "no": is the insurer paying for the roof? */
   insurance?: string;
+  /** "yes" or "no": did someone refer them to us? Every quote form asks (owner, 27 Nov 2026). */
+  referred?: string;
+  /** Who referred them, when referred is "yes". */
+  referrerName?: string;
   message: string;
 };
 
@@ -63,9 +67,21 @@ export function validateLeadInput(input: LeadInput): FieldErrors {
   if (input.extras && input.extras !== "none" && !input.extras.split(",").every((x) => extraOptions.some((o) => o.value === x))) errors.extras = "Pick from the list.";
   if (input.timing && !timingOptions.some((o) => o.value === input.timing)) errors.timing = "Pick when you would like it done.";
   if (input.insurance && !insuranceOptions.some((o) => o.value === input.insurance)) errors.insurance = "Pick yes or no.";
+  if (input.referred && input.referred !== "yes" && input.referred !== "no") errors.referred = "Please answer yes or no.";
+  if ((input.referrerName ?? "").length > 120) errors.referrerName = "Please keep the name under 120 characters.";
   if (input.message.length > 4000) errors.message = "Please keep the message under 4,000 characters.";
   if (input.address.length > 300) errors.address = "Address is too long.";
   return errors;
+}
+
+/**
+ * The referral question, checked in the browser only (owner, 27 Nov 2026: they need to tell us it was a
+ * referral and who from). The API still takes a lead that skipped it, so an older open form never fails.
+ */
+export function referralAnswerErrors(input: LeadInput): FieldErrors {
+  if (input.referred !== "yes" && input.referred !== "no") return { referred: "Please answer yes or no." };
+  if (input.referred === "yes" && (input.referrerName ?? "").trim().length < 2) return { referrerName: "Please tell us who referred you." };
+  return {};
 }
 
 function str(fd: FormData, key: string, max = 500): string {
@@ -100,6 +116,8 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     extras: str(fd, "extras", 100),
     timing: str(fd, "timing", 20),
     insurance: str(fd, "insurance", 5),
+    referred: str(fd, "referred", 3).toLowerCase(),
+    referrerName: str(fd, "referrerName", 120),
     message: str(fd, "message", 4000),
   };
   const errors = validateLeadInput(input);
@@ -136,6 +154,8 @@ export async function parseSubmission(fd: FormData, meta: { userAgent: string })
     sourcePage: str(fd, "sourcePage", 300) || "/",
     referralCode: /^[a-z0-9-]{3,40}$/.exec(str(fd, "referralCode", 40).toLowerCase())?.[0] ?? "",
     referredBy: "",
+    referred: input.referred === "yes" ? "Yes" : input.referred === "no" ? "No" : "",
+    referrerName: input.referred === "yes" ? (input.referrerName ?? "").replace(/\s+/g, " ").trim() : "",
     submittedAt: new Date().toISOString(),
     userAgent: meta.userAgent.slice(0, 300),
   };
