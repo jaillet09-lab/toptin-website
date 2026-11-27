@@ -1,5 +1,7 @@
 "use client";
 
+import { pulse } from "@/lib/motion";
+
 /**
  * "Did someone refer you to us?" on every quote form (owner, 27 Nov 2026: "make sure on the site that
  * they need to tell us it was a referral and from who"). Yes or No must be picked; Yes asks for the
@@ -27,13 +29,13 @@ export function ReferralQuestion({ id, referred, referrerName, onReferred, onNam
     <fieldset aria-describedby={errors.referred ? `${id}-referred-err` : undefined}>
       <legend className={label}>Did someone refer you to us?</legend>
       <div className="grid grid-cols-2 gap-2">
-        <button type="button" aria-pressed={referred === "no"} onClick={() => onReferred("no")} className={choice(referred === "no")}>No</button>
-        <button type="button" aria-pressed={referred === "yes"} onClick={() => onReferred("yes")} className={choice(referred === "yes")}>Yes</button>
+        <button type="button" aria-pressed={referred === "no"} onClick={(e) => { onReferred("no"); pulse(e.currentTarget); }} className={choice(referred === "no")}>No</button>
+        <button type="button" aria-pressed={referred === "yes"} onClick={(e) => { onReferred("yes"); pulse(e.currentTarget); }} className={choice(referred === "yes")}>Yes</button>
       </div>
       {errors.referred ? <p id={`${id}-referred-err`} className={errClass}>{errors.referred}</p> : null}
 
       {referred === "yes" ? (
-        <div className="mt-4">
+        <div className="tt-enter mt-4">
           <label htmlFor={`${id}-referrerName`} className={label}>
             Who referred you? <span className="font-normal opacity-70">(their full name, so we can thank them)</span>
           </label>

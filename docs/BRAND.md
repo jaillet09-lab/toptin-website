@@ -88,6 +88,20 @@ A 4 px scale: 4, 8, 12, 16, 24, 32, 48, 64, 96. Everything snaps to it.
 - **Step:** a 1.5 px Ink rule on top, the number in Yellow ink, a heading, one line of body.
 - **List:** a 6 px yellow square marker, hairline between rows.
 
+## Motion and interaction
+
+Adopted 27 November 2026. Motion explains what happened. It is quick, it never decorates, and every piece of it switches off under prefers-reduced-motion. Durations: 120 ms for a press, 200 ms for a swap, 320 ms for a reveal. Easing: cubic-bezier(0.2, 0.8, 0.2, 1). Printed and PDF documents never animate.
+
+1. **Pulse to confirm.** When an action works (sent, saved, copied, confirmed), the thing pressed gives one short pulse: a 1.5 px outline ring that grows and fades, never a shadow.
+2. **Expand the same element.** Opening something grows it out of what was tapped (the search box into the search, a client's name into their profile). Never a disconnected swap.
+3. **Crossfade icons with blur.** When an icon changes (menu to close, copy to tick), the old one fades out with a slight blur as the new one fades in. Never a hard swap.
+4. **Rubber band past the edge.** A sheet dragged past its end stretches a little and springs back. Dragged down far enough, it closes. Never a hard stop.
+5. **Reveal with masks.** Photos and sections arrive with a mask that wipes up, not a plain fade.
+6. **Stage the focus.** When a panel opens, the page behind steps back: dimmed and slightly blurred. Only the panel competes for attention.
+7. **Fitts's law.** Anything people press is big and close to where they are: 44 px tall at least, the main action beside the thing it acts on.
+8. **Hick's law.** Three choices where three will do. Group or hide the rest.
+9. **Doherty threshold.** Every press answers within 400 ms. The screen changes straight away (pressed state, "Sending…", the new state shown at once) and catches up with the server after.
+
 ## Voice
 
 Say it plainly. Say who does what. Stand behind it. Full guide on the canvas, "Voice and wording".

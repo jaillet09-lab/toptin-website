@@ -10,6 +10,8 @@ import { readRecentRequest, recentDate, saveRecentRequest, type RecentRequest } 
 import { callbackLine, nextSteps } from "@/data/next-steps";
 import { AddressField, addressPickError, type AddressStatus } from "@/components/AddressField";
 import { Icon } from "@/components/ui/Icon";
+import { SwapIcon } from "@/components/ui/SwapIcon";
+import { pulse } from "@/lib/motion";
 import { TelLink } from "@/components/ui/TelLink";
 
 type Input = Required<LeadInput>;
@@ -68,9 +70,11 @@ export function LandingQuoteForm({ source = "landing", referralCode, referrerNam
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
   }
 
-  function tap(k: "roofType" | "storeys" | "insurance" | "timing", value: string) {
+  /** The tapped answer turns navy and pulses at once, then the next question wipes in (within 400 ms). */
+  function tap(k: "roofType" | "storeys" | "insurance" | "timing", value: string, el?: Element | null) {
     set(k, value);
-    setStep((s) => s + 1);
+    pulse(el);
+    window.setTimeout(() => setStep((s) => s + 1), el ? 180 : 0);
   }
 
   function toggleExtra(value: string) {
@@ -140,7 +144,7 @@ export function LandingQuoteForm({ source = "landing", referralCode, referrerNam
     ].filter(([, val]) => Boolean(val)) as [string, string][];
     return (
       <div ref={top} className="scroll-mt-24">
-        <span className="grid size-12 place-items-center rounded-lg bg-tin text-navy-2"><Icon name="check" size={24} strokeWidth={3} /></span>
+        <span className="tt-pulse grid size-12 place-items-center rounded-lg bg-tin text-navy-2" style={{ ["--pulse-ring" as string]: "var(--navy-2)" }}><Icon name="check" size={24} strokeWidth={3} /></span>
         <h2 ref={doneHeading} tabIndex={-1} className="mt-5 font-display text-[28px] font-semibold leading-tight text-ink outline-none">
           Thanks{first ? `, ${first}` : ""}. Your request is in.
         </h2>
@@ -217,11 +221,11 @@ export function LandingQuoteForm({ source = "landing", referralCode, referrerNam
       <div className="mt-5">
         {TAPS.map((t, i) =>
           step === i + 1 ? (
-            <fieldset key={t.key}>
+            <fieldset key={t.key} className="tt-enter">
               <legend className="mb-3 text-[17px] font-semibold text-ink">{t.title}</legend>
               <div className={`grid gap-2.5 ${t.options.length > 3 ? "sm:grid-cols-2" : ""}`}>
                 {t.options.map((o) => (
-                  <button key={o.value} type="button" onClick={() => tap(t.key, o.value)} aria-pressed={v[t.key] === o.value} className={choice(v[t.key] === o.value)}>
+                  <button key={o.value} type="button" onClick={(e) => tap(t.key, o.value, e.currentTarget)} aria-pressed={v[t.key] === o.value} className={choice(v[t.key] === o.value)}>
                     {o.label}
                     <Icon name="chevronRight" size={18} />
                   </button>
@@ -233,17 +237,17 @@ export function LandingQuoteForm({ source = "landing", referralCode, referrerNam
         )}
 
         {step === 4 ? (
-          <fieldset>
+          <fieldset className="tt-enter">
             <legend className="mb-1 text-[17px] font-semibold text-ink">Anything else we should include?</legend>
             <p className="mb-3 text-[14.5px] text-mute">Pick any that apply.</p>
             <div className="grid gap-2.5 sm:grid-cols-2">
               {[...extraOptions, { value: "none", label: "None of these" }].map((o) => {
                 const on = o.value === "none" ? v.extras === "none" : picked.includes(o.value);
                 return (
-                  <button key={o.value} type="button" onClick={() => toggleExtra(o.value)} aria-pressed={on} className={choice(on)}>
+                  <button key={o.value} type="button" onClick={(e) => { toggleExtra(o.value); pulse(e.currentTarget); }} aria-pressed={on} className={choice(on)}>
                     {o.label}
                     <span className={`grid size-6 flex-none place-items-center rounded-md ${on ? "bg-tin text-navy-2" : "border border-line"}`}>
-                      {on ? <Icon name="check" size={15} strokeWidth={3} /> : null}
+                      <SwapIcon on={on} off={<span className="size-[15px]" />} onIcon={<Icon name="check" size={15} strokeWidth={3} />} />
                     </span>
                   </button>
                 );
@@ -257,11 +261,11 @@ export function LandingQuoteForm({ source = "landing", referralCode, referrerNam
         ) : null}
 
         {step === 5 ? (
-          <fieldset>
+          <fieldset className="tt-enter">
             <legend className="mb-3 text-[17px] font-semibold text-ink">When would you like it done?</legend>
             <div className="grid gap-2.5 sm:grid-cols-2">
               {timingOptions.map((o) => (
-                <button key={o.value} type="button" onClick={() => tap("timing", o.value)} aria-pressed={v.timing === o.value} className={choice(v.timing === o.value)}>
+                <button key={o.value} type="button" onClick={(e) => tap("timing", o.value, e.currentTarget)} aria-pressed={v.timing === o.value} className={choice(v.timing === o.value)}>
                   {o.label}
                   <Icon name="chevronRight" size={18} />
                 </button>
@@ -272,7 +276,7 @@ export function LandingQuoteForm({ source = "landing", referralCode, referrerNam
         ) : null}
 
         {step === 6 ? (
-          <div className="grid gap-4">
+          <div className="tt-enter grid gap-4">
             <p className="text-[17px] font-semibold text-ink">Where should we call you?</p>
             {sofar.length ? (
               <p className="flex flex-wrap gap-1.5 text-[13.5px]" aria-label="Your answers so far">

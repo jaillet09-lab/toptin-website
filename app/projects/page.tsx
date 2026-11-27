@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { photos } from "@/data/photos";
+import { Reveal } from "@/components/ui/Reveal";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { CtaBand } from "@/components/CtaBand";
@@ -30,12 +31,14 @@ export default function ProjectsPage() {
           <ul className="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>li]:mb-4">
             {photos.map((p) => (
               <li key={p.src} className="break-inside-avoid">
+                <Reveal>
                 <figure className="card overflow-hidden">
                   <Image src={p.src} alt={p.alt} width={p.width} height={p.height} sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw" className="h-auto w-full" />
                   <figcaption className="px-4 py-3 text-[14px] text-mute">
                     <b className="text-navy">{p.colour} Colorbond roof</b> · Brisbane area
                   </figcaption>
                 </figure>
+                </Reveal>
               </li>
             ))}
           </ul>

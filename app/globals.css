@@ -139,8 +139,10 @@
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     min-height: 48px; padding: 0 22px; border-radius: var(--radius-btn);
     font-weight: 600; font-size: 16px; line-height: 1; text-decoration: none; white-space: nowrap;
-    transition: background-color 0.18s var(--ease), color 0.18s;
+    transition: background-color 0.18s var(--ease), color 0.18s, transform 0.12s var(--ease);
   }
+  /* Doherty threshold: every press answers at once (docs/BRAND.md, Motion and interaction) */
+  .btn:active { transform: scale(0.98); }
   .btn-lg { min-height: 52px; padding: 0 26px; font-size: 16px; }
   .btn-sm { min-height: 44px; padding: 0 16px; font-size: 15px; }
   .btn-primary { background: var(--tin); color: var(--navy-2); }
@@ -191,12 +193,57 @@
   }
 }
 
-/* Scroll reveal */
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
-.reveal.is-in { opacity: 1; transform: none; }
+/* ---------------------------------------------------------------------------
+   Motion (docs/BRAND.md, "Motion and interaction", 27 November 2026). Quick, explains what
+   happened, never decorates. All of it off under prefers-reduced-motion and in print.
+   --------------------------------------------------------------------------- */
+
+/* 5. Reveal with masks: a mask wipes up as it scrolls in, not a plain fade (components/ui/Reveal.tsx) */
+.reveal { clip-path: inset(0 0 100% 0); transform: translateY(12px); transition: clip-path 0.6s var(--ease), transform 0.6s var(--ease); }
+.reveal.is-in { clip-path: inset(-40px); transform: none; } /* ends wider than the box, so focus rings and hovers are never cut */
+
+/* Each new step or panel arrives the same way, on mount */
+@keyframes tt-enter { from { clip-path: inset(0 0 100% 0); transform: translateY(8px); } to { clip-path: inset(-40px); transform: none; } }
+.tt-enter { animation: tt-enter 0.32s var(--ease) backwards; } /* no mask left once it ends (dropdowns, focus rings) */
+
+/* 1. Pulse to confirm: a 1.5 px outline ring grows and fades. Never a shadow. (lib/motion.ts pulse) */
+@keyframes tt-pulse {
+  0%   { outline: 1.5px solid var(--pulse-ring, var(--tin)); outline-offset: 0; transform: scale(1); }
+  35%  { transform: scale(1.03); }
+  100% { outline: 1.5px solid transparent; outline-offset: 10px; transform: scale(1); }
+}
+.tt-pulse { animation: tt-pulse 0.45s var(--ease); }
+
+/* 3. Crossfade icons with blur (components/ui/SwapIcon.tsx) */
+.tt-swap { display: inline-grid; place-items: center; }
+.tt-swap > * { grid-area: 1 / 1; display: inline-grid; place-items: center; transition: opacity 0.2s var(--ease), filter 0.2s var(--ease), transform 0.2s var(--ease); }
+.tt-swap > [data-off] { opacity: 0; filter: blur(4px); transform: scale(0.6); }
+
+/* 6. Stage the focus: the page behind a panel steps back */
+.tt-backdrop { background: rgb(15 22 46 / 0.45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+
+/* 2. Expand the same element (lib/motion.ts expand, View Transitions) */
+::view-transition-group(*) { animation-duration: 0.32s; animation-timing-function: var(--ease); }
+
+/* The FAQ opens in place instead of jumping, where the browser can animate to auto height */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  details::details-content { block-size: 0; overflow: clip; transition: block-size 0.32s var(--ease), content-visibility 0.32s allow-discrete; }
+  details[open]::details-content { block-size: auto; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { clip-path: none; transform: none; transition: none; }
   .btn, .card { transition: none; }
+  .btn:active { transform: none; }
+  .tt-pulse, .tt-enter { animation: none; }
+  .tt-swap > * { transition: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  details::details-content { transition: none; }
+}
+@media print {
+  .reveal { clip-path: none; transform: none; }
+  .tt-pulse { animation: none; }
 }
 
 /* Room for the sticky mobile bar */

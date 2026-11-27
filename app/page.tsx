@@ -156,10 +156,12 @@ export default function HomePage() {
           <SectionHeading eyebrow="Our work" title="Real roofs, finished by our team." lead="Every photo here is a Top Tin job. No stock images." />
           <div className="mt-10">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {gallery.map((p) => (
-                <div key={p.src} className="relative aspect-square overflow-hidden rounded-lg bg-paper">
-                  <Image src={p.src} alt={p.alt} fill sizes="(max-width: 640px) 46vw, (max-width: 1200px) 31vw, 380px" className={`object-cover transition-transform duration-500 hover:scale-105 ${p.crop}`.trim()} />
-                </div>
+              {gallery.map((p, i) => (
+                <Reveal key={p.src} delay={(i % 3) * 80}>
+                  <div className="relative aspect-square overflow-hidden rounded-lg bg-paper">
+                    <Image src={p.src} alt={p.alt} fill sizes="(max-width: 640px) 46vw, (max-width: 1200px) 31vw, 380px" className={`object-cover transition-transform duration-500 hover:scale-105 ${p.crop}`.trim()} />
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>

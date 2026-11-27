@@ -7,6 +7,7 @@ import { quoteServiceOptions } from "@/data/services";
 import { roofAgeOptions, roofTypeOptions } from "@/lib/lead/types";
 import { referralAnswerErrors, validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
 import { ReferralQuestion } from "@/components/ReferralQuestion";
+import { pulse } from "@/lib/motion";
 import { track } from "@/lib/analytics";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
@@ -160,7 +161,7 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
               {quoteServiceOptions.map((o) => {
                 const on = v.service === o.value;
                 return (
-                  <button key={o.value} type="button" onClick={() => set("service", o.value)} aria-pressed={on}
+                  <button key={o.value} type="button" onClick={(e) => { set("service", o.value); pulse(e.currentTarget); }} aria-pressed={on}
                     className={`min-h-12 rounded-lg px-3 text-[14.5px] font-semibold transition-colors ${
                       on ? "bg-navy text-white ring-2 ring-tin" : dark ? "bg-white/10 text-white hover:bg-white/15" : "border border-line bg-white text-navy hover:border-navy/40"
                     }`}>

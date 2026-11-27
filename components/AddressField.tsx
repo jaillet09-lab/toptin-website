@@ -77,7 +77,7 @@ export function AddressField({ id, label, value, status, onChange, error, errorI
   }
 
   const note = `mt-1.5 text-[13.5px] ${dark ? "text-white/70" : "text-caption"}`;
-  const link = `min-h-9 text-[13.5px] font-semibold underline ${dark ? "text-white" : "text-navy-2"}`;
+  const link = `inline-flex min-h-11 items-center text-[13.5px] font-semibold underline ${dark ? "text-white" : "text-navy-2"}`;
 
   return (
     <div className="relative">

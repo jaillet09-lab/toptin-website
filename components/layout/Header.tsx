@@ -8,7 +8,9 @@ import { Logo } from "@/components/Logo";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 import { services } from "@/data/services";
-import { navLinks } from "./nav";
+import { headerLinks, navLinks } from "./nav";
+import { SwapIcon } from "@/components/ui/SwapIcon";
+import { expand } from "@/lib/motion";
 import { isLandingPath, quoteHref } from "./landing";
 
 /** Slim header for the paid-ads landing pages: logo and phone only, no menu or links away. */
@@ -53,7 +55,7 @@ export function Header() {
 
         <nav aria-label="Main" className="hidden nav:block">
           <ul className="flex items-center gap-1">
-            {navLinks.map((l) => (
+            {headerLinks.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}
@@ -79,22 +81,25 @@ export function Header() {
           <TelLink location="header-mobile" className="grid size-11 place-items-center rounded-lg bg-navy text-white" aria-label={`Call ${siteConfig.phone}`}>
             <Icon name="phone" size={18} />
           </TelLink>
+          {/* The button grows into the menu and the menu shrinks back into it (expand the same
+              element); its icon crossfades between menu and close */}
           <button
             type="button"
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => expand(() => setOpen((o) => !o))}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
             className="grid size-11 place-items-center rounded-lg border border-line text-navy"
+            style={open ? undefined : { viewTransitionName: "site-menu" }}
           >
-            <Icon name={open ? "close" : "menu"} size={20} />
+            <SwapIcon on={open} off={<Icon name="menu" size={20} />} onIcon={<Icon name="close" size={20} />} />
           </button>
         </div>
       </div>
     </header>
 
       {open && (
-        <div id="mobile-menu" className="nav:hidden fixed inset-x-0 bottom-0 top-[calc(var(--header-h)+env(safe-area-inset-top))] z-[45] overflow-y-auto overscroll-contain bg-white">
+        <div id="mobile-menu" style={{ viewTransitionName: "site-menu" }} className="nav:hidden fixed inset-x-0 bottom-0 top-[calc(var(--header-h)+env(safe-area-inset-top))] z-[45] overflow-y-auto overscroll-contain bg-white">
           <nav aria-label="Mobile" className="wrap py-6">
             <ul className="divide-y divide-line">
               {navLinks.map((l) => (

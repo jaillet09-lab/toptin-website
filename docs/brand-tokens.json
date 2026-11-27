@@ -171,5 +171,29 @@
     "minWidthPx": 170,
     "minWidthMm": 45,
     "component": "Logo (layout: primary | stacked | icon)"
+  },
+  "motion": {
+    "adopted": "2026-11-27",
+    "easing": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+    "durationsMs": {
+      "press": 120,
+      "swap": 200,
+      "reveal": 320,
+      "pulse": 450
+    },
+    "minTargetPx": 44,
+    "rules": [
+      "Pulse to confirm",
+      "Expand the same element",
+      "Crossfade icons with blur",
+      "Rubber band past the edge",
+      "Reveal with masks",
+      "Stage the focus",
+      "Fitts law: 44 px targets, close to the work",
+      "Hick law: three choices where three will do",
+      "Doherty threshold: answer within 400 ms"
+    ],
+    "reducedMotion": "all motion off",
+    "print": "never animates"
   }
 }
