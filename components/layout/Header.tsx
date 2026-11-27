@@ -9,7 +9,7 @@ import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 import { services } from "@/data/services";
 import { navLinks } from "./nav";
-import { isLandingPath } from "./landing";
+import { isLandingPath, quoteHref } from "./landing";
 
 /** Slim header for the paid-ads landing pages: logo and phone only, no menu or links away. */
 function LandingHeader() {
@@ -72,7 +72,7 @@ export function Header() {
             <Icon name="phone" size={18} />
             {siteConfig.phone}
           </TelLink>
-          <Link href="/quote" className="btn btn-primary btn-sm">Get a free quote</Link>
+          <Link href={quoteHref(pathname)} className="btn btn-primary btn-sm">Get a free quote</Link>
         </div>
 
         <div className="flex items-center gap-2 nav:hidden">
@@ -114,7 +114,7 @@ export function Header() {
               ))}
             </ul>
             <div className="mt-8 grid gap-3">
-              <Link href="/quote" className="btn btn-primary btn-lg">Get a free quote</Link>
+              <Link href={quoteHref(pathname)} onClick={() => setOpen(false)} className="btn btn-primary btn-lg">Get a free quote</Link>
               <TelLink location="mobile-menu" className="btn btn-outline btn-lg">
                 <Icon name="phone" size={18} />
                 Call {siteConfig.phone}

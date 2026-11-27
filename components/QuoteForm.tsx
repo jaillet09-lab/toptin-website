@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/site.config";
 import { quoteServiceOptions } from "@/data/services";
 import { roofAgeOptions, roofTypeOptions } from "@/lib/lead/types";
-import { MAX_PHOTOS, MAX_PHOTO_BYTES, validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
+import { validateLeadInput, type FieldErrors, type LeadInput } from "@/lib/lead/validate";
 import { track } from "@/lib/analytics";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
@@ -30,7 +30,7 @@ const EMPTY: LeadInput = { name: "", phone: "", email: "", address: "", service:
 
 /**
  * The one quote form, used everywhere. Two short steps: contact first (so a lead is
- * never lost to a long form), then roof details and optional photos.
+ * never lost to a long form), then roof details. No photo upload (owner, 27 Nov 2026).
  */
 export function QuoteForm({ service, suburb, source, dark = false, fromUrl = false, referralCode }: Props) {
   const router = useRouter();
@@ -41,8 +41,6 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
   });
   const [step, setStep] = useState<1 | 2>(1);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [files, setFiles] = useState<File[]>([]);
-  const [fileError, setFileError] = useState("");
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState("");
   const [addressStatus, setAddressStatus] = useState<AddressStatus>("");
@@ -86,19 +84,6 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
     if (!has) setStep(2);
   }
 
-  function pickFiles(list: FileList | null) {
-    setFileError("");
-    const picked = Array.from(list ?? []).filter((f) => f.type.startsWith("image/"));
-    const merged = [...files, ...picked].slice(0, MAX_PHOTOS);
-    if (files.length + picked.length > MAX_PHOTOS) setFileError(`Up to ${MAX_PHOTOS} photos.`);
-    if (merged.some((f) => f.size > MAX_PHOTO_BYTES)) {
-      setFileError("Each photo must be under 8 MB.");
-      setFiles(merged.filter((f) => f.size <= MAX_PHOTO_BYTES));
-      return;
-    }
-    setFiles(merged);
-  }
-
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (step === 1) return next();
@@ -113,7 +98,6 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
     setFormError("");
     const fd = new FormData();
     Object.entries(v).forEach(([k, val]) => fd.append(k, val));
-    files.forEach((f) => fd.append("photos", f));
     fd.append("addressStatus", addressStatus);
     if (recent) fd.append("previousRequestAt", recent.at);
     fd.append("startedAt", String(startedAt.current || Date.now() - 10000));
@@ -236,25 +220,6 @@ export function QuoteForm({ service, suburb, source, dark = false, fromUrl = fal
             <label htmlFor={fid("message")} className={label}>Anything else? <span className="font-normal opacity-70">(optional)</span></label>
             <textarea id={fid("message")} className="field min-h-28" rows={4} value={v.message} onChange={(e) => set("message", e.target.value)} {...aria("message")} />
             {err("message")}
-          </div>
-          <div>
-            <span className={label}>Photos of the roof <span className="font-normal opacity-70">(optional, up to {MAX_PHOTOS})</span></span>
-            <label htmlFor={fid("photos")} className={`flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 text-[14.5px] font-semibold ${dark ? "border-white/30 text-white" : "border-line bg-white text-navy"}`}>
-              <Icon name="camera" size={18} />
-              {files.length ? `${files.length} photo${files.length > 1 ? "s" : ""} added. Add more` : "Add photos"}
-            </label>
-            <input id={fid("photos")} type="file" accept="image/*" multiple className="sr-only" onChange={(e) => pickFiles(e.target.files)} />
-            {files.length ? (
-              <ul className={`mt-2 flex flex-wrap gap-2 text-[13px] ${dark ? "text-white/80" : "text-mute"}`}>
-                {files.map((f, i) => (
-                  <li key={i} className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 ${dark ? "bg-white/10" : "bg-paper"}`}>
-                    {f.name.slice(0, 22)}
-                    <button type="button" aria-label={`Remove ${f.name}`} onClick={() => setFiles(files.filter((_, j) => j !== i))}><Icon name="close" size={13} /></button>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            {fileError ? <p className="field-error">{fileError}</p> : null}
           </div>
           <div className="flex flex-col-reverse gap-3 sm:flex-row">
             <button type="button" onClick={() => setStep(1)} className={`btn btn-lg ${dark ? "btn-ghost" : "btn-outline"}`}>Back</button>

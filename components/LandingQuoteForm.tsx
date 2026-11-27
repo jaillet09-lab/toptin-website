@@ -28,9 +28,10 @@ const TAPS = [
  * flow as we can and get people invested). Five quick taps, then name, phone and address. Every
  * tap pre-fills the System's quote flow for the team. Sent through /api/lead like every form,
  * with the page URL (and any ad click id) as the source. After sending, the person sees their
- * roof at a glance and exactly what happens next.
+ * roof at a glance and exactly what happens next. Also the form on the referral page (owner,
+ * 27 Nov 2026), where it carries the referral code so the lead reaches GHL marked "Referred by".
  */
-export function LandingQuoteForm({ source = "landing" }: { source?: string }) {
+export function LandingQuoteForm({ source = "landing", referralCode }: { source?: string; referralCode?: string }) {
   const [v, setV] = useState<Input>(EMPTY);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -95,6 +96,7 @@ export function LandingQuoteForm({ source = "landing" }: { source?: string }) {
     fd.append("startedAt", String(startedAt.current || Date.now() - 10000));
     fd.append("sourcePage", window.location.pathname + window.location.search);
     fd.append("website", honeypot.current?.value ?? "");
+    if (referralCode) fd.append("referralCode", referralCode);
     try {
       const res = await fetch("/api/lead", { method: "POST", body: fd });
       const j = await res.json().catch(() => ({}));

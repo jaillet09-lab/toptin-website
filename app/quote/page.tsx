@@ -11,7 +11,7 @@ import { RatingSummary } from "@/components/Reviews";
 export const metadata: Metadata = buildMetadata({
   title: "Get a Free Roof Replacement Quote in Brisbane",
   description:
-    "Request a free, no-obligation roof replacement or Colorbond quote in Brisbane. Two short steps, optional photos, and a written price after we inspect the roof.",
+    "Request a free, no-obligation roof replacement or Colorbond quote in Brisbane. Two short steps and a written price after we inspect the roof.",
   path: "/quote",
   ogTitle: "Get a free roofing quote",
 });
@@ -45,7 +45,7 @@ export default function QuotePage() {
       <div className="bg-page text-text">
         <div className="wrap section grid gap-8 md:grid-cols-3">
           {[
-            { t: "What happens next", d: "We contact you to arrange a time to inspect the roof. If you sent photos, they help us prepare." },
+            { t: "What happens next", d: "We contact you to arrange a time to inspect the roof." },
             { t: "The written quote", d: "You get the scope, materials and price in writing, with the payment terms set out." },
             { t: "No pressure", d: "Take the time you need. The quote is free and there is no obligation to go ahead." },
           ].map((x) => (

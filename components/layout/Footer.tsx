@@ -5,6 +5,7 @@ import { Icon } from "@/components/ui/Icon";
 import { MailLink, TelLink } from "@/components/ui/TelLink";
 import { services } from "@/data/services";
 import { areas } from "@/data/areas";
+import { QuoteLink } from "./QuoteLink";
 
 const quickLinks = [
   { href: "/projects", label: "Projects" },
@@ -76,7 +77,9 @@ export function Footer() {
           <h2 className="mt-8 text-[15px] font-semibold uppercase tracking-[0.12em] text-tin">Quick links</h2>
           <ul className="mt-4 space-y-2.5 text-[15px]">
             {quickLinks.map((l) => (
-              <li key={l.href}><Link href={l.href} className="text-white/85 hover:text-white">{l.label}</Link></li>
+              <li key={l.href}>{l.href === "/quote"
+                ? <QuoteLink className="text-white/85 hover:text-white">{l.label}</QuoteLink>
+                : <Link href={l.href} className="text-white/85 hover:text-white">{l.label}</Link>}</li>
             ))}
           </ul>
         </div>

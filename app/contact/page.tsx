@@ -61,7 +61,7 @@ export default function ContactPage() {
         <div className="wrap grid gap-6 md:grid-cols-3">
           <div className="card p-6">
             <h2 className="font-display text-[20px] font-semibold text-navy">Getting a quote</h2>
-            <p className="mt-2 text-[15.5px] text-mute">The quickest way is the <Link href="/quote" className="font-semibold text-navy underline">free quote form</Link>. Add a few photos of the roof if you can. They help us prepare before we come out.</p>
+            <p className="mt-2 text-[15.5px] text-mute">The quickest way is the <Link href="/quote" className="font-semibold text-navy underline">free quote form</Link>.</p>
           </div>
           <div className="card p-6">
             <h2 className="font-display text-[20px] font-semibold text-navy">What happens next</h2>

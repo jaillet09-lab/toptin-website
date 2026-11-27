@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/site.config";
-import { QuoteForm } from "@/components/QuoteForm";
+import { LandingQuoteForm } from "@/components/LandingQuoteForm";
 import { Icon } from "@/components/ui/Icon";
 import { TelLink } from "@/components/ui/TelLink";
 import { RatingSummary } from "@/components/Reviews";
@@ -36,7 +36,7 @@ export default async function ReferPage({ params }: { params: Promise<{ code: st
           <span className="eyebrow">Recommended to you</span>
           <h1 className="display-xl mt-4">{who} recommended us for your roof.</h1>
           <p className="lead mt-5">
-            Tell us about the roof in two short steps. We arrange a time to come out, inspect it and send you a written quote. There is no obligation.
+            Tell us about the roof in a few quick taps. We arrange a time to come out, inspect it and send you a written quote. There is no obligation.
           </p>
           <ul className="mt-8 grid gap-3 text-[16px] text-white/85">
             {["Free on-site inspection", "A written, itemised quote", "Help choosing colour and profile", `QBCC licence ${siteConfig.qbcc}`].map((t) => (
@@ -59,14 +59,14 @@ export default async function ReferPage({ params }: { params: Promise<{ code: st
             <p className="mt-1 text-[14px] text-white/65">{siteConfig.hours.label}</p>
           </div>
         </div>
-        <div className="rounded-lg bg-white/[0.05] p-6 ring-1 ring-white/12 md:p-8">
-          <QuoteForm source="referral-page" dark referralCode={valid ? code : undefined} />
+        <div id="quote" className="scroll-mt-24 self-start rounded-lg bg-white p-6 text-text md:p-8">
+          <LandingQuoteForm source="referral-page" referralCode={valid ? code : undefined} />
         </div>
       </div>
       <div className="bg-page text-text">
         <div className="wrap section grid gap-8 md:grid-cols-3">
           {[
-            { t: "What happens next", d: "We contact you to arrange a time to inspect the roof. If you sent photos, they help us prepare." },
+            { t: "What happens next", d: "We contact you to arrange a time to inspect the roof." },
             { t: "The written quote", d: "You get the scope, materials and price in writing, with the payment terms set out." },
             { t: "Why we pay for referrals", d: "A big part of what a roofing company spends goes on advertising. We would rather give that money to the people who recommend us." },
           ].map((x) => (
